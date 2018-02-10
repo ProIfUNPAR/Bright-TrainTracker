@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Ionic Blank
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div id="floating-panel">
+    <b>Start: </b>
+    <select [(ngModel)]="start" id="start" (change)="calculateAndDisplayRoute()">
+      <option value="Bandung Station, West Java">Stasiun Bandung</option>
+      <option value="Cikudapateuh, West Java">Stasiun Cikudapateuh</option>
+      <option value="Kiaracondong Station, West Java">Stasiun Kiaracondong</option>
+      
+    </select><br>
+    <b>End: </b>
+    <select [(ngModel)]="end" id="end" (change)="calculateAndDisplayRoute()">
+      <option value="Bandung Station, West Java">Stasiun Bandung</option>
+      <option value="Cikudapateuh, West Java">Stasiun Cikudapateuh</option>
+      <option value="Kiaracondong Station, West Java">Stasiun Kiaracondong</option>
+    </select>
+    </div>
+    <div #map id="map"></div>
+</ion-content>
