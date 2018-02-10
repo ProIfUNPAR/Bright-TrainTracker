@@ -5,6 +5,12 @@ import { NavController } from 'ionic-angular';
   selector: 'page-home',
   templateUrl: 'home.html'
 })
+
+@IonicPage(
+{
+  name: 'HomePage'
+}
+)
 export class HomePage {
 
   constructor(public navCtrl: NavController) {
