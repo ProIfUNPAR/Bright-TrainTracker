@@ -27,8 +27,8 @@ export class HomePage {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
         var pos = {
-          lat: -6.914167,
-          lng: 107.6025
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
         };
         map.setCenter(pos);
         that.MyLocation = new google.maps.LatLng(pos);
@@ -43,7 +43,10 @@ export class HomePage {
     directionsService.route({
     origin: this.MyLocation,
     destination: this.Destination,
-    travelMode: 'TRANSIT'
+    travelMode: 'TRANSIT',
+    transitOptions: {
+      modes: ['TRAIN']
+    }
   }, function(response, status) {
     if (status === 'OK') {
       directionsDisplay.setDirections(response);
