@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { NavController } from 'ionic-angular';
+//import { AndroidPermissions } from '@ionic-native/android-permissions';
 declare var google;
 
 @Component({
@@ -7,14 +8,19 @@ declare var google;
   templateUrl: 'home.html'
 })
 export class HomePage {
-  Destination: any = '';
+  //@ViewChild('map')mapElement:ElementRef;
+  Destination: any;
   MyLocation: any;
+  directionsService = new google.maps.DirectionsService;
+  directionsDisplay = new google.maps.DirectionsRenderer;
+
 
   constructor(public navCtrl: NavController) {
 
   }
 
-  calculateAndDisplayRoute() {
+
+calculateAndDisplayRoute() {
     let that = this;
     let directionsService = new google.maps.DirectionsService;
     let directionsDisplay = new google.maps.DirectionsRenderer;
@@ -45,7 +51,8 @@ export class HomePage {
     destination: this.Destination,
     travelMode: 'TRANSIT',
     transitOptions: {
-      modes: ['TRAIN']
+      modes: ['TRAIN'],
+      routingPreference: 'FEWER_TRANSFERS'
     }
   }, function(response, status) {
     if (status === 'OK') {
@@ -57,4 +64,6 @@ export class HomePage {
 }
 
 
+
+ 
 }
