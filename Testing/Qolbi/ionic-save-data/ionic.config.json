@@ -1,0 +1,8 @@
+{
+  "name": "ionic-save-data",
+  "app_id": "5fd81dc7",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
