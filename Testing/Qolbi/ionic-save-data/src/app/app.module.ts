@@ -8,10 +8,7 @@ import { IonicStorageModule } from '@ionic/storage';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { DatabaseProvider } from '../providers/database/database';
-import { HttpModule } from '@angular/http';
-import { SQLitePorter } from '@ionic-native/sqlite';
-import { SQLite } from '@ionic-native/sqlite';
+import { SQLite,SQLiteObject } from '@ionic-native/sqlite';
 
 @NgModule({
   declarations: [
@@ -31,13 +28,10 @@ import { SQLite } from '@ionic-native/sqlite';
     MyApp,
     HomePage
   ],
-  providers: [
+  providers: [SQLite,
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    DatabaseProvider,
-    SQLitePorter,
-    SQLite
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}
