@@ -1,2 +1,0 @@
-CREATE TABLE IF NOT EXIST station(id INTEGER PRIMARY KEY AUTOINCREMENT, stationName TEXT, lng REAL, lat REAL);
-INSERT INTO station(stationName, lng, lat) VALUES ('Stasiun Bandung', '‎-6.914744', '107.609810	');
