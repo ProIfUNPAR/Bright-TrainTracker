@@ -1,0 +1,8 @@
+{
+  "name": "sqlite",
+  "app_id": "27d06811",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

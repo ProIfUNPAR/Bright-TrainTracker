@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Ionic Blank
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  	<ion-item>
+		<ion-input type="text" [(ngModel)]="stationName" placeholder="Enter Station Name"></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-input type="text" [(ngModel)]="lat" placeholder="Enter Latitude"></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-input type="text" [(ngModel)]="lng" placeholder="Enter Longitude"></ion-input>
+	</ion-item>
+	<button ion-button color="danger" (click)="save()" > Save </button>
+	<ion-list>
+
+		<ion-item href="#" *ngFor="let x of items" >{{x.name}}
+		</ion-item>
+
+	</ion-list>
+	<ion-item href="#">
+		<textarea id="errorHere" ></textarea>
+	</ion-item>
+</ion-content>
