@@ -1,3 +1,11 @@
-page-list {
-
+ion-header{
+	padding-top: 30px
 }
+.button icon-left ion-chevron-left button-clear button-dark{
+	padding-left: 10px
+}
+$colors:(
+	dark : #222,
+	primary: #488aff,
+	secondary: #32db64
+);
