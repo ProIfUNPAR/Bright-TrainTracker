@@ -1,0 +1,20 @@
+ion-header{
+	padding-top: 30px
+}
+.button icon-left ion-chevron-left button-clear button-dark{
+	padding-left: 10px
+}
+.buttonLocation{
+	padding:20px;
+	padding-left: 30px;
+	padding-right: 30px;
+	margin-left: 25%;
+	margin-bottom : 30px;
+	background-color: black;
+	color:white
+}
+$colors:(
+	dark : #222,
+	primary: #488aff,
+	secondary: #32db64
+);

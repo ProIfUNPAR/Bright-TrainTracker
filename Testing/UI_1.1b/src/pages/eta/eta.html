@@ -1,0 +1,51 @@
+<ion-header>
+  <link rel = "styleclass" href="../list/list.scss">
+  <link rel = "styleclass" href="../ionicons-2.0.1/css">
+  <ion-navbar color="dark" style="height:50px">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>ETA</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+  <ion-item>
+    <ion-label color="primary">ETA</ion-label>
+    <ion-input placeholder="0" readonly="true"></ion-input>
+  </ion-item>
+  <ion-item color="primary">
+      Distance : {{d}}
+    </ion-item>
+  <ion-item>
+    <ion-label color="primary">Train Speed</ion-label>
+    <ion-input placeholder="0" readonly="true"></ion-input>
+  </ion-item>
+</ion-list>
+<button class="buttonLocation">My Current Location</button>
+</ion-content>
+
+
+<!-- OLD ITEM
+<ion-content>
+  <ion-list>
+  <ion-item>
+    <ion-label color="primary">ETA</ion-label>
+    <ion-input placeholder="0" readonly="true"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary">Distance</ion-label>
+    <ion-input placeholder="0" readonly="true"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary">Train Speed</ion-label>
+    <ion-input placeholder="0" readonly="true"></ion-input>
+  </ion-item>
+</ion-list>
+<button class="buttonLocation">My Current Location</button>
+</ion-content>
+
+-->
