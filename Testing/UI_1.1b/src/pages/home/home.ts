@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import {AlertController} from 'ionic-angular';
+import { AlertController} from 'ionic-angular';
 import { EtaPage } from '../eta/eta';
+
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'page-home',
@@ -10,34 +13,37 @@ import { EtaPage } from '../eta/eta';
 export class HomePage {
 
   searchQuery: string = '';
-    items: string[];
+    trains: string[];
+    locations: string[];
+    stations : Observable<any[]>;
 
-    // constructor() {
-    //   this.initializeItems();
-    // }
-    constructor(public alertCtrl: AlertController, public navCtrl: NavController) {
-      this.initializeItems();
+    constructor(public alertCtrl: AlertController, public navCtrl: NavController,public afDatabase: AngularFireDatabase) {
+      this.initializeTrainsAndLocations();
+      this.stations = afDatabase.list('/').valueChanges();
+      //this.initializeStations();
     }
-    //
-    // this.selectOptions = {
-    //   title: 'Pizza Toppings',
-    //   subTitle: 'Select your toppings',
-    //   mode: 'md'
-    // };
 
-/*  //FOR SEARCHBAR */
-
-    initializeItems() {
-      this.items = [
+/*  //FOR SEARCHBAR and ion list option*/
+    initializeTrainsAndLocations() {
+      this.locations = [
         'Amsterdam',
         'Bogota',
         'Cimahi',
         'Depok',
         'Tasikmalaya'
       ];
+      this.trains = [
+        'Argo Willis',
+        'Parahyangan',
+        'Turangga'
+      ];
     }
 
-/* // I DON'T KNOW WHAT IS THIS FOR
+    initializeStations(){
+
+    }
+
+/* //YET, STILL DON'T KNOW WHAT IS THIS FOR
     getItems(ev: any) {
       // Reset items back to all of the items
       this.initializeItems();
@@ -75,9 +81,4 @@ export class HomePage {
       confirmation.present();
     }
 
-/*
-  constructor(public navCtrl: NavController) {
-
-  }
-*/
 }
