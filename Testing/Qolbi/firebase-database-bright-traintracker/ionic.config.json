@@ -1,0 +1,8 @@
+{
+  "name": "firebase-database-bright-traintracker",
+  "app_id": "d1624f2e",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

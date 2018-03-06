@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Ionic Blank
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+	<!--untuk ngesync data dari firebase-->
+<ul>
+  <li *ngFor="let station of stations | async">
+  	 <!-- cara print data dr firebase -->
+     {{ station.name }} {{ station.lat }} {{ station.lng }}
+  </li>
+</ul>
+<ion-item>
+  <ion-label>Stations</ion-label>
+  <ion-select >
+  	<!-- untuk menu dropdown -->
+    <ion-option *ngFor="let station of stations | async">{{ station.name }}</ion-option>
+  </ion-select>
+</ion-item>
+
+</ion-content>
