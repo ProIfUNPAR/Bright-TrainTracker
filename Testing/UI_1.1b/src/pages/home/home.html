@@ -8,12 +8,14 @@
 </ion-header>
 
 <ion-content padding>
+<h2>Bright Train Tracker</h2>
+<br>
 
   <!-- PICK TRAIN -->
  <ion-list>
     <ion-item>
     <ion-label>Select Train</ion-label>
-    <ion-select #newSelect [(ngModel)]="yourtrain" (change)="onChange(yourtrain)">
+    <ion-select required #newSelect [(ngModel)]="yourtrain" (change)="onChange(yourtrain)">
       <ion-option *ngFor="let trains of trains">
          {{trains}}
       </ion-option>
@@ -25,7 +27,7 @@
   <ion-list>
      <ion-item>
      <ion-label>Select Location</ion-label>
-     <ion-select>
+     <ion-select required>
        <ion-option *ngFor="let station of stations | async">
           {{station.name}}
        </ion-option>
@@ -33,9 +35,17 @@
    </ion-item>
    </ion-list>
 
-
-
-
+  <!-- PICK DESTINATION -->
+     <ion-list>
+        <ion-item>
+        <ion-label>Select Destination</ion-label>
+        <ion-select required>
+          <ion-option *ngFor="let station of stations | async">
+             {{station.name}}
+          </ion-option>
+        </ion-select>
+      </ion-item>
+      </ion-list>
 
 <!-- //FOR USING SEARCHBAR
   <p>Input your location : </p>
