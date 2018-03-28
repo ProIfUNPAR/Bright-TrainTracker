@@ -22,7 +22,6 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 // Initialize Firebase
   export const firebaseConfig={
-
     apiKey: "AIzaSyDNZPOAmJoiZk39ViPjV0oVz3z6_xgHg68",
     authDomain: "bright-traintracker.firebaseapp.com",
     databaseURL: "https://bright-traintracker.firebaseio.com",

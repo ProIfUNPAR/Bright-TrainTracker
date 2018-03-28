@@ -2,6 +2,11 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 // import { geodist } from 'geodist'
+
+//Taking data from database.
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import {Observable} from 'rxjs/Observable';
+
 @Component({
   selector: 'page-eta',
   templateUrl: 'eta.html'
@@ -10,6 +15,7 @@ export class EtaPage {
    selectedItem: any;
    icons: string[];
    items: Array<{jam: string, jarak: string, stasiun: string}>;
+   stations : Observable<any[]>;
 
   watch: any;
   lat:any = 0.00;
@@ -28,17 +34,17 @@ export class EtaPage {
 
   //speed: any = 0.00;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams, private geolocation: Geolocation,
+    public afDatabase: AngularFireDatabase) {
+    //generate the station target AngularFireList
+    //later on this stations will be based on the destination,
+    //followed by each station represent the station that will be the stopover
+    this.stations = afDatabase.list('/').valueChanges();
+
     this.selectedItem = navParams.get('item');
-    this.items = [];
-    for (let i = 1; i < 11; i++) {
-      this.items.push({
-        jam: i + ' Jam',
-        jarak: i + ' Km',
-        stasiun: 'Stasiun' + i
-        //icon: this.icons[Math.floor(Math.random() * this.icons.length)]
-      });
-    }
+
+    this.initializeStopoverStations();
 
     this.geolocation.getCurrentPosition().then((resp) => {
       console.log(resp.coords.latitude, resp.coords.longitude);
@@ -70,6 +76,20 @@ export class EtaPage {
  itemTapped(event, item) {
    // That's right, we're pushing to ourselves!
    this.navCtrl.push(EtaPage, { item: item});
+ }
+
+ initializeStopoverStations(){
+   console.log(this.stations);
+   this.items = [];
+   for (let i = 1; i < 11; i++) {
+     this.items.push({
+       jam: i + ' Jam',
+       jarak: i + ' Km',
+       //stasiun: this.stations.name[i] + i
+       //stasiun: this.stations["name"][i] + i
+       //icon: this.icons[Math.floor(Math.random() * this.icons.length)]
+     });
+   }
  }
 /* Not called?
   ionViewWillLeave(){

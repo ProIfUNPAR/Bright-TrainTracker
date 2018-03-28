@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { AlertController} from 'ionic-angular';
 import { EtaPage } from '../eta/eta';
 
+//Taking data from database.
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import {Observable} from 'rxjs/Observable';
 
