@@ -13,6 +13,18 @@ ion-header{
 	background-color: black;
 	color:white
 }
+.itemTitle{
+	padding-left: 10%;
+	padding-right: 30%;
+}
+.fontSize{
+	font-size: 13px;
+	//margin-right: 52px;
+}
+.numberPositioning{
+	padding-right: 99px;
+}
+
 $colors:(
 	dark : #222,
 	primary: #488aff,
