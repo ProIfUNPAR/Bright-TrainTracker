@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {AlertController} from 'ionic-angular';
 import { EtaPage } from '../eta/eta';
+import {MapsPage} from '../maps/maps';
 
 @Component({
   selector: 'page-home',
@@ -54,7 +55,7 @@ export class HomePage {
     }
     */
 
-    presentAlert() {
+    presentAlert(event,dest) {
       let confirmation = this.alertCtrl.create({
         title: 'Confirmation',
         subTitle: 'Are you sure with this train and the location?' ,
@@ -68,7 +69,7 @@ export class HomePage {
           text: 'Yes',
           handler: () => {
             console.log('Agree clicked');
-            this.navCtrl.push(EtaPage);
+            this.navCtrl.push(MapsPage, { dest: dest});
           }
         }]
       });

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { HomePage } from '../home/home';
 
 //import { Component} from '@angular/core';
 //import { NavController } from 'ionic-angular';
@@ -18,8 +19,9 @@ export class MapsPage {
   directionsDisplay = new google.maps.DirectionsRenderer;
 
 
-  constructor(public navCtrl: NavController) {
-
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.Destination = navParams.get('dest');
+    console.log(this.Destination);
   }
 
 
@@ -65,4 +67,5 @@ calculateAndDisplayRoute() {
     }
   });
 }
+
 }

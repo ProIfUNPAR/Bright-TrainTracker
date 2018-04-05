@@ -15,7 +15,7 @@ import { SettingsPage } from '../pages/settings/settings';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = MapsPage;
 
   pages: Array<{title: string, component: any}>;
 
