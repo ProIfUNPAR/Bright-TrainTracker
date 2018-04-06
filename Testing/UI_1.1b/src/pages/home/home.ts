@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { AlertController} from 'ionic-angular';
+import {AlertController} from 'ionic-angular';
 import { EtaPage } from '../eta/eta';
 import {MapsPage} from '../maps/maps';
-
-//Taking data from database.
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
-import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'page-home',
@@ -15,37 +11,34 @@ import {Observable} from 'rxjs/Observable';
 export class HomePage {
 
   searchQuery: string = '';
-    trains: string[];
-    locations: string[];
-    stations : Observable<any[]>;
+    items: string[];
 
-    constructor(public alertCtrl: AlertController, public navCtrl: NavController,public afDatabase: AngularFireDatabase) {
-      this.initializeTrainsAndLocations();
-      this.stations = afDatabase.list('/').valueChanges();
-      //this.initializeStations();
+    // constructor() {
+    //   this.initializeItems();
+    // }
+    constructor(public alertCtrl: AlertController, public navCtrl: NavController) {
+      this.initializeItems();
     }
+    //
+    // this.selectOptions = {
+    //   title: 'Pizza Toppings',
+    //   subTitle: 'Select your toppings',
+    //   mode: 'md'
+    // };
 
-/*  //FOR SEARCHBAR and ion list option*/
-    initializeTrainsAndLocations() {
-      this.locations = [
+/*  //FOR SEARCHBAR */
+
+    initializeItems() {
+      this.items = [
         'Amsterdam',
         'Bogota',
         'Cimahi',
         'Depok',
         'Tasikmalaya'
       ];
-      this.trains = [
-        'Argo Willis',
-        'Parahyangan',
-        'Turangga'
-      ];
     }
 
-    initializeStations(){
-
-    }
-
-/* //YET, STILL DON'T KNOW WHAT IS THIS FOR
+/* // I DON'T KNOW WHAT IS THIS FOR
     getItems(ev: any) {
       // Reset items back to all of the items
       this.initializeItems();
@@ -83,4 +76,9 @@ export class HomePage {
       confirmation.present();
     }
 
+/*
+  constructor(public navCtrl: NavController) {
+
+  }
+*/
 }
