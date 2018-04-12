@@ -14,11 +14,12 @@ import {Observable} from 'rxjs/Observable';
 export class EtaPage {
    selectedItem: any;
    icons: string[];
-   keys : string[];
+  // keys : string[];
    kereta : Array<{trainName : string, route : string}>;
-   stasiun : Array<{id : string, lat : string, lng : string, name : string}>;
-   items: Array<{jam: string, jarak: string}>;
-   stations : Observable<any[]>;
+   stasiuns : Array<{id : string, lat : string, lng : string, name : string}>;
+   items: Array<{jam: string, jarak: string, stasiun : string}>;
+   //stations : Observable<any[]>;
+  // dataCollection : Array<Object>;
 
   watch: any;
   lat:any = 0.00;
@@ -47,33 +48,8 @@ export class EtaPage {
     this.selectedItem = navParams.get('item');
 
 
-    this.initializeStopoverStations();
 
-    this.geolocation.getCurrentPosition().then((resp) => {
-      console.log(resp.coords.latitude, resp.coords.longitude);
-
-      //Our current location
-      this.lat = resp.coords.latitude;
-      this.lon =  resp.coords.longitude;
-
-      //If you want your current location from bandung
-      //this.lat = -6.914167;
-      //this.lon = 107.6025;
-
-      this.lat2  = -6.176716;
-      this.lon2 = 106.830508;
-	    this.radius=6371; // Earth's radius (km)
-	    this.dLat = (Math.PI/180)*(this.lat2 - this.lat);
-	    this.dLon = (Math.PI/180)*(this.lon2 - this.lon);
-	    this.a = Math.sin(this.dLat/2) * Math.sin(this.dLat/2) + Math.cos((Math.PI/180)*this.lat) * Math.cos((Math.PI/180)*this.lat2) * Math.sin(this.dLon / 2) * Math.sin(this.dLon / 2);
-	    this.c = 2 * Math.atan2(Math.sqrt(this.a), Math.sqrt(1-this.a));
-      this.d = this.radius * this.c; // Distance in km
-      this.d = this.d.toFixed(2);
-    }).catch((error) => {
-      console.log('Error getting location', error);
-    });
-
-    this.stasiun = [
+    this.stasiuns = [
       {id:"0",lat:"-6.9197513",lng:"107.6068601",name:"Stasiun Bandung"},
       {id:"1",lat:"-6.9140761",lng:"107.4500881",name:"Stasiun Ciroyom"},
       {id:"2",lat:"-6.8961886",lng:"107.5611397",name:"Stasiun Cimindi"},
@@ -133,23 +109,53 @@ export class EtaPage {
       {trainName:"KA368 - Bandung Raya Eko", route : "[0,5,10,11,12]"},
       {trainName:"KA19 - Argo Parahyangan", route :"[0,3,21,33,42,43]"}
     ];
+    this.initializeStopoverStations();
+    //LAST CODE IN CONSTRUCTOR
+    this.geolocation.getCurrentPosition().then((resp) => {
+      console.log(resp.coords.latitude, resp.coords.longitude);
+
+      //Our current location
+      this.lat = resp.coords.latitude;
+      this.lon =  resp.coords.longitude;
+
+      //If you want your current location from bandung
+      //this.lat = -6.914167;
+      //this.lon = 107.6025;
+
+      this.lat2  = -6.176716;
+      this.lon2 = 106.830508;
+	    this.radius=6371; // Earth's radius (km)
+	    this.dLat = (Math.PI/180)*(this.lat2 - this.lat);
+	    this.dLon = (Math.PI/180)*(this.lon2 - this.lon);
+	    this.a = Math.sin(this.dLat/2) * Math.sin(this.dLat/2) + Math.cos((Math.PI/180)*this.lat) * Math.cos((Math.PI/180)*this.lat2) * Math.sin(this.dLon / 2) * Math.sin(this.dLon / 2);
+	    this.c = 2 * Math.atan2(Math.sqrt(this.a), Math.sqrt(1-this.a));
+      this.d = this.radius * this.c; // Distance in km
+      this.d = this.d.toFixed(2);
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+
+
+    //this.dataCollection = [];
+    //this.dataCollection.push(this.stasiun);
+    //console.log(this.dataCollection);
     //this.keys = Object.keys(this.stasiun[name]);
  }
 
  itemTapped(event, item) {
    // That's right, we're pushing to ourselves!
    this.navCtrl.push(EtaPage, { item: item});
-   this.navCtrl.push(EtaPage,{stasiun : stasiun});
  }
 
  initializeStopoverStations(){
-   console.log(this.stasiun);
+   console.log(this.stasiuns);
    this.items = [];
-   for (let i = 1; i < 11; i++) {
+   for (let i = 0; i < this.stasiuns.length; i++) {
      this.items.push({
        jam: i + ' Jam',
        jarak: i + ' Km',
-       //stasiun: this.stations.name[i] + i
+       stasiun : this.stasiuns[i].name
+       //stasiun: 'a '
        //stasiun: this.stations["name"][i] + i
        //icon: this.icons[Math.floor(Math.random() * this.icons.length)]
      });
