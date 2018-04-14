@@ -3,22 +3,39 @@ import { NavController } from 'ionic-angular';
 import {AlertController} from 'ionic-angular';
 import { EtaPage } from '../eta/eta';
 import {MapsPage} from '../maps/maps';
+import {Storage} from '@ionic/storage';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
+//@Injectable()
 export class HomePage {
 
+  //public roll: FR;
+  storage : Storage;
   searchQuery: string = '';
     items: string[];
+
 
     // constructor() {
     //   this.initializeItems();
     // }
-    constructor(public alertCtrl: AlertController, public navCtrl: NavController) {
+    constructor(private storage: Storage,public alertCtrl: AlertController, public navCtrl: NavController) {
       this.initializeItems();
+      this.storage = storage;
+
+
+      //this.roll = new FR ("test");
     }
+    ionViewDidLoad(){
+      this.storage.set('destination','Cimahi');
+      this.storage.get('destination').then((val) => {
+        console.log('Your destination is ', val);
+      });
+
+    }
+
     //
     // this.selectOptions = {
     //   title: 'Pizza Toppings',
