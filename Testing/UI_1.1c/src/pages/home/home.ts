@@ -6,7 +6,7 @@ import { MapsPage } from '../maps/maps';
 import { Storage } from '@ionic/storage';
 
 //Taking data from database.
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+//import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -25,7 +25,7 @@ export class HomePage {
     tujuan: string;
     berangkat: string;
 
-    constructor(private storage: Storage, public alertCtrl: AlertController, public navCtrl: NavController,public afDatabase: AngularFireDatabase) {
+    constructor(private storage: Storage, public alertCtrl: AlertController, public navCtrl: NavController) {
       this.initializeTrainsAndLocations();
       //this.stations = afDatabase.list('/').valueChanges();
       //this.initializeStations();
@@ -183,7 +183,7 @@ export class HomePage {
     */
     onChangeDestination(event){
       this.tujuan = event;
-      this.tujuan = this.tujuan.replace(/\s+/g,'')      
+      this.tujuan = this.tujuan.replace(/\s+/g,'')
       this.storage.set('destination', this.tujuan);
     }
     /*
