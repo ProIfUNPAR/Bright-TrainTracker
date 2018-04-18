@@ -41,7 +41,7 @@
 </ion-list>
 
 <ion-list>
-  <ion-item color="dark">
+  <ion-item *ngFor="let item of items" (click)="itemTapped($event, item)" color="dark">
       <ion-input placeholder="Jam" readonly="true"></ion-input>
       <ion-input placeholder="Jarak" readonly="true"></ion-input>
       <ion-input placeholder="Stasiun" readonly="true"></ion-input>

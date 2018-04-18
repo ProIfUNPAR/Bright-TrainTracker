@@ -17,6 +17,7 @@ export class HomePage {
   constructor(public navCtrl: NavController, public afDatabase: AngularFireDatabase) {
   	//console.log("test");
   	//retrieve data dari firebase
+    //
   	this.stations = afDatabase.list('/').valueChanges();
   	//this.title="test";
     //select station berdasarkan
