@@ -2,181 +2,181 @@ DARI BDG
 ========
 
 Argo Wilis (KA6) (ekse)
-BDG,tsk,bnjr,kroya,kutoarjo,ygy,soloblpn,mdiun,jmbng,sby gbng
+0,90,83,115,134,130,123,131,133,135
 
 Turangga (KA50) (ekse)
-BDG,cpndy,tskmly,bnjr,kroya,kutoarjo,ygy,soloblpn,madiun,nganjk,kertosono,jmbng,mjkrto,sby gbng
+0,86,90,83,115,134,130,123,131,136,137,133,138,135
 
 Lodaya Pagi (KA80) (ekse&bis)
-BDG,krcn,cpndy,tskmly,bnjr,sidereja,kutoarjo,wates,ygy,klaten,soloblpn
+0,5,86,90,83,122,134,139,130,140,123
 
 Lodaya Malam (KA82) (ekse&bis)
-BDG,krcn,cpndy,tskmly,bnjr,kbmn,kutoarjo,wates,ygy,klaten,soloblpn
+0,5,86,90,83,112,134,139,130,140,123
 
 Mutiara Selatan (KA112/113) (bis)
-BDG,krcn,cpndy,tsk,ciamis,bnjr,kroya,gmbng,kbmn,kutoarjo,ygy,soloblpn,mdiun,nganjk,kertosono,jmbng,mjkrto,
-SBY GBNG,sdorjo,bangil,lwng,MLNG
+0,5,86,90,84,83,115,141,112,134,130,123,131,136,137,133,138,
+135,142,128,143,144
 
 Malabar (KA92) (ekse,bis&ekoAC)
-BDG,krcn,cpndy,tskmly,bnjr,kroya,gmbng,kbmn,kutoarjo,ygy,soloblpn,paron,madiun,nganjk
-kertosono,kdr,tlnggng,blitar,kepanjen,mlng kotalm, MLNG
+0,5,86,90,83,115,141,112,134,130,123,145,131,136
+137,129,146,147,148,132,144
 
 Argo Parahyangan Dini Hari (KA19) (ekse)
-BDG,cmh,pwk,bks,jtngr,GMBR
+0,3,21,33,42,43
 
 Argo Parahyangan Pagi (KA21) (ekse)
-BDG,cmh,bks,jtngr,GMBR
+0,3,33,42,43
 
 Argo Parahyangan Siang (KA23) (ekse)
-BDG,cmh,bks,jtngr,GMBR
+0,3,33,42,43
 
 Argo Parahyangan Sore (KA25) (ekse)
-BDG,cmh,bks,jtngr,GMBR
+0,3,33,42,43
 
 Argo Parahyangan Malam (KA27) (ekse)
-BDG,bks,jtngr,GMBR
+0,33,42,43
 
 Argo Parahyangan Malam (KA29) (ekse)
-BDG,cmh,bks,jtngr,GMBR
+0,3,33,42,43
 
 Argo Parahyangan Pagi (KA31) (ekse)
-BDG,cmh,bks,jtngr,GMBR
+0,3,33,42,43
 
 Argo Parahyangan Pagi (KA33) (ekse)
-BDG,cmh,bks,jtngr,GMBR
+0,3,33,42,43
 
 Argo Parahyangan Malam (KA35F) (ekse)
-BDG,cmh,bks,jtngr,GMBR
+0,3,33,42,43
 
 Argo Parahyangan PAGI (KA37F) (ekse)
-BDG,cmh,jtngr,GMBR
+0,3,42,43
 
 Hirana (KA75) (ekse&bis)
-BDG,cmh,pwk,ckmpk,crb,tgl,pklngn,smrng twng,ngrmb,cpu,bjngro,babt,lmngn,SBY PSTRI
+0,3,21,24,149,125,117,121,150,107,151,127,152,153
 
 Ciremai Express (KA99/98) (ekse&ekoAC)
-BDG,cmnh,pwk,ckmpk,hrgls,jtbrng,crb,tgl,pklngn,smrng pcl,SMRG TWNG
+0,3,21,24,88,jtbrng,149,125,117,120,121
 
-DARI JKT GMBR
+DARI JKT GaMBiR
 =============
 
 Argo Bromo Anggrek Pagi (KA2) (ekse)
-GMBR,crb,pklngn,smrng twng, SBY PSTRI
+43,149,117,121, 153
 
 Argo Bromo Anggrek Malam (KA4) (ekse)
-GMBR,crb,smrng twng, SBY PSTRI
+43,149,121, 153
 
 Argo Sindro (KA12) (ekse)
-GMBR,crb,tgl,pklngn,SMRG TWNG
+43,149,125,117,121
 
 Argo Muria (KA14) (ekse)
-GMBR,crb,tgl,pklngn,SMRG TWNG
+43,149,125,117,121
 
 Sembrani (KA48) (ekse)
-GMBR,crb,tgl,pklngn,smrng twng,cpu,bjngro,lmngn,SBY PSTRI
+43,149,125,117,121,107,151,152,153
 
 Argo Jati Pagi (KA16) (ekse)
-GMBR,bks,jtbrng,CRB
+43,33,jtbrng,149
 
 Argo Jati sore (KA18) (ekse)
-GMBR,bks,jtbrng,CRB
+43,33,jtbrng,149
 
 Argo Jati Pagi (KA40F) (ekse)
-GMBR,jtbrng,CRB
+43,jtbrng,149
 
 Argo Cirebon Express Siang (KA68) (ekse&bis)
-GMBR,bks,hrgls,jtbrng,arjwngn,CRB
+43,33,88,jtbrng,arjwngn,149
 
 Argo Cirebon Express Malam 2 (KA70) (ekse&bis)
-GMBR,bks,hrgls,jtbrng,CRB
+43,33,88,jtbrng,149
 
 Argo Cirebon Express Malam 1 (KA72) (ekse&bis)
-GMBR,bks,hrgls,jtbrng,CRB
+43,33,88,jtbrng,149
 
 Tegal Bahari Siang 1 (62) (ekse&bis)
-GMBR,bks,hrgls,jtbrng,crb,bbkn,lsri,tnjng,brbes,TGL
+43,33,88,jtbrng,149,bbkn,lsri,tnjng,brbes,125
 
 Tegal Bahari Siang 2 (64) (ekse&bis)
-GMBR,bks,hrgls,jtbrng,crb,bbkn,lsri,tnjng,brbes,TGL
+43,33,88,jtbrng,149,bbkn,lsri,tnjng,brbes,125
 
 Tegal Bahari Malam (66) (ekse&bis)
-GMBR,bks,hrgls,jtbrng,CRB,bbkn,lsri,tnjng,brbes,TGL
+43,33,88,jtbrng,149,bbkn,lsri,tnjng,brbes,125
 
 Bangunkarta (KA56) (ekse)
-GMBR,crb,tgl,pmlng,pklngn,smrng twng,sljbres,parn,mdiun,ngjnk,krtsn,jmbng,mjkrto,SBY GBNG
+43,149,125,pmlng,117,121,sljbres,parn,131,ngjnk,krtsn,133,138,135
 
 Argo Lawu (KA8F) (ekse)
-GMBR,crb,pwk,kjrjo,ygy,kltn,SOLOBLPN
+43,149,21,kjrjo,130,kltn,123
 
 Argo Dwipangga (KA10) (ekse)
-GMBR,crb,pwk,ktarjo,ygy,klaten,SOLOBLPN
+43,149,21,ktarjo,130,140,123
 
 Taksaka Siang (KA51) (ekse)
-GMBR,crb,pwk,kbmn,ktarjo,YGY
+43,149,21,112,ktarjo,130
 
 Taksaka Malam (KA54) (ekse)
-GMBR,crb,pwk,ktarjo,YGY
+43,149,21,ktarjo,130
 
 Bima (KA42) (ekse)
-GMBR, jtbrng,crb,pwk,ygy,soloblpn,mdiun,ngjnk,jmbng,mjkrto,SBY GBNG,sdorjo,lwng,MLNG
+43, jtbrng,149,21,130,123,131,ngjnk,133,138,135,142,143,144
 
 Gajayana (KA42) (ekse)
-GMBR,crb,pwk,ktarjo,ygy,soloblpn,mdiun,nganjk,krtsn,kdr,tlnggng,blitar,wlingi,kpnjn,mlng ktlm, MLNG
+43,149,21,ktarjo,130,123,131,136,krtsn,129,146,147,154,148,132,144
 
 Purwojaya (KA58/59) (ekse&bis)
-GMBR,crb,pwk,kroya,maos,CLCP
+43,149,21,115,maos,CLCP
 
 Argo Parahyangan Dini Hari (KA20)
-GMBR,bks,pwk,cmh,BDG
+43,33,21,3,0
 
 Argo Parahyangan Pagi (KA22)
-GMBR,bks,pwk,cmh,BDG
+43,33,21,3,0
 
 Argo Parahyangan Siang (KA24)
-GMBR,BDG
+43,0
 
 Argo Parahyangan Sore (KA26)
-GMBR,BDG
+43,0
 
 Argo Parahyangan Malam 1 (KA28)
-GMBR,BDG
+43,0
 
 Argo Parahyangan Malam 2 (KA30)
-GMBR,BDG
+43,0
 
 Argo Parahyangan Siang (KA32)
-GMBR,bks,pwk,BDG
+43,33,21,0
 
 Argo Parahyangan Siang 2 (KA34)
-GMBR,BDG
+43,0
 
 DARI JKTKOTA
 ============
 
 Gumarang (KA72) (ekse&bis)
-JKTKOTA,psrsnen,crb,tgl,pmlng,pklngn,smrg twng,ngrmbo,cpu,bjngro,bbt,lmngn, SBY PSTRI
+JKTKOTA,psrsnen,149,125,pmlng,117,121,ngrmbo,107,151,bbt,152, 153
 
 Tegal Arum (KA186) (ekoAC)
-JKTKOTA,pngdnbr,hrgls,jtbrng,arjwngn,crbn prjkan,bbkn,lsri,tnjng,brbes,TGL
+JKTKOTA,pngdnbr,88,jtbrng,arjwngn,crbn prjkan,bbkn,lsri,tnjng,brbes,125
 
 Gayabaru Malam Selatan (KA154) (ekoAC)
-JKTKOTA,hrgls,jtbrng,crbn prjkan,cldg,prwkto,ktwngn,lmpuyungan,prwsri,srgen,walikkn,gneng,mdiun,jmbng,mjkrto,SBY GBNG
+JKTKOTA,88,jtbrng,crbn prjkan,cldg,prwkto,ktwngn,lmpuyungan,prwsri,srgen,walikkn,gneng,131,133,138,135
 
 Serayu Pagi (KA212) (ekoAC)
-JKTKOTA,pwk,pdlrng,krcn,cbt,cpndy,tskmly,ciamis,bnjr,sdreja,kawungaten,maon,kroya,kbsen,PRWKTO
+JKTKOTA,21,pdlrng,5,cbt,86,90,84,83,sdreja,kawungaten,maon,115,kbsen,PRWKTO
 
 Serayu Malam (KA216) (eko)
-JKTKOTA,pwk,krcn,cbt,cpndy,tskmly,ciamis,bnjr,sdreja,gndrngmangun,kawungaten,maon,kroya,PRWKTO
+JKTKOTA,21,5,cbt,86,90,84,83,sdreja,gndrngmangun,kawungaten,maon,115,PRWKTO
 
-DARI KRCN
+DARI KirRCN2
 ===========
 Kutojaya Selatan (KA204) (eko)
-KRCN,cpndy,tskmly,bnjr,sdreja,gndrngmangun,maos,kroya,smpiuh,gmbng,krnganyar,kbmn,KTARJO
+5,86,90,83,sdreja,gndrngmangun,maos,115,smpiuh,141,krnganyar,112,KTARJO
 
 Kahuripan (KA182) (eko)
-KRCN,cpndy,tskmly,ciamis,bnjr,gndrngmangun,maos,gmbng,ktarjo,wates,lmpuyungan,kltn,prwsri,
-srgn,walikkn,paron,brt,caruban,nganjk,krtsn,kdr,tlnggng,BLITAR
+5,86,90,84,83,gndrngmangun,maos,141,ktarjo,139,lmpuyungan,kltn,prwsri,
+srgn,walikkn,145,brt,caruban,136,krtsn,129,146,147
 
 Pasundan (KA160) (eko)
-KRCN,cbtu,cpndy,tskmly,ciamis,bnjr,sdreja,maos,kroya,gmbng,ktarjo,wates,lmpuyungan,klaten,
-prwsri,srgen,walikkn,paron,mdiun,caruban,nganjk,jmbng,mjkrto,wonokromo,SBY GBNG
+5,cbtu,86,90,84,83,sdreja,maos,115,141,ktarjo,139,lmpuyungan,140,
+prwsri,srgen,walikkn,145,131,caruban,136,133,138,wonokromo,135
