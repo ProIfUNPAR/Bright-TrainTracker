@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, navParams } from 'ionic-angular';
 import { AlertController} from 'ionic-angular';
 import { EtaPage } from '../eta/eta';
 import { MapsPage } from '../maps/maps';
@@ -16,17 +16,27 @@ import { Observable } from 'rxjs/Observable';
 export class HomePage {
     //Var local storage
     storage : Storage;
+
     //trains: string[];
     //locations: string[];
     destinations : Array<{id : string, lat : string, lng : string, name : string}>;
     locations : Array<{id : string, lat : string, lng : string, name : string}>;
     trains : Array<{trainName : string, route : number[] }>;
+    routeLocation : number[];
+    routeDestination : number[];
 
+    //trainLocations : Array<{stationName : string}>;
+    trainLocations : any[] = [];
+    route : any;
+
+    //onchange variable
+    kereta : string;
     tujuan: string;
     berangkat: string;
 
     constructor(private storage: Storage, public alertCtrl: AlertController, public navCtrl: NavController) {
       this.initializeTrainsAndLocations();
+      //this.navParams = navParams;
       //this.stations = afDatabase.list('/').valueChanges();
       //this.initializeStations();
     }
@@ -178,11 +188,20 @@ export class HomePage {
 
     }
 
+    onChangeTrainLocation(event){
+      this.kereta = event;
+      this.kereta = this.kereta.replace(/\s+/g,'')
+      this.storage.set('kereta', this.kereta);
+      console.log(this.kereta);
+      this.initializeRouteLocation();
+    }
+
     /*
       Method to get the value from chosen option
     */
     onChangeDestination(event){
       this.tujuan = event;
+      console.log(this.tujuan);
       this.tujuan = this.tujuan.replace(/\s+/g,'')
       this.storage.set('destination', this.tujuan);
     }
@@ -217,6 +236,28 @@ export class HomePage {
       confirmation.present();
     }
 
+
+    initializeRouteLocation(){
+
+      var myTrain = this.kereta;
+      console.log(this.trains[1].trainName);
+      for(let j = 0; j < this.trains.length;j++){
+        if(myTrain == this.trains[j].trainName.replace(/\s+/g,'')){
+          this.route = this.trains[j].route;
+          console.log(this.route);
+        }
+      }
+      var length = this.trains[0].route.length;
+
+      //console.log(this.stasiunKereta[0]);
+      for (let i = 0; i < length; i++) {
+        var idx = this.route[i];
+        var stationName = this.locations[idx].name;
+        console.log(stationName);
+        this.trainLocations.push({stationName: stationName});
+        //this.trainLocations[i] = stationName;
+      }
+     }
 }
 
 
