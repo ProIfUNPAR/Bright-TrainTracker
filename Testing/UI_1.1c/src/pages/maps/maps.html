@@ -1,0 +1,55 @@
+
+<!-- COBA-COBA
+<ion-header>
+  <ion-navbar color="danger">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+     Direction
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <form (ngSubmit)="calculateAndDisplayRoute()">
+      <ion-item>
+        <ion-label floating>Destination</ion-label>
+        <ion-input type="text" [(ngModel)]="Destination"></ion-input>
+      </ion-item>
+      <button ion-button full type="submit" block>Show Direction</button>
+    </form>
+
+  <div id="map"></div>
+
+</ion-content>
+
+-->
+
+
+<ion-header>
+  <ion-navbar color="danger">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+     Direction
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+
+      <ion-item>
+          <ion-label floating>Destination</ion-label>
+          <ion-input type="text" [(ngModel)]="Destination" disabled></ion-input>
+      </ion-item>
+  </ion-list>
+
+    <button ion-button full (click)="calculateAndDisplayRoute()">Show Direction</button>
+
+  <div id="map"></div>
+
+</ion-content>
