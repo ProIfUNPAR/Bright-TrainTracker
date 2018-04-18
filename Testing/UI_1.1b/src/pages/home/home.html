@@ -28,24 +28,24 @@
      <ion-item>
      <ion-label>Select Location</ion-label>
      <ion-select required>
-       <ion-option *ngFor="let station of stations | async">
-          {{station.name}}
+       <ion-option *ngFor="let locations of locations">
+          {{locations}}
        </ion-option>
      </ion-select>
    </ion-item>
    </ion-list>
 
   <!-- PICK DESTINATION -->
-     <ion-list>
-        <ion-item>
-        <ion-label>Select Destination</ion-label>
-        <ion-select required>
-          <ion-option *ngFor="let station of stations | async">
-             {{station.name}}
-          </ion-option>
-        </ion-select>
-      </ion-item>
-      </ion-list>
+  <ion-list>
+     <ion-item>
+     <ion-label>Select Location</ion-label>
+     <ion-select required>
+       <ion-option *ngFor="let locations of locations">
+          {{locations}}
+       </ion-option>
+     </ion-select>
+   </ion-item>
+   </ion-list>
 
 <!-- //FOR USING SEARCHBAR
   <p>Input your location : </p>
@@ -58,6 +58,18 @@
   </ion-list>
 -->
 
+<!--
+<button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
+  <ion-icon [name]="item.icon" item-start></ion-icon>
+  {{item.title}}
+  <div class="item-note" item-end>
+    {{item.note}}
+  </div>
+</button>
 
-  <button class="buttonGo" ion-button (click)="presentAlert()">GO</button>
+  <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)"></button>
+-->
+
+  <button class="buttonGo" button (click)="presentAlert($event, locations)">GO</button>
+
 </ion-content>

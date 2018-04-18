@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 // import { geodist } from 'geodist'
-
 //Taking data from database.
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import {Observable} from 'rxjs/Observable';
@@ -16,6 +15,8 @@ export class EtaPage {
    icons: string[];
    items: Array<{jam: string, jarak: string, stasiun: string}>;
    stations : Observable<any[]>;
+
+   stasiunKereta : string[];
 
   watch: any;
   lat:any = 0.00;
@@ -33,7 +34,6 @@ export class EtaPage {
   d : any = 0.00;
 
   //speed: any = 0.00;
-
   constructor(public navCtrl: NavController,
     public navParams: NavParams, private geolocation: Geolocation,
     public afDatabase: AngularFireDatabase) {
@@ -56,7 +56,6 @@ export class EtaPage {
       //If you want your current location from bandung
       //this.lat = -6.914167;
       //this.lon = 107.6025;
-
       this.lat2  = -6.176716;
       this.lon2 = 106.830508;
 	    this.radius=6371; // Earth's radius (km)
@@ -70,7 +69,7 @@ export class EtaPage {
       console.log('Error getting location', error);
     });
 
-
+    this.initializeStasiun();
  }
 
  itemTapped(event, item) {
@@ -78,14 +77,25 @@ export class EtaPage {
    this.navCtrl.push(EtaPage, { item: item});
  }
 
+ initializeStasiun() {
+   //dummy
+   this.stasiunKereta = [
+     'Amsterdam',
+     'Bogota',
+     'Cimahi',
+     'Depok',
+     'Tasikmalaya'
+   ];
+ }
+
  initializeStopoverStations(){
-   console.log(this.stations);
+   console.log(stasiunKereta[2]);
    this.items = [];
-   for (let i = 1; i < 11; i++) {
+   for (let i = 1; i < 4; i++) {
      this.items.push({
        jam: i + ' Jam',
        jarak: i + ' Km',
-       //stasiun: this.stations.name[i] + i
+       //stasiun: this.stasiunKereta[i]
        //stasiun: this.stations["name"][i] + i
        //icon: this.icons[Math.floor(Math.random() * this.icons.length)]
      });

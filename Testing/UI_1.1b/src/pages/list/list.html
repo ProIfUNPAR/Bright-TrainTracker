@@ -18,6 +18,9 @@
     </button>
   </ion-list>
   <div *ngIf="selectedItem" padding>
+  <!-- <div *ngIf="selectedItem" padding> -->
     You navigated here from <b>{{selectedItem.title}}</b>
   </div>
+
+  <button class="buttonHome" ion-button (click)="goHome()">HOME</button>
 </ion-content>

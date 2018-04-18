@@ -8,9 +8,9 @@ import { Geolocation } from '@ionic-native/geolocation';
 // Import all navigated page
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-//import { ListPage } from '../pages/list/list';
+  import { ListPage } from '../pages/list/list';
 import { EtaPage } from '../pages/eta/eta';
-//import { MapsPage } from '../pages/maps/maps';
+import { MapsPage } from '../pages/maps/maps';
 import { SettingsPage } from '../pages/settings/settings';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -35,9 +35,9 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
   declarations: [
     MyApp,
     HomePage,
-    //ListPage,
+      ListPage,
     EtaPage,
-    //MapsPage,
+    MapsPage,
     SettingsPage
   ],
   imports: [
@@ -50,9 +50,9 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
   entryComponents: [
     MyApp,
     HomePage,
-    //ListPage,
+      ListPage,
     EtaPage,
-    //MapsPage,
+    MapsPage,
     SettingsPage
   ],
   providers: [

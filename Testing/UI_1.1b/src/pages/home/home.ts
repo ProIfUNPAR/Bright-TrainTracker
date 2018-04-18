@@ -5,7 +5,7 @@ import { EtaPage } from '../eta/eta';
 
 //Taking data from database.
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'page-home',
@@ -26,6 +26,7 @@ export class HomePage {
 
 /*  //FOR SEARCHBAR and ion list option*/
     initializeTrainsAndLocations() {
+      //dummy
       this.locations = [
         'Amsterdam',
         'Bogota',
@@ -61,7 +62,7 @@ export class HomePage {
     }
     */
 
-    presentAlert() {
+    presentAlert(event, station) {
       let confirmation = this.alertCtrl.create({
         title: 'Confirmation',
         subTitle: 'Are you sure with this train and the location?' ,
@@ -75,7 +76,7 @@ export class HomePage {
           text: 'Yes',
           handler: () => {
             console.log('Agree clicked');
-            this.navCtrl.push(EtaPage);
+            this.navCtrl.push(EtaPage, { station: station});
           }
         }]
       });
