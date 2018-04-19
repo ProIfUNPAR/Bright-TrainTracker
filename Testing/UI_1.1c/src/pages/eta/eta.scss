@@ -43,13 +43,14 @@ ion-header{
 	padding-bottom: 0px;
 }
 .stasiunAwal{
-	border : 1px solid black;
-  padding-left:10px;
-	padding-bottom:15px;
-	padding-right:5px;
+//	border : 1px solid black;
+  // padding-left:10px;
+	 padding-bottom:20px;
+	// padding-right:5px;
+
 	//padding-top : 10px;
-// padding-left: 30px;
-// padding-right: 40px;
+padding-left: 30px;
+padding-right: 40px;
 	font-size: 14px;
 }
 .toStation{
@@ -65,10 +66,12 @@ ion-header{
 	padding-bottom: 20px;
 }
 .stasiunTujuan{
-	border:1px solid black;
+	//border:1px solid black;
 	font-size: 14px;
-	padding-bottom : 15px;
-	padding-right:10px;
+	 padding-bottom : 20px;
+	// padding-right:10px;
+	padding-left: 30px;
+	padding-right: 40px;
 }
 
 $colors:(
