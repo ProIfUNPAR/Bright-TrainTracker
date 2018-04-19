@@ -35,6 +35,41 @@ ion-header{
 .numberPositioning{
 	padding-right: 99px;
 }
+.headerStasiun{
+	//border : 4px solid black;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+.stasiunAwal{
+	border : 1px solid black;
+  padding-left:10px;
+	padding-bottom:15px;
+	padding-right:5px;
+	//padding-top : 10px;
+// padding-left: 30px;
+// padding-right: 40px;
+	font-size: 14px;
+}
+.toStation{
+	//padding-left : 120px;
+	//padding-bottom: 10px;
+	//border: 1px solid black;
+	font-size: 14px;
+}
+.ionItem{
+	padding-left:0px;
+	padding-right:0px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+.stasiunTujuan{
+	border:1px solid black;
+	font-size: 14px;
+	padding-bottom : 15px;
+	padding-right:10px;
+}
 
 $colors:(
 	dark : #222,
