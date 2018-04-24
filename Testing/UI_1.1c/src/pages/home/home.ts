@@ -25,7 +25,7 @@ export class HomePage {
     routeLocation : number[];
     routeDestination : number[];
 
-    //trainLocations : Array<{stationName : string}>;
+    //this array will be filled with track according to the chosen train.
     trainLocations : any[] = [];
     route : any;
 
@@ -40,9 +40,8 @@ export class HomePage {
       //this.stations = afDatabase.list('/').valueChanges();
       //this.initializeStations();
     }
+
     ionViewDidLoad(){
-
-
       //cek output
       this.storage.get('location').then((val) => {
         console.log('Your location is ', val);
@@ -53,7 +52,7 @@ export class HomePage {
 
     }
 
-/*  //FOR SEARCHBAR and ion list option*/
+/*  Stations and Trains Data */
     initializeTrainsAndLocations() {
       //dummy
       // this.locations = [
@@ -201,9 +200,10 @@ export class HomePage {
     */
     onChangeDestination(event){
       this.tujuan = event;
-      console.log(this.tujuan);
       this.tujuan = this.tujuan.replace(/\s+/g,'')
       this.storage.set('destination', this.tujuan);
+      console.log(this.tujuan); 
+      //this.initializeRouteLocation();
     }
     /*
       Method to get the value from chosen option
@@ -237,6 +237,8 @@ export class HomePage {
     }
 
 
+    //Creating list of stopover station,
+    //based on the chosen train.
     initializeRouteLocation(){
 
       var myTrain = this.kereta;
@@ -249,13 +251,12 @@ export class HomePage {
       }
       var length = this.trains[0].route.length;
 
-      //console.log(this.stasiunKereta[0]);
+      //List of station based on train route track.
       for (let i = 0; i < length; i++) {
         var idx = this.route[i];
         var stationName = this.locations[idx].name;
         console.log(stationName);
         this.trainLocations.push({stationName: stationName});
-        //this.trainLocations[i] = stationName;
       }
      }
 }

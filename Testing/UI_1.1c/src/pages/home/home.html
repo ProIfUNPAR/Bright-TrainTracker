@@ -40,8 +40,8 @@
      <ion-item>
      <ion-label>Select Destination</ion-label>
      <ion-select (ionChange)="onChangeDestination($event)" required>
-       <ion-option *ngFor="let destination of destinations">
-          {{destination.name}}
+       <ion-option *ngFor="let trainLocation of trainLocations">
+          {{trainLocation.stationName}}
        </ion-option>
      </ion-select>
    </ion-item>
