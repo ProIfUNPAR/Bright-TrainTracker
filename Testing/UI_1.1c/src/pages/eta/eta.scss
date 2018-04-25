@@ -24,7 +24,7 @@ ion-header{
 	padding-right:20px;
 }
 .itemStasiun{
-	//border: 1px solid red;
+//	border: 1px solid red;
 	padding-left: 30px;
 	padding-right: 40px;
 }
@@ -41,37 +41,51 @@ ion-header{
 	padding-right: 0px;
 	padding-top: 0px;
 	padding-bottom: 0px;
+	height: 55px;
 }
 .stasiunAwal{
 //	border : 1px solid black;
-  // padding-left:10px;
-	 padding-bottom:20px;
-	// padding-right:5px;
+   padding-left:10px;
+	 //padding-bottom:0px;
+	 padding-right:25px;
 
 	//padding-top : 10px;
-padding-left: 30px;
-padding-right: 40px;
-	font-size: 14px;
+//	margin-left: 20px;
+//	margin-right: 20px;
+//	padding-left: 30px;
+// padding-right: 40px;
+	font-size: 13px;
 }
-.toStation{
-	//padding-left : 120px;
-	//padding-bottom: 10px;
-	//border: 1px solid black;
-	font-size: 14px;
+
+.to{
+	//border: 1px solid red;
+	padding-right: 20px;
+	//padding-left : 10px;
+	font-size: 13px;
+	width: 0px;
 }
 .ionItem{
 	padding-left:0px;
 	padding-right:0px;
-	padding-top: 20px;
-	padding-bottom: 20px;
+	padding-top: 0px;
+	padding-bottom: 0px;
 }
 .stasiunTujuan{
 	//border:1px solid black;
-	font-size: 14px;
-	 padding-bottom : 20px;
+	font-size: 13px;
+	// padding-bottom : 40px;
+	// width: 200px;
+	// height: 40px;
+//	 padding-left: 30px;
+ //	padding-right: 40px;
 	// padding-right:10px;
-	padding-left: 30px;
-	padding-right: 40px;
+	//padding-left: 0px;
+	//padding-right: 0px;
+}
+.isi{
+	//border : 1px solid black;
+	width:90px;
+	height: 38px;
 }
 
 $colors:(
