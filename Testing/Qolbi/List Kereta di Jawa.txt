@@ -1,4 +1,4 @@
-DARI BDG
+DARI 0
 ========
 
 Argo Wilis (KA6) (ekse)
@@ -180,3 +180,100 @@ Kahuripan (KA182) (eko)
 Pasundan (KA160) (eko)
 5,85,86,90,84,83,122,116,115,141,134,139,166,140,
 119,167,168,145,131,175,136,133,138,176,135
+
+DARI SURABAYA SUBENG
+=====================
+
+Bima (KA41) (ekse)
+135,138,133,131,123,130,149,89,42,43
+
+Argo Wilis (KA5) (ekse)
+135,133,131,130,134,115,83,90,86,0
+
+Turangga (KA49) (ekse)
+135,138,133,131,123,130,134,115,83,90,86,0
+
+Mutiara Selatan (KA111/114) (bis)
+135,138,133,137,136,131,123,130,134,112,109,115,116,83,84,90,86,5,0
+
+Sancaka Pagi (KA83)(ekse&bis)
+135,138,133,136,131,123,140,130
+
+Sancaka Sore (KA83)(ekse&bis)
+135,138,133,136,131,123,130
+
+Mutiara Timur Pagi (KA87)(ekse&bis)
+135,142,128,177,178,179,180,181,182,183,184,185,186,187
+
+Mutiara Timur Malam (KA89)(ekse&bis)
+135,142,128,177,178,179,180,181,182,183,184,185,186,187
+
+Bangunkarta Sore (KA55)(Ekse)
+135,138,133,137,136,175,131,145,124,121,117,160,125,149,42,43
+
+DARI BANYUWANGI
+==============
+Mutiara Timur (KA88)(ekse&bis)
+187,186,185,184,183,182,181,180,179,178,177,128,142,135
+
+DARI CILACAP
+============
+Purwojaya (KA60/57)(ekse&bis)
+108,116,115,118,149,33,42,43
+
+DARI CIREBON
+============
+Argo Jati Pagi (KA15)(eks)
+149,89,33,42,43
+
+Argo Jati Sore (KA17)(eks)
+149,89,33,42,43
+
+Argo Jati Siang (KA9F)(eks)
+149,89,42,43
+
+Cirebon Express Dini Hari (KA67)(ekse&bis)
+149,89,88,24,33,42,43
+
+Cirebon Express Pagi (KA69)(ekse&bis)
+149,89,88,33,42,43
+
+Cirebon Express Sore (KA71F)(ekse&bis)
+149,89,88,33,42,43
+
+Ciremai Express (KA97/100)(ekse&ekoAC)
+149,89,88,24,21,3,0
+
+DARI JOMBANG
+============
+Bangunkarta (KA55)(ekse)
+133,137,136,175,131,145,124,121,117,160,125,149,42,43
+
+DARI JOGJAKARTA
+===============
+Taksaka Pagi (KA51)(ekse)
+130,134,115,118,149,42,43
+
+Taksaka Malam (KA53)(ekse)
+130,134,115,118,149,42,43
+
+Fajar Utama (KA117)(bis)
+130,134,118,188,189,149,89,88,42,162
+
+Senja Utama (KA119)(bis)
+130,139,112,109,118,149,33,42,162
+
+Sancaka Pagi (KA84)(ekse&bis)
+130,140,123,131,136,133,138,135
+
+Sancaka Sore (KA86)(ekse&bis)
+130,123,131,136,133,138,135
+
+Malioboro Express Pagi (KA94)(ekse&ekoAC)
+130,140,123,131,136,137,129,146,147,154,148,132,144
+
+Malioboro Express Malam (KA94)(ekse&ekoAC)
+130,140,123,131,136,137,129,146,147,154,148,132,144
+
+DARI KOTABARU MALANG
+====================
