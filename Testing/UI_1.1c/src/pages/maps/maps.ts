@@ -21,6 +21,8 @@ export class MapsPage {
   Destination: any;
   //Your chosen station
   Location: any;
+  //Location to Destination
+  MyTrip: any;
 
   //Your realistic location
   MyLocation: any;
@@ -48,6 +50,7 @@ export class MapsPage {
       console.log('Your destination from storage is ', val);
     });
 
+    this.MyTrip = this.storage.get('location') + " to " +this.storage.get('destination')
   }
 
   calculateSpeed(t1, lat1, lng1, t2, lat2, lng2) {

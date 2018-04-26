@@ -51,8 +51,6 @@ export class EtaPage {
    this.calculateRoute();
    this.initializeStopoverStations();
 
-
-
    this.geolocation.getCurrentPosition().then((resp) => {
      console.log(resp.coords.latitude, resp.coords.longitude);
 
@@ -91,7 +89,6 @@ export class EtaPage {
 
    this.stationDistances = [ 0,0,0,0,0 ];
 
-   //real
    this.stasiun = [
       {id:"0",lat:"-6.9197513",lng:"107.6068601",name:"Stasiun Bandung"},
       {id:"1",lat:"-6.9140761",lng:"107.4500881",name:"Stasiun Ciroyom"},
@@ -293,8 +290,9 @@ export class EtaPage {
       {id:"198",lat:"",lng:"",name:""},
       {id:"199",lat:"",lng:"",name:""},
       {id:"200",lat:"",lng:"",name:""},
-
     ];
+
+
     this.kereta = [
       {trainName:"Argo Wilis (KA6) (ekse)",route:[0,90,83,115,134,130,123,131,133,135]},
       {trainName:"Turangga (KA50) (ekse)",route :[0,86,90,83,115,134,130,123,131,136,137,133,138,135]},
@@ -360,8 +358,7 @@ export class EtaPage {
       {trainName:"Sancaka Sore (KA83)(ekse&bis)",route :[135,138,133,136,131,123,130]},
       {trainName:"Mutiara Timur Pagi (KA87)(ekse&bis)",route :[135,142,128,177,178,179,180,181,182,183,184,185,186,187]},
       {trainName:"Mutiara Timur Malam (KA89)(ekse&bis)",route :[135,142,128,177,178,179,180,181,182,183,184,185,186,187]},
-      {trainName:"Bangunkarta Sore (KA55)(Ekse)",route :[135,138,133,137,136,175,131,145,124,121,117,160,125,149,42,43
-]},
+      {trainName:"Bangunkarta Sore (KA55)(Ekse)",route :[135,138,133,137,136,175,131,145,124,121,117,160,125,149,42,43]},
       {trainName:"Mutiara Timur Pagi (KA88)(ekse&bis)",route :[187,186,185,184,183,182,181,180,179,178,177,128,142,135]},
       {trainName:"Mutiara Timur Malam (KA88)(ekse&bis)",route :[187,186,185,184,183,182,181,180,179,178,177,128,142,135]},
       {trainName:"Purwojaya (KA60/57)(ekse&bis)",route :[108,116,115,118,149,33,42,43]},
@@ -412,7 +409,7 @@ export class EtaPage {
       {trainName:"",route :[]},
       {trainName:"",route :[]},
       {trainName:"",route :[]},
-      
+
 
 
     ];
@@ -421,6 +418,8 @@ export class EtaPage {
   /**
   *STILL dummy location and destination
   */
+
+
  calculateRoute(){
    var aa : any = 0.00;
    var cc : any = 0.00;
@@ -437,7 +436,7 @@ export class EtaPage {
   var dLatt:any = 0.00;
   var dLonn:any = 0.00;
 
-  //Ceritanya naik kereta Bandung Raya Eko
+  //Ceritanya naik kereta Argo Wilis (KA6) (ekse)
   console.log("Mau this");
   console.log(this);
    this.myTrain = this.kereta[0];
@@ -447,7 +446,7 @@ export class EtaPage {
      //index for target station
      var idx = this.myTrain.route[i];
      var stat1 = this.stasiun[idx];
-     idx = this.myTrain.route[i+1];
+     idx = this.myTrain.route[i];
      var stat2 = this.stasiun[idx];
 
      //calculate distance between station
@@ -480,7 +479,7 @@ export class EtaPage {
  initializeStopoverStations(){
    //console.log(this.stasiunKereta[0]);
    this.items = [];
-   for (let i = 0; i < this.stationDistances.length-1; i++) {
+   for (let i = 0; i < this.stationDistances.length; i++) {
      var idx = this.myTrain.route[i+1];
      this.items.push({
        jam: i + ' Jam',
