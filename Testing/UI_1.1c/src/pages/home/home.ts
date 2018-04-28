@@ -426,7 +426,7 @@ export class HomePage {
           text: 'Yes',
           handler: () => {
             console.log('Agree clicked');
-            this.navCtrl.push(MapsPage, { location: this.berangkat, destination: this.tujuan});
+            this.navCtrl.push(EtaPage, { location: this.berangkat, destination: this.tujuan});
           }
         }]
       });
