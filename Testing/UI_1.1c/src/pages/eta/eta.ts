@@ -2,12 +2,15 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 // import { geodist } from 'geodist'
-
+declare var google;
 @Component({
   selector: 'page-eta',
   templateUrl: 'eta.html'
 })
 export class EtaPage {
+
+   Destination: any;
+   Location: any;
    selectedItem: any;
    icons: string[];
    items: Array<{jam: string, jarak: string, stasiun: string}>;
@@ -16,6 +19,10 @@ export class EtaPage {
    myTrain : any;
    stasiunAwal : any;
    stasiunTujuan : any;
+
+   MyLocation: any;
+   directionsService = new google.maps.DirectionsService;
+   directionsDisplay = new google.maps.DirectionsRenderer;
    //dummy station
    //stasiunKereta : string[];
 
@@ -43,6 +50,9 @@ export class EtaPage {
  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation) {
   this.geolocation = geolocation;
   this.navParams = navParams;
+
+  this.Destination = navParams.get('destination');
+  this.Location = navParams.get('location');
  }
 
  ionViewDidLoad(){
@@ -409,4 +419,69 @@ export class EtaPage {
      });
    }
   }
+
+  calculateAndDisplayRoute() {
+    //show and hide MAP
+    //if false (not yet show map) show the map
+    //if true(map already showed) hide the map
+
+
+      let that = this;
+      /*Speed Part :
+      navigator.geolocation.getCurrentPosition(function(position1){
+        var t1 = Date.now();
+        console.log('test1');
+        setTimeout(function(){
+          navigator.geolocation.getCurrentPosition(function(position2){
+            console.log('test2');
+            var speed = that.calculateSpeed(t1 / 1000, position1.coords.latitude, position1.coords.longitude, Date.now() / 1000, position2.coords.latitude, position2.coords.longitude);
+            console.log(speed);
+          })
+        },1000);
+      })
+      */
+
+      let directionsService = new google.maps.DirectionsService;
+      let directionsDisplay = new google.maps.DirectionsRenderer;
+      const map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 7,
+        center: {lat: -6.9197513, lng: -107.6068601}
+      });
+      directionsDisplay.setMap(map);
+      console.log('processing..')
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          console.log('loading map..');
+          var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+          map.setCenter(pos);
+          //that.MyLocation = new google.maps.LatLng(pos); //TO GET YOUR TRULLY POSITION
+          that.MyLocation = that.Location;
+
+          directionsService.route({
+            origin: that.MyLocation,
+            destination: that.Destination+"",
+            travelMode: 'TRANSIT',
+            transitOptions: {
+              modes: ['TRAIN'],
+              routingPreference: 'FEWER_TRANSFERS'
+            }
+          }, function(response, status) {
+            if (status === 'OK') {
+              directionsDisplay.setDirections(response);
+              console.log('finish')
+            } else {
+              window.alert('Directions request failed due to ' + status);
+            }
+          });
+
+        }, function() {
+
+        });
+      } else {
+        // Browser doesn't support Geolocation
+      }
+}
 }

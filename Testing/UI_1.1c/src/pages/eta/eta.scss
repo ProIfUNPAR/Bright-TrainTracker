@@ -67,6 +67,13 @@ ion-header{
 	font-size : 13px;
 }
 
+
+page-eta {
+  #map{
+      height: 400px;
+      width: 100%;
+    }
+}
 $colors:(
 	dark : #222,
 	primary: #488aff,
