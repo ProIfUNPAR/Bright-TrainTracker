@@ -181,6 +181,7 @@ export class HomePage {
       {id:"109",lat:"-7.610921",lng:"109.507770",name:"Stasiun Gombong"},
       {id:"110",lat:"-7.218755",lng:"110.899937",name:"Stasiun Gundih"},
       {id:"111",lat:"-7.633169",lng:"109.573493",name:"Stasiun Karanganyar"},
+      {id:"113",lat:"0",lng:"0",name:"Stasiun Unknown"},
       {id:"112",lat:"-7.681909",lng:"109.662123",name:"Stasiun Kebumen"},
       {id:"114",lat:"-7.163653",lng:"110.635626",name:"Stasiun Kedungjati"},
       {id:"115",lat:"-7.630120",lng:"109.253538",name:"Stasiun Kroya"},
