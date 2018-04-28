@@ -14,7 +14,8 @@ export class EtaPage {
    kereta : Array<{trainName : string, route : number[] }>;
 
    myTrain : any;
-
+   stasiunAwal : any;
+   stasiunTujuan : any;
    //dummy station
    //stasiunKereta : string[];
 
@@ -51,6 +52,8 @@ export class EtaPage {
    this.calculateRoute();
    this.initializeStopoverStations();
 
+
+
    this.geolocation.getCurrentPosition().then((resp) => {
      console.log(resp.coords.latitude, resp.coords.longitude);
 
@@ -80,6 +83,8 @@ export class EtaPage {
    this.navCtrl.push(EtaPage, { item: item});
  }
 
+
+
  initializeStasiun() {
    //dummy
    // this.stasiunKereta = [
@@ -89,6 +94,7 @@ export class EtaPage {
 
    this.stationDistances = [ 0,0,0,0,0 ];
 
+   //real
    this.stasiun = [
       {id:"0",lat:"-6.9197513",lng:"107.6068601",name:"Stasiun Bandung"},
       {id:"1",lat:"-6.9140761",lng:"107.4500881",name:"Stasiun Ciroyom"},
@@ -190,7 +196,7 @@ export class EtaPage {
       {id:"97",lat:"-7.134336",lng:"108.118114",name:"Stasiun Cirahayu"},
       {id:"98",lat:"-6.686093",lng:"107.397989",name:"Stasiun Cisomang"},
       {id:"99",lat:"-7.286944",lng:"108.201001",name:"Stasiun Indihiang"},
-      {id:"100",lat:"-7.053602",lng:"107.894007",name:"Stasiun Lebak -8.164787ro"},
+      {id:"100",lat:"-7.053602",lng:"107.894007",name:"Stasiun Lebak Jero"},
       {id:"101",lat:"-7.084447",lng:"107.899663",name:"Stasiun Leles"},
       {id:"102",lat:"-7.353104",lng:"108.302707",name:"Stasiun Manon Jaya"},
       {id:"103",lat:"-6.409218",lng:"107.584170",name:"Stasiun Pabuaran"},
@@ -266,65 +272,52 @@ export class EtaPage {
       {id:"174",lat:"-7.562228",lng:"111.450942",name:"Stasiun Barat"},
       {id:"175",lat:"-7.551138",lng:"111.654806",name:"Stasiun Caruban"},
       {id:"176",lat:"-7.301983",lng:"112.739210",name:"Stasiun Wonokromo"},
-      {id:"177",lat:"-7.742787",lng:"113.216008",name:"Stasiun Probolinggo"},
-      {id:"178",lat:"-8.162861",lng:"113.448379",name:"Stasiun Tanggul"},
-      {id:"179",lat:"-8.203397",lng:"113.614409",name:"Stasiun Rambipuji"},
-      {id:"180",lat:"-8.164787",lng:"113.703603",name:"Stasiun Jember"},
-      {id:"181",lat:"-8.126871",lng:"113.812322",name:"Stasun Kalisat"},
-      {id:"182",lat:"-8.288862",lng:"113.984387",name:"Stasiun Kalibaru"},
-      {id:"183",lat:"-8.302854",lng:"114.139770",name:"Stasiun Kalisetail"},
-      {id:"184",lat:"-8.309794",lng:"114.201957",name:"Stasiun Temuguruh"},
-      {id:"185",lat:"-8.304502",lng:"114.292582",name:"Stasiun Rogojampi"},
-      {id:"186",lat:"-8.222879",lng:"114.340794",name:"Stasiun Karangasem"},
-      {id:"187",lat:"-8.141180",lng:"114.397142",name:"Stasiun Banyuwangi Baru"},
-      {id:"188",lat:"-7.237399",lng:"109.009802",name:"Stasiun Bumiayu"},
-      {id:"189",lat:"-6.938286",lng:"108.884382",name:"Stasiun Ketanggungan"},
-      {id:"190",lat:"-7.655204",lng:"109.603104",name:"Stasiun Sruweng"},
-      {id:"191",lat:"-6.857969",lng:"108.647692",name:"Stasiun Karangsuwung"}
+      {id:"177",lat:"",lng:"",name:""},
+      {id:"178",lat:"",lng:"",name:""},
+      {id:"179",lat:"",lng:"",name:""},
+      {id:"180",lat:"",lng:"",name:""},
     ];
-
-
     this.kereta = [
-      {trainName:"Argo Wilis (KA6) ( Eksekutif )",route:[0,90,83,115,134,130,123,131,133,135]},
-      {trainName:"Turangga (KA50) ( Eksekutif )",route :[0,86,90,83,115,134,130,123,131,136,137,133,138,135]},
-      {trainName:"Lodaya Pagi (KA80) ( Eksekutif & Bisnis )",route :[0,5,86,90,83,122,134,139,130,140,123]},
-      {trainName:"Lodaya Malam (KA82) ( Eksekutif & Bisnis )",route :[0,5,86,90,83,112,134,139,130,140,123]},
-      {trainName:"Mutiara Selatan (KA112/113) ( Bisnis )",route :[0,5,86,90,84,83,115,141,112,134,130,123,131,136,137,133,138,135,142,128,143,144]},
-      {trainName:"Malabar (KA92) ( Eksekutif , Bisnis & Ekonomi AC )",route :[0,5,86,90,83,115,141,112,134,130,123,145,131,136,137,129,146,147,148,132,144]},
-      {trainName:"Argo Parahyangan Dini Hari (KA19) ( Eksekutif )",route :[0,3,21,33,42,43]},
-      {trainName:"Argo Parahyangan Pagi (KA21) ( Eksekutif )",route :[0,3,33,42,43]},
-      {trainName:"Argo Parahyangan Siang (KA23) ( Eksekutif )",route :[0,3,33,42,43]},
-      {trainName:"Argo Parahyangan Sore (KA25) ( Eksekutif )",route :[0,3,33,42,43]},
-      {trainName:"Argo Parahyangan Malam (KA27) ( Eksekutif )",route :[0,33,42,43]},
-      {trainName:"Argo Parahyangan Malam (KA29) ( Eksekutif )",route :[0,3,33,42,43]},
-      {trainName:"Argo Parahyangan Pagi (KA31) ( Eksekutif )",route :[0,3,33,42,43]},
-      {trainName:"Argo Parahyangan Pagi (KA33) ( Eksekutif )",route :[0,3,33,42,43]},
-      {trainName:"Argo Parahyangan Malam (KA35F) ( Eksekutif )",route :[0,3,33,42,43]},
-      {trainName:"Argo Parahyangan Pagi (KA37F) ( Eksekutif )",route :[0,3,42,43]},
-      {trainName:"Harina (KA75) ( Eksekutif & Bisnis )",route :[0,3,21,24,149,125,117,121,150,107,151,127,152,153]},
-      {trainName:"Ciremai Express (KA99/98) ( Eksekutif & Ekonomi AC )",route :[0,3,21,24,88,89,149,125,117,120,121]},
-      {trainName:"Argo Bromo Anggrek Pagi (KA2) ( Eksekutif )",route :[43,149,117,121,153]},
-      {trainName:"Argo Bromo Anggrek Malam (KA4) ( Eksekutif )",route :[43,149,121,153]},
-      {trainName:"Argo Sindro (KA12) ( Eksekutif )",route :[43,149,125,117,121]},
-      {trainName:"Argo Muria (KA14) ( Eksekutif )",route :[43,149,125,117,121]},
-      {trainName:"Sembrani (KA48) ( Eksekutif )",route :[43,149,125,117,121,107,151,152,15343,33,89,149]},
-      {trainName:"Argo Jati Pagi (KA16) ( Eksekutif )",route :[43,33,89,149]},
-      {trainName:"Argo Jati Sore (KA18) ( Eksekutif )",route :[43,33,89,149]},
-      {trainName:"Argo Jati Pagi (KA40F) ( Eksekutif )",route :[43,89,149]},
-      {trainName:"Argo Cirebon Express Siang (KA68) ( Eksekutif & Bisnis )",route :[43,33,88,89,155,149]},
-      {trainName:"Argo Cirebon Express Malam 2 (KA70) ( Eksekutif & Bisnis )",route :[43,33,88,89,149]},
-      {trainName:"Argo Cirebon Express Malam 1 (KA72) ( Eksekutif & Bisnis )",route :[43,33,88,89,149]},
-      {trainName:"Tegal Bahari Siang 1 (KA62) ( Eksekutif & Bisnis )",route :[43,33,88,89,149,156,157,158,159,125]},
-      {trainName:"Tegal Bahari Siang 2 (KA64) ( Eksekutif & Bisnis )",route :[43,33,88,89,149,156,157,158,159,125]},
-      {trainName:"Tegal Bahari Malam (KA66) ( Eksekutif & Bisnis )",route :[43,33,88,89,149,156,157,158,159,125]},
-      {trainName:"Bangunkarta (KA56) ( Eksekutif )",route :[43,149,125,160,117,121,124,145,131,136,137,133,138,135]},
-      {trainName:"Argo Lawu (KA8F) ( Eksekutif )",route :[43,149,21,134,130,140,123]},
-      {trainName:"Argo Dwipangga (KA10) ( Eksekutif )",route :[43,149,21,134,130,140,123]},
-      {trainName:"Taksaka Siang (KA51) ( Eksekutif )",route :[43,149,21,112,134,130]},
-      {trainName:"Taksaka Malam (KA54) ( Eksekutif )",route :[43,149,21,134,130]},
-      {trainName:"Bima (KA42) ( Eksekutif )",route :[43, 89,149,21,130,123,131,136,133,138,135,142,143,144]},
-      {trainName:"Gajayana (KA42) ( Eksekutif )",route :[43,149,21,134,130,123,131,136,137,129,146,147,154,148,132,144]},
-      {trainName:"Purwojaya (KA58/59) ( Eksekutif & Bisnis )",route :[43,149,21,115,116,108]},
+      {trainName:"Argo Wilis (KA6) (ekse)",route:[0,90,83,115,134,130,123,131,133,135]},
+      {trainName:"Turangga (KA50) (ekse)",route :[0,86,90,83,115,134,130,123,131,136,137,133,138,135]},
+      {trainName:"Lodaya Pagi (KA80) (ekse&bis)",route :[0,5,86,90,83,122,134,139,130,140,123]},
+      {trainName:"Lodaya Malam (KA82) (ekse&bis)",route :[0,5,86,90,83,112,134,139,130,140,123]},
+      {trainName:"Mutiara Selatan (KA112/113) (bis)",route :[0,5,86,90,84,83,115,141,112,134,130,123,131,136,137,133,138,135,142,128,143,144]},
+      {trainName:"Malabar (KA92) (ekse,bis&ekoAC)",route :[0,5,86,90,83,115,141,112,134,130,123,145,131,136,137,129,146,147,148,132,144]},
+      {trainName:"Argo Parahyangan Dini Hari (KA19) (ekse)",route :[0,3,21,33,42,43]},
+      {trainName:"Argo Parahyangan Pagi (KA21) (ekse)",route :[0,3,33,42,43]},
+      {trainName:"Argo Parahyangan Siang (KA23) (ekse)",route :[0,3,33,42,43]},
+      {trainName:"Argo Parahyangan Sore (KA25) (ekse)",route :[0,3,33,42,43]},
+      {trainName:"Argo Parahyangan Malam (KA27) (ekse)",route :[0,33,42,43]},
+      {trainName:"Argo Parahyangan Malam (KA29) (ekse)",route :[0,3,33,42,43]},
+      {trainName:"Argo Parahyangan Pagi (KA31) (ekse)",route :[0,3,33,42,43]},
+      {trainName:"Argo Parahyangan Pagi (KA33) (ekse)",route :[0,3,33,42,43]},
+      {trainName:"Argo Parahyangan Malam (KA35F) (ekse)",route :[0,3,33,42,43]},
+      {trainName:"Argo Parahyangan Pagi (KA37F) (ekse)",route :[0,3,42,43]},
+      {trainName:"Harina (KA75) (ekse&bis)",route :[0,3,21,24,149,125,117,121,150,107,151,127,152,153]},
+      {trainName:"Ciremai Express (KA99/98) (ekse&ekoAC)",route :[0,3,21,24,88,89,149,125,117,120,121]},
+      {trainName:"Argo Bromo Anggrek Pagi (KA2) (ekse)",route :[43,149,117,121,153]},
+      {trainName:"Argo Bromo Anggrek Malam (KA4) (ekse)",route :[43,149,121,153]},
+      {trainName:"Argo Sindro (KA12) (ekse)",route :[43,149,125,117,121]},
+      {trainName:"Argo Muria (KA14) (ekse)",route :[43,149,125,117,121]},
+      {trainName:"Sembrani (KA48) (ekse)",route :[43,149,125,117,121,107,151,152,15343,33,89,149]},
+      {trainName:"Argo Jati Pagi (KA16) (ekse)",route :[43,33,89,149]},
+      {trainName:"Argo Jati Sore (KA18) (ekse)",route :[43,33,89,149]},
+      {trainName:"Argo Jati Pagi (KA40F) (ekse)",route :[43,89,149]},
+      {trainName:"Argo Cirebon Express Siang (KA68) (ekse&bis)",route :[43,33,88,89,155,149]},
+      {trainName:"Argo Cirebon Express Malam 2 (KA70) (ekse&bis)",route :[43,33,88,89,149]},
+      {trainName:"Argo Cirebon Express Malam 1 (KA72) (ekse&bis)",route :[43,33,88,89,149]},
+      {trainName:"Tegal Bahari Siang 1 (KA62) (ekse&bis)",route :[43,33,88,89,149,156,157,158,159,125]},
+      {trainName:"Tegal Bahari Siang 2 (KA64) (ekse&bis)",route :[43,33,88,89,149,156,157,158,159,125]},
+      {trainName:"Tegal Bahari Malam (KA66) (ekse&bis)",route :[43,33,88,89,149,156,157,158,159,125]},
+      {trainName:"Bangunkarta (KA56) (ekse)",route :[43,149,125,160,117,121,124,145,131,136,137,133,138,135]},
+      {trainName:"Argo Lawu (KA8F) (ekse)",route :[43,149,21,134,130,140,123]},
+      {trainName:"Argo Dwipangga (KA10) (ekse)",route :[43,149,21,134,130,140,123]},
+      {trainName:"Taksaka Siang (KA51) (ekse)",route :[43,149,21,112,134,130]},
+      {trainName:"Taksaka Malam (KA54) (ekse)",route :[43,149,21,134,130]},
+      {trainName:"Bima (KA42) (ekse)",route :[43, 89,149,21,130,123,131,136,133,138,135,142,143,144]},
+      {trainName:"Gajayana (KA42) (ekse)",route :[43,149,21,134,130,123,131,136,137,129,146,147,154,148,132,144]},
+      {trainName:"Purwojaya (KA58/59) (ekse&bis)",route :[43,149,21,115,116,108]},
       {trainName:"Argo Parahyangan Dini Hari (KA20)",route :[43,33,21,3,0]},
       {trainName:"Argo Parahyangan Pagi (KA22)",route :[43,33,21,3,0]},
       {trainName:"Argo Parahyangan Siang (KA24)",route :[43,0]},
@@ -333,126 +326,21 @@ export class EtaPage {
       {trainName:"Argo Parahyangan Malam 2 (KA30)",route :[43,0]},
       {trainName:"Argo Parahyangan Siang (KA32)",route :[43,0]},
       {trainName:"Argo Parahyangan Siang 2 (KA34)",route :[43,0]},
-      {trainName:"Gumarang (KA72) ( Eksekutif & Bisnis )",route :[161,162,149,125,160,117,121,150,107,151,127,152, 153]},
-      {trainName:"Tegal Arum (KA186) ( Ekonomi AC )",route :[161,163,88,89,155,87,156,157,158,159,125]},
-      {trainName:"Gayabaru Malam Selatan (KA154) ( Ekonomi AC )",route :[161,88,89,87,164,118,165,166,119,167,168,169,131,133,138,135]},
-      {trainName:"Serayu Pagi (KA212) ( Ekonomi AC )",route :[161,21,8,5,85,86,90,84,83,122,170,116,115,171,118]},
+      {trainName:"Gumarang (KA72) (ekse&bis)",route :[161,162,149,125,160,117,121,150,107,151,127,152, 153]},
+      {trainName:"Tegal Arum (KA186) (ekoAC)",route :[161,163,88,89,155,87,156,157,158,159,125]},
+      {trainName:"Gayabaru Malam Selatan (KA154) (ekoAC)",route :[161,88,89,87,164,118,165,166,119,167,168,169,131,133,138,135]},
+      {trainName:"Serayu Pagi (KA212) (ekoAC)",route :[161,21,8,5,85,86,90,84,83,122,170,116,115,171,118]},
       {trainName:"Serayu Malam (KA216) (eko)",route :[161,21,5,85,86,90,84,83,122,172,170,116,115,118]},
       {trainName:"Kutojaya Selatan (KA204) (eko)",route :[5,86,90,83,122,172,116,115,173,141,111,112,134]},
       {trainName:"Kahuripan (KA182) (eko)",route :[5,86,90,84,83,172,116,141,134,139,166,140,119,167,168,145,174,131,175,136,137,129,146,147]},
       {trainName:"Pasundan (KA160) (eko)",route :[5,85,86,90,84,83,122,116,115,141,134,139,166,140,119,167,168,145,131,175,136,133,138,176,135]},
-      {trainName:"Bima (KA41) (ekse)",route :[135,138,133,131,123,130,149,89,42,43]},
-      {trainName:"Argo Wilis (KA5) (ekse)",route :[135,133,131,130,134,115,83,90,86,0]},
-      {trainName:"Turangga (KA49) (ekse)",route :[135,138,133,131,123,130,134,115,83,90,86,0]},
-      {trainName:"Mutiara Selatan (KA111/114) (bis)",route :[135,138,133,137,136,131,123,130,134,112,109,115,116,83,84,90,86,5,0]},
-      {trainName:"Sancaka Pagi (KA83)(ekse&bis)",route :[135,138,133,136,131,123,140,130]},
-      {trainName:"Sancaka Sore (KA83)(ekse&bis)",route :[135,138,133,136,131,123,130]},
-      {trainName:"Mutiara Timur Pagi (KA87)(ekse&bis)",route :[135,142,128,177,178,179,180,181,182,183,184,185,186,187]},
-      {trainName:"Mutiara Timur Malam (KA89)(ekse&bis)",route :[135,142,128,177,178,179,180,181,182,183,184,185,186,187]},
-      {trainName:"Bangunkarta Sore (KA55)(Ekse)",route :[135,138,133,137,136,175,131,145,124,121,117,160,125,149,42,43]},
-      {trainName:"Mutiara Timur Pagi (KA88)(ekse&bis)",route :[187,186,185,184,183,182,181,180,179,178,177,128,142,135]},
-      {trainName:"Mutiara Timur Malam (KA88)(ekse&bis)",route :[187,186,185,184,183,182,181,180,179,178,177,128,142,135]},
-      {trainName:"Purwojaya (KA60/57)(ekse&bis)",route :[108,116,115,118,149,33,42,43]},
-      {trainName:"Argo Jati Pagi (KA15)(eks)",route :[149,89,33,42,43]},
-      {trainName:"Argo Jati Sore (KA17)(eks)",route :[149,89,33,42,43]},
-      {trainName:"Argo Jati Siang (KA9F)(eks)",route :[149,89,42,43]},
-      {trainName:"Cirebon Express Dini Hari (KA67)(ekse&bis)",route :[149,89,88,24,33,42,43]},
-      {trainName:"Cirebon Express Pagi (KA69)(ekse&bis)",route :[149,89,88,33,42,43]},
-      {trainName:"Cirebon Express Sore (KA71F)(ekse&bis)",route :[149,89,88,33,42,43]},
-      {trainName:"Ciremai Express (KA97/100)(ekse&ekoAC)",route :[149,89,88,24,21,3,0]},
-      {trainName:"Bangunkarta (KA55)(ekse)",route :[133,137,136,175,131,145,124,121,117,160,125,149,42,43]},
-      {trainName:"Taksaka Pagi (KA51)(ekse)",route :[130,134,115,118,149,42,43]},
-      {trainName:"Taksaka Malam (KA53)(ekse)",route :[130,134,115,118,149,42,43]},
-      {trainName:"Fajar Utama (KA117)(bis)",route :[130,134,118,188,189,149,89,88,42,162]},
-      {trainName:"Senja Utama (KA119)(bis)",route :[130,139,112,109,118,149,33,42,162]},
-      {trainName:"Sancaka Pagi (KA84)(ekse&bis)",route :[130,140,123,131,136,133,138,135]},
-      {trainName:"Sancaka Sore (KA86)(ekse&bis)",route :[130,123,131,136,133,138,135]},
-      {trainName:"Malioboro Express Pagi (KA94)(ekse&ekoAC)",route :[130,140,123,131,136,137,129,146,147,154,148,132,144]},
-      {trainName:"Malioboro Express Malam (KA94)(ekse&ekoAC)",route :[130,140,123,131,136,137,129,146,147,154,148,132,144]},
-      {trainName:"Gajayana (KA41)(ekse)",route :[144,132,148,154,147,146,129,137,136,131,123,130,134,118,149,42,43]},
-      {trainName:"Malabar (KA97)(ekse&bis&ekoAC)",route :[144,132,148,154,147,146,129,137,136,131,145,123,130,134,112,109,115,83,90,86,5,0]},
-      {trainName:"Malioboro Express Pagi (KA93)(ekse&ekoAC)",route :[144,132,148,154,147,146,129,137,136,131,123,140,130]},
-      {trainName:"Malioboro Express Malam (KA95)(ekse&ekoAC)",route :[144,132,148,154,147,146,129,137,136,131,123,140,130]},
-      {trainName:"Suwanggalih Pagi (KA121)(bis)",route :[134,112,111,109,115,118,188,164,149,33,42,162]},
-      {trainName:"Suwanggalih Malam (KA123)(bis)",route :[134,112,111,109,115,118,188,149,33,42,162]},
-      {trainName:"Fajar Utama Jogjakarta (KA118)(bis)",route :[162,88,89,149,188,118,115,111,190,134,139,130]},
-      {trainName:"Senja Utama Jogjakarta (KA120)(bis)",route :[162,149,191,118,112,139,130]},
-      {trainName:"Senja Utama Solo (KA116)(bis)",route :[162,149,118,112,134,130,140,123]},
-      {trainName:"Sawunggalih Pagi (KA122)(bis)",route :[162,149,164,188,118,115,109,111,112,134]},
-      {trainName:"Sawunggalih Malam (KA124)(ekse&bis)",route :[162,149,188,118,115,109,111,112,134]},
-      {trainName:"Argo Bromo Anggrek Pagi (KA1)(ekse)",route :[153,121,117,149,42,43]},
-      {trainName:"Argo Bromo Anggrek Malam (KA3)(ekse)",route :[153,121,149,42,43]},
-      {trainName:"Sembrani (KA47)(ekse)",route :[153,152,151,107,121,117,125,149,42,43]},
-      {trainName:"Gumarang (KA77)(ekse)",route :[153,152,151,107,150,121,117,160,125,149,89,33,42,162]},
-      {trainName:"Harina (KA67)(ekse&bis)",route :[153,152,127,151,107,150,121,117,125,149,124,21,3,0]},
-      {trainName:"Argo Lawu (KA7)(ekse)",route :[123,140,130,134,118,149,42,43]},
-      {trainName:"Argo Dwipangga (KA9)(ekse)",route :[123,140,130,134,118,149,42,43]},
-      {trainName:"Senja Utama Solo (KA115)(bis",route :[123,140,130,134,115,118,149,33,42,43]},
-      {trainName:"Lodaya Pagi (KA79)(ekse&bis)",route :[123,140,130,139,134,112,122,83,90,86,5,0]},
-      {trainName:"Lodaya Malam (KA81)(ekse&bis)",route :[123,140,130,139,134,122,83,90,86,5,0]},
-      {trainName:"Argo Sindro (KA11)(ekse)",route :[121,117,125,149,42,43]},
-      {trainName:"Argo Muria (KA18)(ekse)",route :[121,117,125,149,33,42,43]},
-      {trainName:"Menoreh (KA149)(ekse)",route :[121,126,117,125,159,87,89,42,162]},
-      {trainName:"Bima (KA41) ( Eksekutif )",route :[135,138,133,131,123,130,149,89,42,43]},
-      {trainName:"Argo Wilis (KA5) ( Eksekutif )",route :[135,133,131,130,134,115,83,90,86,0]},
-      {trainName:"Turangga (KA49) ( Eksekutif )",route :[135,138,133,131,123,130,134,115,83,90,86,0]},
-      {trainName:"Mutiara Selatan (KA111/114) ( Bisnis )",route :[135,138,133,137,136,131,123,130,134,112,109,115,116,83,84,90,86,5,0]},
-      {trainName:"Sancaka Pagi (KA83)( Eksekutif & Bisnis )",route :[135,138,133,136,131,123,140,130]},
-      {trainName:"Sancaka Sore (KA83)( Eksekutif & Bisnis )",route :[135,138,133,136,131,123,130]},
-      {trainName:"Mutiara Timur Pagi (KA87)( Eksekutif & Bisnis )",route :[135,142,128,177,178,179,180,181,182,183,184,185,186,187]},
-      {trainName:"Mutiara Timur Malam (KA89)( Eksekutif & Bisnis )",route :[135,142,128,177,178,179,180,181,182,183,184,185,186,187]},
-      {trainName:"Bangunkarta Sore (KA55)( Eksekutif )",route :[135,138,133,137,136,175,131,145,124,121,117,160,125,149,42,43]},
-      {trainName:"Mutiara Timur Pagi (KA88)( Eksekutif & Bisnis )",route :[187,186,185,184,183,182,181,180,179,178,177,128,142,135]},
-      {trainName:"Mutiara Timur Malam (KA88)( Eksekutif & Bisnis )",route :[187,186,185,184,183,182,181,180,179,178,177,128,142,135]},
-      {trainName:"Purwojaya (KA60/57)( Eksekutif & Bisnis )",route :[108,116,115,118,149,33,42,43]},
-      {trainName:"Argo Jati Pagi (KA15)(eks)",route :[149,89,33,42,43]},
-      {trainName:"Argo Jati Sore (KA17)(eks)",route :[149,89,33,42,43]},
-      {trainName:"Argo Jati Siang (KA9F)(eks)",route :[149,89,42,43]},
-      {trainName:"Cirebon Express Dini Hari (KA67)( Eksekutif & Bisnis )",route :[149,89,88,24,33,42,43]},
-      {trainName:"Cirebon Express Pagi (KA69)( Eksekutif & Bisnis )",route :[149,89,88,33,42,43]},
-      {trainName:"Cirebon Express Sore (KA71F)( Eksekutif & Bisnis )",route :[149,89,88,33,42,43]},
-      {trainName:"Ciremai Express (KA97/100)( Eksekutif & Ekonomi AC )",route :[149,89,88,24,21,3,0]},
-      {trainName:"Bangunkarta (KA55)( Eksekutif )",route :[133,137,136,175,131,145,124,121,117,160,125,149,42,43]},
-      {trainName:"Taksaka Pagi (KA51)( Eksekutif )",route :[130,134,115,118,149,42,43]},
-      {trainName:"Taksaka Malam (KA53)( Eksekutif )",route :[130,134,115,118,149,42,43]},
-      {trainName:"Fajar Utama (KA117)( Bisnis )",route :[130,134,118,188,189,149,89,88,42,162]},
-      {trainName:"Senja Utama (KA119)( Bisnis )",route :[130,139,112,109,118,149,33,42,162]},
-      {trainName:"Sancaka Pagi (KA84)( Eksekutif & Bisnis )",route :[130,140,123,131,136,133,138,135]},
-      {trainName:"Sancaka Sore (KA86)( Eksekutif & Bisnis )",route :[130,123,131,136,133,138,135]},
-      {trainName:"Malioboro Express Pagi (KA94)( Eksekutif & Ekonomi AC )",route :[130,140,123,131,136,137,129,146,147,154,148,132,144]},
-      {trainName:"Malioboro Express Malam (KA94)( Eksekutif & Ekonomi AC )",route :[130,140,123,131,136,137,129,146,147,154,148,132,144]},
-      {trainName:"Gajayana (KA41)( Eksekutif )",route :[144,132,148,154,147,146,129,137,136,131,123,130,134,118,149,42,43]},
-      {trainName:"Malabar (KA97)( Eksekutif , Bisnis & Ekonomi AC )",route :[144,132,148,154,147,146,129,137,136,131,145,123,130,134,112,109,115,83,90,86,5,0]},
-      {trainName:"Malioboro Express Pagi (KA93)( Eksekutif & Ekonomi AC )",route :[144,132,148,154,147,146,129,137,136,131,123,140,130]},
-      {trainName:"Malioboro Express Malam (KA95)( Eksekutif & Ekonomi AC )",route :[144,132,148,154,147,146,129,137,136,131,123,140,130]},
-      {trainName:"Suwanggalih Pagi (KA121)( Bisnis )",route :[134,112,111,109,115,118,188,164,149,33,42,162]},
-      {trainName:"Suwanggalih Malam (KA123)( Bisnis )",route :[134,112,111,109,115,118,188,149,33,42,162]},
-      {trainName:"Fajar Utama Jogjakarta (KA118)( Bisnis )",route :[162,88,89,149,188,118,115,111,190,134,139,130]},
-      {trainName:"Senja Utama Jogjakarta (KA120)( Bisnis )",route :[162,149,191,118,112,139,130]},
-      {trainName:"Senja Utama Solo (KA116)( Bisnis )",route :[162,149,118,112,134,130,140,123]},
-      {trainName:"Sawunggalih Pagi (KA122)( Bisnis )",route :[162,149,164,188,118,115,109,111,112,134]},
-      {trainName:"Sawunggalih Malam (KA124)( Eksekutif & Bisnis )",route :[162,149,188,118,115,109,111,112,134]},
-      {trainName:"Argo Bromo Anggrek Pagi (KA1)( Eksekutif )",route :[153,121,117,149,42,43]},
-      {trainName:"Argo Bromo Anggrek Malam (KA3)( Eksekutif )",route :[153,121,149,42,43]},
-      {trainName:"Sembrani (KA47)( Eksekutif )",route :[153,152,151,107,121,117,125,149,42,43]},
-      {trainName:"Gumarang (KA77)( Eksekutif )",route :[153,152,151,107,150,121,117,160,125,149,89,33,42,162]},
-      {trainName:"Harina (KA67)( Eksekutif & Bisnis )",route :[153,152,127,151,107,150,121,117,125,149,124,21,3,0]},
-      {trainName:"Argo Lawu (KA7)( Eksekutif )",route :[123,140,130,134,118,149,42,43]},
-      {trainName:"Argo Dwipangga (KA9)( Eksekutif )",route :[123,140,130,134,118,149,42,43]},
-      {trainName:"Senja Utama Solo (KA115)( Bisnis ",route :[123,140,130,134,115,118,149,33,42,43]},
-      {trainName:"Lodaya Pagi (KA79)( Eksekutif & Bisnis )",route :[123,140,130,139,134,112,122,83,90,86,5,0]},
-      {trainName:"Lodaya Malam (KA81)( Eksekutif & Bisnis )",route :[123,140,130,139,134,122,83,90,86,5,0]},
-      {trainName:"Argo Sindro (KA11)( Eksekutif )",route :[121,117,125,149,42,43]},
-      {trainName:"Argo Muria (KA18)( Eksekutif )",route :[121,117,125,149,33,42,43]},
-      {trainName:"Menoreh (KA149)( Eksekutif )",route :[121,126,117,125,159,87,89,42,162]}
-      ];
+      {trainName:"",route :[]},
+    ];
   }
 
   /**
   *STILL dummy location and destination
   */
-
-
  calculateRoute(){
    var aa : any = 0.00;
    var cc : any = 0.00;
@@ -469,7 +357,7 @@ export class EtaPage {
   var dLatt:any = 0.00;
   var dLonn:any = 0.00;
 
-  //Ceritanya naik kereta Argo Wilis (KA6) (ekse)
+  //Ceritanya naik kereta Bandung Raya Eko
   console.log("Mau this");
   console.log(this);
    this.myTrain = this.kereta[0];
@@ -479,7 +367,7 @@ export class EtaPage {
      //index for target station
      var idx = this.myTrain.route[i];
      var stat1 = this.stasiun[idx];
-     idx = this.myTrain.route[i];
+     idx = this.myTrain.route[i+1];
      var stat2 = this.stasiun[idx];
 
      //calculate distance between station
@@ -512,7 +400,7 @@ export class EtaPage {
  initializeStopoverStations(){
    //console.log(this.stasiunKereta[0]);
    this.items = [];
-   for (let i = 0; i < this.stationDistances.length; i++) {
+   for (let i = 0; i < this.stationDistances.length-1; i++) {
      var idx = this.myTrain.route[i+1];
      this.items.push({
        jam: i + ' Jam',
