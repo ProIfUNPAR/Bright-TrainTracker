@@ -100,12 +100,6 @@ export class EtaPage {
    //   'Mojokerto'
    // ];
 
-<<<<<<< HEAD
-=======
-   this.stationDistances = [ 0,0,0,0,0 ];
-
-   //real
->>>>>>> 14f1fb34b9adb55bc47993d859fd54c933b8bb4c
    this.stasiun = [
       {id:"0",lat:"-6.9197513",lng:"107.6068601",name:"Stasiun Bandung"},
       {id:"1",lat:"-6.9140761",lng:"107.4500881",name:"Stasiun Ciroyom"},
@@ -382,12 +376,8 @@ export class EtaPage {
      //from starting station to each stopover
      var idx = this.myTrain.route[i];
      var stat1 = this.stasiun[idx];
-<<<<<<< HEAD
      //its target station
          idx = this.myTrain.route[i+1];
-=======
-     idx = this.myTrain.route[i+1];
->>>>>>> 14f1fb34b9adb55bc47993d859fd54c933b8bb4c
      var stat2 = this.stasiun[idx];
 
      //calculate distance between station
@@ -435,19 +425,14 @@ calculateStopoverDistance(){
   destination and also for each stopover.
 */
 calculateMyMovement(){
-  
+
 }
 
 initializeStopoverStations(){
    this.calculateStopoverDistance();
 
    this.items = [];
-<<<<<<< HEAD
-   for (let i = 0; i < this.stationDistances.length; i++) {
-      //di+1 karena tidak perlu tampilkan stasiun asal dia pergi
-=======
    for (let i = 0; i < this.stationDistances.length-1; i++) {
->>>>>>> 14f1fb34b9adb55bc47993d859fd54c933b8bb4c
      var idx = this.myTrain.route[i+1];
      //console.log("index : "+idx);
      console.log("stasiun distance : "+this.stationDistances[i]);
