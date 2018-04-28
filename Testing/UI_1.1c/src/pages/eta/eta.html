@@ -15,14 +15,14 @@
   <!--<ion-card class="headerStasiun"> -->
     <!--<ion-card-header class= "headerStasiun"> -->
       <ion-item class = "ionItem">
-        <div class = "stasiunAwal" item-end>
-          <ion-input class="isi"  placeholder="Stasiun Awaldsdffddhjasdhavhhdvs" readonly="true"></ion-input>
+        <div item-end>
+          <ion-input class="isi"  placeholder="Stasiun Awal" readonly="true">{{stasiunAwal}}</ion-input>
         </div>
         <div item-end>
           <ion-label class="to" color="primary">to</ion-label>
         </div>
-        <div class ="stasiunTujuan" item-end>
-          <ion-input class="isi" placeholder="Stasiun Tujuan" readonly="true"></ion-input>
+        <div item-end>
+          <ion-input class="isi" placeholder="Stasiun Tujuan" readonly="true">{{stasiunTujuan}}</ion-input>
         </div>
       </ion-item>
     <!--</ion-card-header> -->
@@ -43,7 +43,14 @@
     <ion-label color="primary" >Train Speed : </ion-label>
     <ion-input placeholder="0" readonly="true"></ion-input>
   </ion-item>
+
 </ion-list>
+
+  <!-- PENAMBAHAN CODE DARI MAPS -->
+  <button ion-button full (click)="calculateAndDisplayRoute()">Show Direction</button>
+
+  <div id="map"></div>
+
 
 <ion-list>
   <ion-item class="fontSize" ion-item *ngFor="let item of items">
@@ -58,30 +65,4 @@
      </div>
   </ion-item>
 </ion-list>
-
-
-<!-- Button to current location
-<button class="buttonLocation">My Current Location</button>
--->
 </ion-content>
-
-
-<!-- OLD ITEM
-<ion-content>
-  <ion-list>
-  <ion-item>
-    <ion-label color="primary">ETA</ion-label>
-    <ion-input placeholder="0" readonly="true"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label color="primary">Distance</ion-label>
-    <ion-input placeholder="0" readonly="true"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label color="primary">Train Speed</ion-label>
-    <ion-input placeholder="0" readonly="true"></ion-input>
-  </ion-item>
-</ion-list>
-<button class="buttonLocation">My Current Location</button>
-</ion-content>
--->
