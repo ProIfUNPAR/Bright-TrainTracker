@@ -439,7 +439,6 @@ initializeStopoverStations(){
      this.items.push({
        jam: i + ' Jam',
        jarak: this.stopoverDistance[i] + ' Km',
-       //jarak: this.stationDistances[i] + ' Km',
        stasiun: this.stasiun[idx].name
      });
    }
