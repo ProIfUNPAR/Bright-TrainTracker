@@ -22,7 +22,7 @@ export class MapsPage {
   //Your chosen station
   Location: any;
   //Location to Destination
-  MyTrip: any;
+  MyTrip: string;
 
   //Your realistic location
   MyLocation: any;
@@ -43,14 +43,17 @@ export class MapsPage {
 
   ionViewDidLoad(){
     //cek output
-    this.storage.get('location').then((val) => {
-      console.log('Your location from storage is ', val);
+
+    this.storage.get('location').then((val:string) => {
+      this.MyTrip = val;
+      console.log('Your location from storage is loca =', val);
     });
+    //this.MyTrip = loca;
+    //console.log('MaTrip is '+this.MyTrip);
     this.storage.get('destination').then((val) => {
+      this.MyTrip = this.MyTrip + " to " + val;
       console.log('Your destination from storage is ', val);
     });
-
-    this.MyTrip = this.storage.get('location') + " to " +this.storage.get('destination')
   }
 
   calculateSpeed(t1, lat1, lng1, t2, lat2, lng2) {
