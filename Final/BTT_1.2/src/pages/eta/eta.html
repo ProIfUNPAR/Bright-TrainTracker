@@ -1,0 +1,68 @@
+<ion-header>
+  <link rel = "styleclass" href="../list/list.scss">
+  <link rel = "styleclass" href="../ionicons-2.0.1/css">
+  <ion-navbar color="dark" style="height:50px">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>ETA</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <!--<ion-card class="headerStasiun"> -->
+    <!--<ion-card-header class= "headerStasiun"> -->
+      <ion-item class = "ionItem">
+        <div item-end>
+          <ion-input class="isi"  placeholder="Stasiun Awal" readonly="true">{{stasiunAwal}}</ion-input>
+        </div>
+        <div item-end>
+          <ion-label class="to" color="primary">to</ion-label>
+        </div>
+        <div item-end>
+          <ion-input class="isi" placeholder="Stasiun Tujuan" readonly="true">{{stasiunTujuan}}</ion-input>
+        </div>
+      </ion-item>
+    <!--</ion-card-header> -->
+  <!--</ion-card> -->
+
+
+  <ion-list>
+  <ion-item>
+    <ion-label color="primary">ETA : </ion-label>
+    <ion-input placeholder="0" readonly="true"></ion-input>
+  </ion-item>
+  <ion-item color="">
+    <ion-label color="primary" >Distance : </ion-label>
+    <ion-label readonly="true" class="numberPositioning">{{d}}</ion-label>
+    <!--  Distance : {{d}} -->
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary" >Train Speed : </ion-label>
+    <ion-input placeholder="0" readonly="true"></ion-input>
+  </ion-item>
+
+</ion-list>
+
+  <!-- PENAMBAHAN CODE DARI MAPS -->
+  <button ion-button full (click)="calculateAndDisplayRoute()">Show Direction</button>
+
+  <div id="map"></div>
+
+
+<ion-list>
+  <ion-item class="fontSize" ion-item *ngFor="let item of items">
+    <div class="item-note itemJam" item-end>
+      {{item.jam}}
+    </div>
+     <div class="item-note itemTitle" item-end>
+        {{item.jarak}}
+     </div>
+     <div class="item-note itemStasiun" item-end>
+        {{item.stasiun}}
+     </div>
+  </ion-item>
+</ion-list>
+</ion-content>

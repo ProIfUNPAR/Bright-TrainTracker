@@ -1,0 +1,8 @@
+{
+  "name": "UI_1.1b",
+  "app_id": "",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

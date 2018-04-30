@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+<h2>Bright Train Tracker</h2>
+<br>
+
+  <!-- PICK TRAIN -->
+ <ion-list>
+    <ion-item>
+    <ion-label>Select Train</ion-label>
+    <ion-select (ionChange)="onChangeTrainLocation($event)" required>
+      <ion-option *ngFor="let train of trains">
+         {{train.trainName}}
+      </ion-option>
+    </ion-select>
+  </ion-item>
+  </ion-list>
+
+<!-- PICK LOCATION -->
+  <ion-list>
+     <ion-item>
+     <ion-label>Select Location</ion-label>
+     <ion-select (ionChange)="onChangeLocation($event)" required>
+       <ion-option *ngFor="let trainLocation of trainLocations">
+          {{trainLocation.stationName}}
+       </ion-option>
+     </ion-select>
+   </ion-item>
+   </ion-list>
+
+  <!-- PICK DESTINATION -->
+  <ion-list>
+     <ion-item>
+     <ion-label>Select Destination</ion-label>
+     <ion-select (ionChange)="onChangeDestination($event)" required>
+       <ion-option *ngFor="let trainLocation of trainLocations">
+          {{trainLocation.stationName}}
+       </ion-option>
+     </ion-select>
+   </ion-item>
+   </ion-list>
+
+  <button class="buttonGo" button (click)="presentAlert()">GO</button>
+
+</ion-content>
