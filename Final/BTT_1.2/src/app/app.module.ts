@@ -8,9 +8,9 @@ import { Geolocation } from '@ionic-native/geolocation';
 // Import all navigated page
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+//import { ListPage } from '../pages/list/list';
 import { EtaPage } from '../pages/eta/eta';
-import { MapsPage } from '../pages/maps/maps';
+//import { MapsPage } from '../pages/maps/maps';
 import { SettingsPage } from '../pages/settings/settings';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -38,10 +38,10 @@ import { IonicStorageModule } from '@ionic/storage';
   declarations: [
     MyApp,
     HomePage,
-    ListPage,
+    //ListPage,
     EtaPage,
-    MapsPage,
-    SettingsPage
+    //MapsPage,
+    //SettingsPage
   ],
   imports: [
     BrowserModule,
@@ -57,10 +57,10 @@ import { IonicStorageModule } from '@ionic/storage';
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage,
+    //ListPage,
     EtaPage,
-    MapsPage,
-    SettingsPage
+    //MapsPage,
+    //SettingsPage
   ],
   providers: [
     StatusBar,
