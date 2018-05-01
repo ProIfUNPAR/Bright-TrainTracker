@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, navParams } from 'ionic-angular';
 import { AlertController} from 'ionic-angular';
 import { EtaPage } from '../eta/eta';
-//import { MapsPage } from '../maps/maps';
+import { MapsPage } from '../maps/maps';
 import { Storage } from '@ionic/storage';
 
 //To take data from database.
@@ -15,7 +15,7 @@ import { Storage } from '@ionic/storage';
 })
 export class HomePage {
     //Var local storage
-    localStorage : Storage;
+    storage : Storage;
 
     //trains: string[];
     //locations: string[];
@@ -35,17 +35,16 @@ export class HomePage {
     berangkat: string;
 
     constructor(private storage: Storage, public alertCtrl: AlertController, public navCtrl: NavController) {
-      this.localStorage = storage;
       this.initializeTrainsAndLocations();
-
+      
     }
 
     ionViewDidLoad(){
       //cek output
-      this.localStorage.get('location').then((val) => {
+      this.storage.get('location').then((val) => {
         console.log('Your location is ', val);
       });
-      this.localStorage.get('destination').then((val) => {
+      this.storage.get('destination').then((val) => {
         console.log('Your destination is ', val);
       });
 
@@ -386,22 +385,23 @@ export class HomePage {
       this.kereta = event;
       console.log(this.kereta);
       this.kereta = this.kereta.replace(/\s+/g,'')
-      this.localStorage.set('kereta', this.kereta);
+      this.storage.set('kereta', this.kereta);
       console.log(this.kereta);
+      this.trainLocations = []; 
       this.initializeRouteLocation();
     }
 
     onChangeDestination(event){
       this.tujuan = event;
       this.tujuan = this.tujuan.replace(/\s+/g,'')
-      this.localStorage.set('destination', this.tujuan);
+      this.storage.set('destination', this.tujuan);
       console.log(this.tujuan);
     }
 
     onChangeLocation(event){
       this.berangkat = event;
       this.berangkat = this.berangkat.replace(/\s+/g,'')
-      this.localStorage.set('location', this.berangkat);
+      this.storage.set('location', this.berangkat);
       console.log(this.berangkat);
     }
 //
@@ -447,7 +447,7 @@ export class HomePage {
           //console.log(this.route);
         }
       }
-      var length = this.trains[0].route.length;
+      var length = this.route.length;
 
       //List of station based on train route track.
       for (let i = 0; i < length; i++) {
@@ -456,6 +456,7 @@ export class HomePage {
         //console.log(stationName);
         this.trainLocations.push({stationName: stationName});
       }
+      
      }
 }
 
