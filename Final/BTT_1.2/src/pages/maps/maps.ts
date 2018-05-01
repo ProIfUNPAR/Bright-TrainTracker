@@ -37,7 +37,7 @@ export class MapsPage {
     console.log("Location :"+this.Location);
     console.log("Destination :"+this.Destination);
 
-    //this.calculateAndDisplayRoute(); 
+    //this.calculateAndDisplayRoute();
   }
 
   ionViewDidLoad(){
@@ -55,26 +55,30 @@ export class MapsPage {
   });
 }
 
+
 calculateSpeed(t1, lat1, lng1, t2, lat2, lng2) {
   // From Caspar Kleijne's answer starts
   /** Converts numeric degrees to radians */
 
   // From Caspar Kleijne's answer ends
   // From cletus' answer starts
-  var R = 6371; // km
-  var dLat = (lat2-lat1)* Math.PI / 180;;
-  var dLon = (lng2-lng1)* Math.PI / 180;;
-  var lat1 = lat1 * Math.PI / 180;
-  var lat2 = lat2 * Math.PI / 180;
 
-  var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-  Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) *    Math.cos(lat2);
-  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-  var distance = R * c;
+  // var R = 6371; // km
+  // var dLat = (lat2-lat1)* Math.PI / 180;;
+  // var dLon = (lng2-lng1)* Math.PI / 180;;
+  // var lat1 = lat1 * Math.PI / 180;
+  // var lat2 = lat2 * Math.PI / 180;
+  //
+  // var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+  // Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) *    Math.cos(lat2);
+  // var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  // var distance = R * c;
+
   // From cletus' answer ends
 
-  return distance / t2 - t1;
+  //return distance / t2 - t1;
 }
+
 
 calculateAndDisplayRoute() {
   //show and hide MAP
