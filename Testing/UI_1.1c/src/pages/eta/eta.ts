@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-
-//External component
-import { Storage } from '@ionic/storage';
-import { NgZone } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
+<<<<<<< HEAD
+// import { geodist } from 'geodist'
+=======
 import { BackgroundGeolocation} from '@ionic-native/background-geolocation';
+>>>>>>> e6ed82fcb3ff69362bfa2c9a06073ee348c4eb29
 declare var google;
 
 
@@ -14,6 +14,32 @@ declare var google;
   templateUrl: 'eta.html'
 })
 export class EtaPage {
+<<<<<<< HEAD
+
+   Destination: any;
+   Location: any;
+   selectedItem: any;
+   icons: string[];
+   items: Array<{jam: string, jarak: string, stasiun: string}>;
+   kereta : Array<{trainName : string, route : number[] }>;
+
+   myTrain : any;
+   stasiunAwal : any;
+   stasiunTujuan : any;
+
+
+   MyLocation: any;
+   directionsService = new google.maps.DirectionsService;
+   directionsDisplay = new google.maps.DirectionsRenderer;
+   //dummy station
+   //stasiunKereta : string[];
+
+   //real station
+   stasiun : Array<{id : string, lat : string, lng : string, name : string}>;
+   stationDistances : number[];
+
+   //Geolocation variable
+=======
   //local Storage
   storage : Storage;
 
@@ -57,6 +83,7 @@ export class EtaPage {
   geoLongitude : any;
 
   //Geolocation variable
+>>>>>>> e6ed82fcb3ff69362bfa2c9a06073ee348c4eb29
   watch: any;
   lat:any = 0.00;
   lon:any = 0.00;
@@ -72,6 +99,16 @@ export class EtaPage {
   c : any = 0.00;
   d : any = 0.00;
 
+<<<<<<< HEAD
+  //speed: any = 0.00;
+ constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation) {
+  this.geolocation = geolocation;
+  this.navParams = navParams;
+
+  this.Destination = navParams.get('destination');
+  this.Location = navParams.get('location');
+ }
+=======
 
   constructor(private storage: Storage, public navCtrl: NavController, public zone: NgZone, private geolocation: Geolocation, public backgroundGeolocation: BackgroundGeolocation) {
     this.geolocation = geolocation;
@@ -93,60 +130,59 @@ export class EtaPage {
       this.Destination = val;
     });
   }
+>>>>>>> e6ed82fcb3ff69362bfa2c9a06073ee348c4eb29
 
-  ionViewDidLoad(){
-      this.initializeStasiun();
+ ionViewDidLoad(){
+   this.initializeStasiun();
 
-      //this.findTrainIndex();
+   this.selectedItem = this.navParams.get('item');
+   this.calculateRoute();
+   this.initializeStopoverStations();
 
-      this.calculateRoute();
-      this.initializeStopoverStations();
 
-      this.startTracking();
-      //console.log("KECEPATAN "+this.speed);
 
-      this.geolocation.getCurrentPosition().then((resp) => {
-        //console.log(" LAT                -  LONG")
-        console.log(resp.coords.latitude, resp.coords.longitude);
+   this.geolocation.getCurrentPosition().then((resp) => {
+     console.log(resp.coords.latitude, resp.coords.longitude);
 
-        //Our current location
-        this.lat = resp.coords.latitude;
-        this.lon =  resp.coords.longitude;
-        //If you want your current location from bandung
-        //this.lat = -6.914167;
-        //this.lon = 107.6025;
+     //Our current location
+     this.lat = resp.coords.latitude;
+     this.lon =  resp.coords.longitude;
+     //If you want your current location from bandung
+     //this.lat = -6.914167;
+     //this.lon = 107.6025;
 
-        this.lat2  = -6.176716;
-        this.lon2 = 106.830508;
-        this.radius = 6371; // Earth's radius (km)
-        this.dLat = (Math.PI/180)*(this.lat2 - this.lat);
-        this.dLon = (Math.PI/180)*(this.lon2 - this.lon);
-        this.a = Math.sin(this.dLat/2) * Math.sin(this.dLat/2) + Math.cos((Math.PI/180)*this.lat) * Math.cos((Math.PI/180)*this.lat2) * Math.sin(this.dLon / 2) * Math.sin(this.dLon / 2);
-        this.c = 2 * Math.atan2(Math.sqrt(this.a), Math.sqrt(1-this.a));
-        this.d = this.radius * this.c; // Distance in km
-        this.d = this.d.toFixed(2);
+     this.lat2  = -6.176716;
+     this.lon2 = 106.830508;
+     this.radius = 6371; // Earth's radius (km)
+     this.dLat = (Math.PI/180)*(this.lat2 - this.lat);
+     this.dLon = (Math.PI/180)*(this.lon2 - this.lon);
+     this.a = Math.sin(this.dLat/2) * Math.sin(this.dLat/2) + Math.cos((Math.PI/180)*this.lat) * Math.cos((Math.PI/180)*this.lat2) * Math.sin(this.dLon / 2) * Math.sin(this.dLon / 2);
+     this.c = 2 * Math.atan2(Math.sqrt(this.a), Math.sqrt(1-this.a));
+     this.d = this.radius * this.c; // Distance in km
+     this.d = this.d.toFixed(2);
+   }).catch((error) => {
+     console.log('Error getting location', error);
+   });
+ }
 
-        //actual distance
-        this.d = this.stopoverDistance[this.stopoverDistance.length-1];
-        this.estimatedTimeOfArrival = this.d / this.speed;
-        //console.log("ETA "+this.estimatedTimeOfArrival);
+ itemTapped(event, item) {
+   // That's right, we're pushing to ourselves!
+   this.navCtrl.push(EtaPage, { item: item});
+ }
 
-      }).catch((error) => {
-        console.log('Error getting location', error);
-      });
-    }
 
-  /*
-    Method to initialize all trains and stations.
-  */
-  initializeStasiun() {
-    //dummy
-    // this.stasiunKereta = [
-    //   'Surabaya',
-    //   'Mojokerto'
-    // ];
 
-    this.stasiun = [
+ initializeStasiun() {
+   //dummy
+   // this.stasiunKereta = [
+   //   'Surabaya',
+   //   'Mojokerto'
+   // ];
+
+   this.stationDistances = [ 0,0,0,0,0 ];
+
+   //real
+   this.stasiun = [
       {id:"0",lat:"-6.9197513",lng:"107.6068601",name:"Stasiun Bandung"},
       {id:"1",lat:"-6.9140761",lng:"107.4500881",name:"Stasiun Ciroyom"},
       {id:"2",lat:"-6.8961886",lng:"107.5611397",name:"Stasiun Cimindi"},
@@ -260,7 +296,6 @@ export class EtaPage {
       {id:"110",lat:"-7.218755",lng:"110.899937",name:"Stasiun Gundih"},
       {id:"111",lat:"-7.633169",lng:"109.573493",name:"Stasiun Karanganyar"},
       {id:"112",lat:"-7.681909",lng:"109.662123",name:"Stasiun Kebumen"},
-      {id:"113",lat:"0",lng:"0",name:"Stasiun Unknown"},
       {id:"114",lat:"-7.163653",lng:"110.635626",name:"Stasiun Kedungjati"},
       {id:"115",lat:"-7.630120",lng:"109.253538",name:"Stasiun Kroya"},
       {id:"116",lat:"-7.619092",lng:"109.139473",name:"Stasiun Maos"},
@@ -390,7 +425,106 @@ export class EtaPage {
     ];
   }
 
+  /**
+  *STILL dummy location and destination
+  */
+ calculateRoute(){
+   var aa : any = 0.00;
+   var cc : any = 0.00;
+   var dd : any = 0.00;
 
+<<<<<<< HEAD
+   //Geolocation variable
+  var watch2: any;
+  var latt:any = 0.00;
+  var lonn:any = 0.00;
+  var radiuss:any = 0.00;
+  var latt2:any = 0.00;
+  var lonn2:any = 0.00;
+
+  var dLatt:any = 0.00;
+  var dLonn:any = 0.00;
+
+  //Ceritanya naik kereta Bandung Raya Eko
+  console.log("Mau this");
+  console.log(this);
+   this.myTrain = this.kereta[0];
+   console.log("Route kereta 1 :"+this.myTrain.route[1]);
+   for(let i=0; i < this.myTrain.route.length-1;i++){
+
+     //index for target station
+     var idx = this.myTrain.route[i];
+     var stat1 = this.stasiun[idx];
+     idx = this.myTrain.route[i+1];
+     var stat2 = this.stasiun[idx];
+
+     //calculate distance between station
+     //1st location
+     latt = parseFloat(stat1.lat);
+     lonn = parseFloat(stat1.lng);
+
+     //2nd location
+     latt2  = parseFloat(stat2.lat);
+     lonn2 = parseFloat(stat2.lng);
+
+     radiuss = 6371; // Earth's radius (km)
+     dLatt = (Math.PI/180)*(latt2 - latt);
+     dLonn = (Math.PI/180)*(lonn2 - lonn);
+     aa = Math.sin(dLatt/2) * Math.sin(dLatt/2) +
+          Math.cos((Math.PI/180)*latt) *
+          Math.cos((Math.PI/180)*latt2) *
+          Math.sin(dLonn / 2) *
+          Math.sin(dLonn / 2);
+     cc = 2 * Math.atan2(Math.sqrt(aa), Math.sqrt(1-aa));
+     dd = radiuss * cc; // Distance in km
+     dd = dd.toFixed(2);
+
+     //write to array :
+     this.stationDistances[i] = dd;
+   }
+ }
+
+
+ initializeStopoverStations(){
+   //console.log(this.stasiunKereta[0]);
+   this.items = [];
+   for (let i = 0; i < this.stationDistances.length-1; i++) {
+     var idx = this.myTrain.route[i+1];
+     this.items.push({
+       jam: i + ' Jam',
+       jarak: this.stationDistances[i] + ' Km',
+       stasiun: this.stasiun[idx].name
+     });
+   }
+  }
+
+  calculateAndDisplayRoute() {
+    //show and hide MAP
+    //if false (not yet show map) show the map
+    //if true(map already showed) hide the map
+
+
+      let that = this;
+      /*Speed Part :
+      navigator.geolocation.getCurrentPosition(function(position1){
+        var t1 = Date.now();
+        console.log('test1');
+        setTimeout(function(){
+          navigator.geolocation.getCurrentPosition(function(position2){
+            console.log('test2');
+            var speed = that.calculateSpeed(t1 / 1000, position1.coords.latitude, position1.coords.longitude, Date.now() / 1000, position2.coords.latitude, position2.coords.longitude);
+            console.log(speed);
+          })
+        },1000);
+      })
+      */
+
+      let directionsService = new google.maps.DirectionsService;
+      let directionsDisplay = new google.maps.DirectionsRenderer;
+      const map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 7,
+        center: {lat: -6.9197513, lng: -107.6068601}
+=======
 
   /*
   Method to calculate the speed and EtaPage
@@ -681,6 +815,7 @@ calculateAndDisplayRoute() {
         } else {
           window.alert('Directions request failed due to ' + status);
         }
+>>>>>>> e6ed82fcb3ff69362bfa2c9a06073ee348c4eb29
       });
 
     }, function() {
