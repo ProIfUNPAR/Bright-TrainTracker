@@ -8,7 +8,7 @@ import 'rxjs/add/operator/filter'
 
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html' 
 })
 export class HomePage {
   public lat;

@@ -1,13 +1,22 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
+
+//External component
+import { Storage } from '@ionic/storage';
+import { NgZone } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation';
+<<<<<<< HEAD
 // import { geodist } from 'geodist'
+=======
+import { BackgroundGeolocation} from '@ionic-native/background-geolocation';
+>>>>>>> 4afa88610ae8c99f5751ec31782004d27c4e064a
 declare var google;
 @Component({
   selector: 'page-eta',
   templateUrl: 'eta.html'
 })
 export class EtaPage {
+<<<<<<< HEAD
 
    Destination: any;
    Location: any;
@@ -32,6 +41,51 @@ export class EtaPage {
    stationDistances : number[];
 
    //Geolocation variable
+=======
+  //local Storage
+  storage : Storage;
+
+  icons: string[];
+  items: Array<{jam: string, jarak: string, stasiun: string}>;
+  kereta : Array<{trainName : string, route : number[] }>;
+
+  myTrain : any;
+  stasiunAwal : any;
+  stasiunTujuan : any;
+  //dummy station
+  //stasiunKereta : string[];
+
+  //Location and Destination for Train MAPS
+  Destination: any;
+  Location: any;
+
+  MyLocation: any;
+  directionsService = new google.maps.DirectionsService;
+  directionsDisplay = new google.maps.DirectionsRenderer;
+  //dummy station
+  //stasiunKereta : string[];
+
+  //real station
+  stasiun : Array<{id : string, lat : string, lng : string, name : string}>;
+
+  //save each distance between station
+  stationDistances : number[] = [];
+
+  //save each distance from starting point to each calculateStopoverDistance
+  stopoverDistance : number[] = [];
+
+  //save the distance of our movement
+  //since we left our starting point.
+  ourDistance : number;
+
+  //SPEED and ETA
+  speed : any;
+  estimatedTimeOfArrival : any;
+  geoLatitude : any;
+  geoLongitude : any;
+
+  //Geolocation variable
+>>>>>>> 4afa88610ae8c99f5751ec31782004d27c4e064a
   watch: any;
   lat:any = 0.00;
   lon:any = 0.00;
@@ -47,6 +101,7 @@ export class EtaPage {
   c : any = 0.00;
   d : any = 0.00;
 
+<<<<<<< HEAD
   //speed: any = 0.00;
  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation) {
   this.geolocation = geolocation;
@@ -55,58 +110,83 @@ export class EtaPage {
   this.Destination = navParams.get('destination');
   this.Location = navParams.get('location');
  }
+=======
 
- ionViewDidLoad(){
-   this.initializeStasiun();
+  constructor(private storage: Storage, public navCtrl: NavController, public zone: NgZone, private geolocation: Geolocation, public backgroundGeolocation: BackgroundGeolocation) {
+    this.geolocation = geolocation;
+    //this.navParams = navParams;
+>>>>>>> 4afa88610ae8c99f5751ec31782004d27c4e064a
 
-   this.selectedItem = this.navParams.get('item');
-   this.calculateRoute();
-   this.initializeStopoverStations();
+    this.speed = -1;
+    this.estimatedTimeOfArrival = -1;
 
+    //catch dest and location from home.html
+    // this.Destination = navParams.get('destination');
+    // this.Location = navParams.get('location');
 
+    //Get dest and loc from storage
+    this.storage.get('location').then((val) => {
+      this.Location = val;
+      //console.log('Your location from storage is loca =', val);
+    });
+    this.storage.get('destination').then((val) => {
+      this.Destination = val;
+    });
+  }
 
-   this.geolocation.getCurrentPosition().then((resp) => {
-     console.log(resp.coords.latitude, resp.coords.longitude);
+  ionViewDidLoad(){
+      this.initializeStasiun();
 
-     //Our current location
-     this.lat = resp.coords.latitude;
-     this.lon =  resp.coords.longitude;
-     //If you want your current location from bandung
-     //this.lat = -6.914167;
-     //this.lon = 107.6025;
+      //this.findTrainIndex();
 
-     this.lat2  = -6.176716;
-     this.lon2 = 106.830508;
-     this.radius = 6371; // Earth's radius (km)
-     this.dLat = (Math.PI/180)*(this.lat2 - this.lat);
-     this.dLon = (Math.PI/180)*(this.lon2 - this.lon);
-     this.a = Math.sin(this.dLat/2) * Math.sin(this.dLat/2) + Math.cos((Math.PI/180)*this.lat) * Math.cos((Math.PI/180)*this.lat2) * Math.sin(this.dLon / 2) * Math.sin(this.dLon / 2);
-     this.c = 2 * Math.atan2(Math.sqrt(this.a), Math.sqrt(1-this.a));
-     this.d = this.radius * this.c; // Distance in km
-     this.d = this.d.toFixed(2);
-   }).catch((error) => {
-     console.log('Error getting location', error);
-   });
- }
+      this.calculateRoute();
+      this.initializeStopoverStations();
 
- itemTapped(event, item) {
-   // That's right, we're pushing to ourselves!
-   this.navCtrl.push(EtaPage, { item: item});
- }
+      this.startTracking();
+      //console.log("KECEPATAN "+this.speed);
 
+      this.geolocation.getCurrentPosition().then((resp) => {
+        //console.log(" LAT                -  LONG")
+        console.log(resp.coords.latitude, resp.coords.longitude);
 
+        //Our current location
+        this.lat = resp.coords.latitude;
+        this.lon =  resp.coords.longitude;
+        //If you want your current location from bandung
+        //this.lat = -6.914167;
+        //this.lon = 107.6025;
 
- initializeStasiun() {
-   //dummy
-   // this.stasiunKereta = [
-   //   'Surabaya',
-   //   'Mojokerto'
-   // ];
+        this.lat2  = -6.176716;
+        this.lon2 = 106.830508;
+        this.radius = 6371; // Earth's radius (km)
+        this.dLat = (Math.PI/180)*(this.lat2 - this.lat);
+        this.dLon = (Math.PI/180)*(this.lon2 - this.lon);
+        this.a = Math.sin(this.dLat/2) * Math.sin(this.dLat/2) + Math.cos((Math.PI/180)*this.lat) * Math.cos((Math.PI/180)*this.lat2) * Math.sin(this.dLon / 2) * Math.sin(this.dLon / 2);
+        this.c = 2 * Math.atan2(Math.sqrt(this.a), Math.sqrt(1-this.a));
+        this.d = this.radius * this.c; // Distance in km
+        this.d = this.d.toFixed(2);
 
-   this.stationDistances = [ 0,0,0,0,0 ];
+        //actual distance
+        this.d = this.stopoverDistance[this.stopoverDistance.length-1];
+        this.estimatedTimeOfArrival = this.d / this.speed;
+        //console.log("ETA "+this.estimatedTimeOfArrival);
 
-   //real
-   this.stasiun = [
+      }).catch((error) => {
+        console.log('Error getting location', error);
+      });
+    }
+
+  /*
+    Method to initialize all trains and stations.
+  */
+  initializeStasiun() {
+    //dummy
+    // this.stasiunKereta = [
+    //   'Surabaya',
+    //   'Mojokerto'
+    // ];
+
+    this.stasiun = [
       {id:"0",lat:"-6.9197513",lng:"107.6068601",name:"Stasiun Bandung"},
       {id:"1",lat:"-6.9140761",lng:"107.4500881",name:"Stasiun Ciroyom"},
       {id:"2",lat:"-6.8961886",lng:"107.5611397",name:"Stasiun Cimindi"},
@@ -220,6 +300,7 @@ export class EtaPage {
       {id:"110",lat:"-7.218755",lng:"110.899937",name:"Stasiun Gundih"},
       {id:"111",lat:"-7.633169",lng:"109.573493",name:"Stasiun Karanganyar"},
       {id:"112",lat:"-7.681909",lng:"109.662123",name:"Stasiun Kebumen"},
+      {id:"113",lat:"0",lng:"0",name:"Stasiun Unknown"},
       {id:"114",lat:"-7.163653",lng:"110.635626",name:"Stasiun Kedungjati"},
       {id:"115",lat:"-7.630120",lng:"109.253538",name:"Stasiun Kroya"},
       {id:"116",lat:"-7.619092",lng:"109.139473",name:"Stasiun Maos"},
@@ -349,14 +430,8 @@ export class EtaPage {
     ];
   }
 
-  /**
-  *STILL dummy location and destination
-  */
- calculateRoute(){
-   var aa : any = 0.00;
-   var cc : any = 0.00;
-   var dd : any = 0.00;
 
+<<<<<<< HEAD
    //Geolocation variable
   var watch2: any;
   var latt:any = 0.00;
@@ -420,6 +495,263 @@ export class EtaPage {
      });
    }
   }
+=======
+
+  /*
+  Method to calculate the speed and EtaPage
+  */
+  startTracking(){
+
+    let config = {
+      desiredAccuracy: 0,
+      stationaryRadius: 5,
+      distanceFilter: 10,
+      debug: true,
+      interval: 1000
+    };
+
+    this.backgroundGeolocation.configure(config).subscribe((location) => {
+      this.zone.run(() => {
+        this.geoLatitude = location.latitude;
+        this.geoLongitude = location.longitude;
+        this.speed = this.precisionRound((location.speed * 3600)/1000,1) ; // can be speed * 3.6 and should be round for 2 decimal
+      });
+
+    }, (err) => {
+      console.log(err);
+
+    });
+
+    this.backgroundGeolocation.start();
+  }
+
+  /*
+    METHOD TO SUPPORT startTracking();
+  */
+  precisionRound(number, precision) {
+    var factor = Math.pow(10, precision);
+    return Math.round(number * factor) / factor;
+  }
+
+  /*
+    Method to get the index of train.
+  */
+  private findTrainIndex(){
+    // var tempTrain : string;
+    // this.storage.get('kereta').then((val) => {
+    //   this.tempTrain = val;
+    // });
+    // console.log("KERETAKOEEE "+tempTrain);
+    //
+    // //bruteforce searching
+    // for(let i = 0; i < this.kereta.length;i++){
+    //   var namaKerata = this.kereta[i].trainName;
+    //   namaKerata = namaKerata.replace(/\s+/g,'');
+    //  console.log(" :"+tempTrain+" == COMPARE "+namaKerata);
+    //   if(tempTrain==namaKerata){
+    //       return this.kereta[i];
+    //   }
+    // }
+  }
+
+  private findTrainRoute(){
+    //var tempRoute : number[] = [];
+
+  }
+
+  /*
+  Default method.
+  */
+  itemTapped(event, item) {
+    // That's right, we're pushing to ourselves!
+    this.navCtrl.push(EtaPage, { item: item});
+  }
+
+  //
+  /*
+  It's calculate from starting to each stopover
+  Calculate each station
+  */
+  calculateRoute(){
+    var aa : any = 0.00;
+    var cc : any = 0.00;
+    var dd : any = 0.00;
+
+    //Geolocation variable
+    var watch2: any;
+    var latt:any = 0.00;
+    var lonn:any = 0.00;
+    var radiuss:any = 0.00;
+    var latt2:any = 0.00;
+    var lonn2:any = 0.00;
+
+    var dLatt:any = 0.00;
+    var dLonn:any = 0.00;
+
+    //display all variable in this class
+    console.log("Mau this");
+    console.log(this);
+
+    //this.myTrain = this.findTrainIndex();
+    //Ceritanya naik kereta Bandung Raya Eko
+    this.myTrain = this.kereta[0];
+    console.log("Route kereta 1 :"+this.myTrain.trainName);
+    for(let i=0; i < this.myTrain.route.length-1;i++){
+
+      //index for target station
+      //from starting station to each stopover
+      var idx = this.myTrain.route[i];
+      var stat1 = this.stasiun[idx];
+      //its target station
+      idx = this.myTrain.route[i+1];
+      var stat2 = this.stasiun[idx];
+
+      //calculate distance between station
+      //1st location
+      latt = parseFloat(stat1.lat);
+      lonn = parseFloat(stat1.lng);
+
+      //2nd location
+      latt2  = parseFloat(stat2.lat);
+      lonn2 = parseFloat(stat2.lng);
+
+      radiuss = 6371; // Earth's radius (km)
+      dLatt = (Math.PI/180)*(latt2 - latt);
+      dLonn = (Math.PI/180)*(lonn2 - lonn);
+      aa = Math.sin(dLatt/2) * Math.sin(dLatt/2) +
+      Math.cos((Math.PI/180)*latt) *
+      Math.cos((Math.PI/180)*latt2) *
+      Math.sin(dLonn / 2) *
+      Math.sin(dLonn / 2);
+      cc = 2 * Math.atan2(Math.sqrt(aa), Math.sqrt(1-aa));
+      dd = radiuss * cc; // Distance in km
+      dd = dd.toFixed(2); // Using to fixed its becoming string.
+
+      //write to array :
+      //it keep data of distance between station
+      this.stationDistances[i] = dd;
+    }
+  }
+
+  /*
+  This method is used to calculate the total distance
+  from starting point, to each stopover, until destination
+  */
+  calculateStopoverDistance(){
+    this.calculateMyMovement();
+
+    //WAIT TILL GET LOCATION FIRST!
+    setTimeout(() =>
+    {
+      var curDistance : number = 0;
+      var tempDistance : number = 0;
+      for (let i = 0; i < this.stationDistances.length; i++) {
+        curDistance = curDistance + Number(this.stationDistances[i]);
+        this.stopoverDistance[i] = Number(curDistance) - Number(this.ourDistance);
+      }
+      //actual distance
+      this.d = this.stopoverDistance[this.stopoverDistance.length-1];
+    },
+    3000);
+  }
+
+  /*
+  This method is used to calculate the distance from our location to
+  certain station.
+  YOU HAVE TO GET THE LOCATION FIRST BEFORE PROGRESS ANY FURTHER!
+  */
+  calculateMyMovement(){
+    var aa : any = 0.00;
+    var cc : any = 0.00;
+    var dd : any = 0.00;
+
+    //Geolocation variable
+    var watch2: any;
+    var latt:any = 0.00;
+    var lonn:any = 0.00;
+    var radiuss:any = 0.00;
+    var latt2:any = 0.00;
+    var lonn2:any = 0.00;
+
+    var dLatt:any = 0.00;
+    var dLonn:any = 0.00;
+
+    //Ceritanya naik kereta Bandung Raya Eko
+    this.myTrain = this.kereta[0];
+
+    //get my geolocation then
+    //count it distance to spesific station
+    this.geolocation.getCurrentPosition().then((resp) => {
+    console.log(resp.coords.latitude, resp.coords.longitude);
+
+    //calculate distance to station
+    //our location now
+    latt = resp.coords.latitude;
+    lonn = resp.coords.longitude;
+
+    //our starting location
+    //it will change everytime past through stopover station.
+    //need global index to keep the information that tell this variable
+    //later on that this variable will change if past through a station.
+    //ex: the idx become route[1]
+    var idx = this.myTrain.route[0];
+    var stat2 = this.stasiun[idx];
+    latt2  = parseFloat(stat2.lat);
+    lonn2 = parseFloat(stat2.lng);
+
+    radiuss = 6371; // Earth's radius (km)
+    dLatt = (Math.PI/180)*(latt2 - latt);
+    dLonn = (Math.PI/180)*(lonn2 - lonn);
+    aa = Math.sin(dLatt/2) * Math.sin(dLatt/2) +
+    Math.cos((Math.PI/180)*latt) *
+    Math.cos((Math.PI/180)*latt2) *
+    Math.sin(dLonn / 2) *
+    Math.sin(dLonn / 2);
+    cc = 2 * Math.atan2(Math.sqrt(aa), Math.sqrt(1-aa));
+    dd = radiuss * cc; // Distance in km
+    dd = dd.toFixed(2); // Using to fixed its becoming string.
+
+    //save the changes of our distance.
+    this.ourDistance = Number(dd);
+    console.log(this.ourDistance+" away from previous station")
+
+  }).catch((error) => {
+    console.log('Error getting location', error);
+  });
+
+}
+
+
+/*
+Print out the information on ETA.
+*/
+initializeStopoverStations(){
+  this.calculateStopoverDistance();
+
+  setTimeout(() =>  {
+    this.items = [];
+    for (let i = 0; i < this.stationDistances.length; i++) {
+      var idx = this.myTrain.route[i+1];
+      //console.log("index : "+idx);
+      //console.log("stasiun distance : "+this.stationDistances[i]);
+      this.items.push({
+        jam: i + ' Jam',
+        jarak: this.stopoverDistance[i].toFixed(2) + ' Km',
+        stasiun: this.stasiun[idx].name
+      });
+    }
+  },6000);
+
+}
+
+
+calculateAndDisplayRoute() {
+  //show and hide MAP
+  //if false (not yet show map) show the map
+  //if true(map already showed) hide the map
+
+  let that = this;
+>>>>>>> 4afa88610ae8c99f5751ec31782004d27c4e064a
 
   calculateAndDisplayRoute() {
     //show and hide MAP

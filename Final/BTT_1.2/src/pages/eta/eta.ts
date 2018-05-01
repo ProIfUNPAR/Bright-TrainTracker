@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 
 //External component
 import { Storage } from '@ionic/storage';
@@ -15,9 +15,8 @@ declare var google;
 })
 export class EtaPage {
   //local Storage
-  storage : Storage;
+  localStorage : Storage;
 
-  selectedItem: any;
   icons: string[];
   items: Array<{jam: string, jarak: string, stasiun: string}>;
   kereta : Array<{trainName : string, route : number[] }>;
@@ -31,15 +30,6 @@ export class EtaPage {
   //Location and Destination for Train MAPS
   Destination: any;
   Location: any;
-
-  selectedItem: any;
-  icons: string[];
-  items: Array<{jam: string, jarak: string, stasiun: string}>;
-  kereta : Array<{trainName : string, route : number[] }>;
-
-  myTrain : any;
-  stasiunAwal : any;
-  stasiunTujuan : any;
 
   MyLocation: any;
   directionsService = new google.maps.DirectionsService;
@@ -63,6 +53,8 @@ export class EtaPage {
   //SPEED and ETA
   speed : any;
   estimatedTimeOfArrival : any;
+  geoLatitude : any;
+  geoLongitude : any;
 
   //Geolocation variable
   watch: any;
@@ -81,9 +73,10 @@ export class EtaPage {
   d : any = 0.00;
 
 
-  constructor(private storage: Storage, public navCtrl: NavController, public navParams: NavParams, public zone: NgZone, private geolocation: Geolocation, public backgroundGeolocation: BackgroundGeolocation) {
+  constructor(private storage: Storage, public navCtrl: NavController, public zone: NgZone, private geolocation: Geolocation, public backgroundGeolocation: BackgroundGeolocation) {
+    this.localStorage = storage;
     this.geolocation = geolocation;
-    this.navParams = navParams;
+    //this.navParams = navParams;
 
     this.speed = -1;
     this.estimatedTimeOfArrival = -1;
@@ -93,22 +86,20 @@ export class EtaPage {
     // this.Location = navParams.get('location');
 
     //Get dest and loc from storage
-    this.storage.get('location').then((val) => {
+    this.localStorage.get('location').then((val) => {
       this.Location = val;
       //console.log('Your location from storage is loca =', val);
     });
-    this.storage.get('destination').then((val) => {
+    this.localStorage.get('destination').then((val) => {
       this.Destination = val;
     });
   }
 
-
-    ionViewDidLoad(){
+  ionViewDidLoad(){
       this.initializeStasiun();
 
-      this.findTrainIndex();
+      //this.findTrainIndex();
 
-      this.selectedItem = this.navParams.get('item');
       this.calculateRoute();
       this.initializeStopoverStations();
 
@@ -145,11 +136,6 @@ export class EtaPage {
         console.log('Error getting location', error);
       });
     }
-
-  itemTapped(event, item) {
-    // That's right, we're pushing to ourselves!
-    this.navCtrl.push(EtaPage, { item: item});
-  }
 
   /*
     Method to initialize all trains and stations.
@@ -422,8 +408,8 @@ export class EtaPage {
 
     this.backgroundGeolocation.configure(config).subscribe((location) => {
       this.zone.run(() => {
-        this.lat = location.latitude;
-        this.lng = location.longitude;
+        this.geoLatitude = location.latitude;
+        this.geoLongitude = location.longitude;
         this.speed = this.precisionRound((location.speed * 3600)/1000,1) ; // can be speed * 3.6 and should be round for 2 decimal
       });
 
@@ -436,24 +422,32 @@ export class EtaPage {
   }
 
   /*
+    METHOD TO SUPPORT startTracking();
+  */
+  precisionRound(number, precision) {
+    var factor = Math.pow(10, precision);
+    return Math.round(number * factor) / factor;
+  }
+
+  /*
     Method to get the index of train.
   */
   private findTrainIndex(){
-    var tempTrain : string;
-    this.storage.get('kereta').then((val) => {
-      tempTrain = val;
-      console.log("KERETAKOEEE "+tempTrain);
-    });
-
-    //bruteforce searching
-    for(let i = 0; i < this.kereta.length;i++){
-      var namaKerata = this.kereta[i].trainName;
-      namaKerata = namaKerata.replace(/\s+/g,'');
-      if(tempTrain==namaKerata){
-        console.log("TEMP :"+tempTrain+" == COMPARE "+namaKerata);
-          return this.kereta[i];
-      }
-    }
+    // var tempTrain : string;
+    // this.storage.get('kereta').then((val) => {
+    //   this.tempTrain = val;
+    // });
+    // console.log("KERETAKOEEE "+tempTrain);
+    //
+    // //bruteforce searching
+    // for(let i = 0; i < this.kereta.length;i++){
+    //   var namaKerata = this.kereta[i].trainName;
+    //   namaKerata = namaKerata.replace(/\s+/g,'');
+    //  console.log(" :"+tempTrain+" == COMPARE "+namaKerata);
+    //   if(tempTrain==namaKerata){
+    //       return this.kereta[i];
+    //   }
+    // }
   }
 
   private findTrainRoute(){
@@ -472,6 +466,7 @@ export class EtaPage {
   //
   /*
   It's calculate from starting to each stopover
+  Calculate each station
   */
   calculateRoute(){
     var aa : any = 0.00;
