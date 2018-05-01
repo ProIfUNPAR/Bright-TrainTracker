@@ -445,6 +445,7 @@ export class EtaPage {
   findTrainIndex(){
     this.localStorage.get('kereta').then((val) => {
       this.tempTrain = val;
+      console.log("KERETA AING : "+val)
     });
 
     //var keretaAsal = localStorage.getItem('kereta')

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, navParams } from 'ionic-angular';
+import { NavController} from 'ionic-angular';
 import { AlertController} from 'ionic-angular';
 import { EtaPage } from '../eta/eta';
-import { MapsPage } from '../maps/maps';
+//import { MapsPage } from '../maps/maps';
 import { Storage } from '@ionic/storage';
 
 //To take data from database.
@@ -15,11 +15,7 @@ import { Storage } from '@ionic/storage';
 })
 export class HomePage {
     //Var local storage
-<<<<<<< HEAD
-    //localStorage : Storage;
-=======
-    storage : Storage;
->>>>>>> 60ef91a7d25d5b941040196f129df6079d70b4d6
+    localStorage : Storage;
 
     //trains: string[];
     //locations: string[];
@@ -38,22 +34,17 @@ export class HomePage {
     tujuan: string;
     berangkat: string;
 
-<<<<<<< HEAD
-    constructor(public localStorage : Storage, public alertCtrl: AlertController, public navCtrl: NavController) {
-      //this.localStorage = storage;
-=======
-    constructor(private storage: Storage, public alertCtrl: AlertController, public navCtrl: NavController) {
->>>>>>> 60ef91a7d25d5b941040196f129df6079d70b4d6
+    constructor(private storage : Storage, public alertCtrl: AlertController, public navCtrl: NavController) {
+      this.localStorage = storage;
       this.initializeTrainsAndLocations();
-      
     }
 
     ionViewDidLoad(){
       //cek output
-      this.storage.get('location').then((val) => {
+      this.localStorage.get('location').then((val) => {
         console.log('Your location is ', val);
       });
-      this.storage.get('destination').then((val) => {
+      this.localStorage.get('destination').then((val) => {
         console.log('Your destination is ', val);
       });
 
@@ -396,11 +387,7 @@ export class HomePage {
       this.kereta = this.kereta.replace(/\s+/g,'')
       this.storage.set('kereta', this.kereta);
       console.log(this.kereta);
-<<<<<<< HEAD
       this.trainLocations = [];
-=======
-      this.trainLocations = []; 
->>>>>>> 60ef91a7d25d5b941040196f129df6079d70b4d6
       this.initializeRouteLocation();
     }
 
@@ -469,11 +456,6 @@ export class HomePage {
         //console.log(stationName);
         this.trainLocations.push({stationName: stationName});
       }
-<<<<<<< HEAD
-
-=======
-      
->>>>>>> 60ef91a7d25d5b941040196f129df6079d70b4d6
      }
 }
 
