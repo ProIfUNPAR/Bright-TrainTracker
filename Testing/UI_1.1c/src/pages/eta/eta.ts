@@ -28,12 +28,7 @@ export class EtaPage {
 
    //real station
    stasiun : Array<{id : string, lat : string, lng : string, name : string}>;
-
-   //save each distance between station
-   stationDistances : number[] = [];
-
-   //save each distance from starting point to each calculateStopoverDistance
-   stopoverDistance : number[] = [];
+   stationDistances : number[];
 
    //Geolocation variable
   watch: any;
@@ -88,9 +83,6 @@ export class EtaPage {
      this.c = 2 * Math.atan2(Math.sqrt(this.a), Math.sqrt(1-this.a));
      this.d = this.radius * this.c; // Distance in km
      this.d = this.d.toFixed(2);
-
-     //actual distance
-     this.d = this.stopoverDistance[this.stopoverDistance.length-1];
    }).catch((error) => {
      console.log('Error getting location', error);
    });
@@ -110,6 +102,9 @@ export class EtaPage {
    //   'Mojokerto'
    // ];
 
+   this.stationDistances = [ 0,0,0,0,0 ];
+
+   //real
    this.stasiun = [
       {id:"0",lat:"-6.9197513",lng:"107.6068601",name:"Stasiun Bandung"},
       {id:"1",lat:"-6.9140761",lng:"107.4500881",name:"Stasiun Ciroyom"},
@@ -224,7 +219,6 @@ export class EtaPage {
       {id:"110",lat:"-7.218755",lng:"110.899937",name:"Stasiun Gundih"},
       {id:"111",lat:"-7.633169",lng:"109.573493",name:"Stasiun Karanganyar"},
       {id:"112",lat:"-7.681909",lng:"109.662123",name:"Stasiun Kebumen"},
-      {id:"113",lat:"0",lng:"0",name:"Stasiun Unknown"},
       {id:"114",lat:"-7.163653",lng:"110.635626",name:"Stasiun Kedungjati"},
       {id:"115",lat:"-7.630120",lng:"109.253538",name:"Stasiun Kroya"},
       {id:"116",lat:"-7.619092",lng:"109.139473",name:"Stasiun Maos"},
@@ -354,10 +348,8 @@ export class EtaPage {
     ];
   }
 
-//
-  /*
-  STILL dummy location and destination
-  It's calculate from starting to each stopover
+  /**
+  *STILL dummy location and destination
   */
  calculateRoute(){
    var aa : any = 0.00;
@@ -379,15 +371,13 @@ export class EtaPage {
   console.log("Mau this");
   console.log(this);
    this.myTrain = this.kereta[0];
-   console.log("Route kereta 1 :"+this.myTrain.trainName);
+   console.log("Route kereta 1 :"+this.myTrain.route[1]);
    for(let i=0; i < this.myTrain.route.length-1;i++){
 
      //index for target station
-     //from starting station to each stopover
      var idx = this.myTrain.route[i];
      var stat1 = this.stasiun[idx];
-     //its target station
-         idx = this.myTrain.route[i+1];
+     idx = this.myTrain.route[i+1];
      var stat2 = this.stasiun[idx];
 
      //calculate distance between station
@@ -409,46 +399,22 @@ export class EtaPage {
           Math.sin(dLonn / 2);
      cc = 2 * Math.atan2(Math.sqrt(aa), Math.sqrt(1-aa));
      dd = radiuss * cc; // Distance in km
-     dd = dd.toFixed(2); // Using to fixed its becoming string.
+     dd = dd.toFixed(2);
 
      //write to array :
-     //it keep data of distance between station
      this.stationDistances[i] = dd;
    }
  }
 
-/*
-  This method is used to calculate the total distance
-  from starting point, to each stopover, until destination
-*/
-calculateStopoverDistance(){
-  var curDistance : number = 0;
-  for (let i = 0; i < this.stationDistances.length; i++) {
-    console.log("si stasiun : "+this.stationDistances[i]);
-    curDistance = curDistance + Number(this.stationDistances[i]);
-    this.stopoverDistance[i] = curDistance;
-  }
-}
 
-/*
-  This method is used to calculate the distance remaining to our
-  destination and also for each stopover.
-*/
-calculateMyMovement(){
-
-}
-
-initializeStopoverStations(){
-   this.calculateStopoverDistance();
-
+ initializeStopoverStations(){
+   //console.log(this.stasiunKereta[0]);
    this.items = [];
    for (let i = 0; i < this.stationDistances.length-1; i++) {
      var idx = this.myTrain.route[i+1];
-     //console.log("index : "+idx);
-     console.log("stasiun distance : "+this.stationDistances[i]);
      this.items.push({
        jam: i + ' Jam',
-       jarak: this.stopoverDistance[i] + ' Km',
+       jarak: this.stationDistances[i] + ' Km',
        stasiun: this.stasiun[idx].name
      });
    }
