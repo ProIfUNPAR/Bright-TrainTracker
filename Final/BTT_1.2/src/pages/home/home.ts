@@ -15,7 +15,7 @@ import { Storage } from '@ionic/storage';
 })
 export class HomePage {
     //Var local storage
-    localStorage : Storage;
+    //localStorage : Storage;
 
     //trains: string[];
     //locations: string[];
@@ -34,8 +34,8 @@ export class HomePage {
     tujuan: string;
     berangkat: string;
 
-    constructor(private storage: Storage, public alertCtrl: AlertController, public navCtrl: NavController) {
-      this.localStorage = storage;
+    constructor(public localStorage : Storage, public alertCtrl: AlertController, public navCtrl: NavController) {
+      //this.localStorage = storage;
       this.initializeTrainsAndLocations();
 
     }
@@ -388,6 +388,7 @@ export class HomePage {
       this.kereta = this.kereta.replace(/\s+/g,'')
       this.localStorage.set('kereta', this.kereta);
       console.log(this.kereta);
+      this.trainLocations = [];
       this.initializeRouteLocation();
     }
 
@@ -447,7 +448,7 @@ export class HomePage {
           //console.log(this.route);
         }
       }
-      var length = this.trains[0].route.length;
+      var length = this.route.length;
 
       //List of station based on train route track.
       for (let i = 0; i < length; i++) {
@@ -456,6 +457,7 @@ export class HomePage {
         //console.log(stationName);
         this.trainLocations.push({stationName: stationName});
       }
+
      }
 }
 

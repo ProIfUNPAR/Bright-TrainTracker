@@ -15,7 +15,7 @@ declare var google;
 })
 export class EtaPage {
   //local Storage
-  localStorage : Storage;
+  //localStorage : Storage;
 
   icons: string[];
   items: Array<{jam: string, jarak: string, stasiun: string}>;
@@ -28,14 +28,17 @@ export class EtaPage {
   //stasiunKereta : string[];
 
   //Location and Destination for Train MAPS
-  Destination: any;
-  Location: any;
+  Destination: string;
+  Location: string;
 
   MyLocation: any;
   directionsService = new google.maps.DirectionsService;
   directionsDisplay = new google.maps.DirectionsRenderer;
   //dummy station
   //stasiunKereta : string[];
+
+  //rute kereta
+  ruteKereta : number[] = [];
 
   //real station
   stasiun : Array<{id : string, lat : string, lng : string, name : string}>;
@@ -49,6 +52,9 @@ export class EtaPage {
   //save the distance of our movement
   //since we left our starting point.
   ourDistance : number;
+
+  //Temporary variable to keep it from Storage
+  tempTrain : any;
 
   //SPEED and ETA
   speed : any;
@@ -73,8 +79,8 @@ export class EtaPage {
   d : any = 0.00;
 
 
-  constructor(private storage: Storage, public navCtrl: NavController, public zone: NgZone, private geolocation: Geolocation, public backgroundGeolocation: BackgroundGeolocation) {
-    this.localStorage = storage;
+  constructor(public localStorage : Storage,public navCtrl: NavController, public zone: NgZone, private geolocation: Geolocation, public backgroundGeolocation: BackgroundGeolocation) {
+    //this.localStorage = storage;
     this.geolocation = geolocation;
     //this.navParams = navParams;
 
@@ -86,19 +92,23 @@ export class EtaPage {
     // this.Location = navParams.get('location');
 
     //Get dest and loc from storage
-    this.localStorage.get('location').then((val) => {
-      this.Location = val;
-      //console.log('Your location from storage is loca =', val);
-    });
-    this.localStorage.get('destination').then((val) => {
-      this.Destination = val;
-    });
+
   }
 
   ionViewDidLoad(){
+    this.localStorage.get('location').then((val:string) => {
+      this.Location = val;
+    });
+    this.localStorage.get('destination').then((val:string) => {
+      this.Destination = val;
+    });
+
+    console.log('Your location from storage is loca =', this.Location);
+    console.log('Your destination from storage is dest =', this.Destination);
+
       this.initializeStasiun();
 
-      //this.findTrainIndex();
+      this.findTrainIndex();
 
       this.calculateRoute();
       this.initializeStopoverStations();
@@ -432,27 +442,36 @@ export class EtaPage {
   /*
     Method to get the index of train.
   */
-  private findTrainIndex(){
-    // var tempTrain : string;
-    // this.storage.get('kereta').then((val) => {
-    //   this.tempTrain = val;
-    // });
-    // console.log("KERETAKOEEE "+tempTrain);
-    //
-    // //bruteforce searching
-    // for(let i = 0; i < this.kereta.length;i++){
-    //   var namaKerata = this.kereta[i].trainName;
-    //   namaKerata = namaKerata.replace(/\s+/g,'');
-    //  console.log(" :"+tempTrain+" == COMPARE "+namaKerata);
-    //   if(tempTrain==namaKerata){
-    //       return this.kereta[i];
-    //   }
-    // }
+  findTrainIndex(){
+    this.localStorage.get('kereta').then((val) => {
+      this.tempTrain = val;
+    });
+
+    //var keretaAsal = localStorage.getItem('kereta')
+    this.tempTrain = this.getMyTrain();
+    console.log("ASAL TRAIN "+String(this.tempTrain));
+
+    //bruteforce searching
+    for(let i = 0; i < this.kereta.length;i++){
+      var namaKerata = this.kereta[i].trainName;
+      namaKerata = namaKerata.replace(/\s+/g,'');
+     //console.log("TEMPORARY :"+this.tempTrain+" == COMPARE "+namaKerata);
+      if(this.tempTrain==namaKerata){
+        console.log("HOORAY!");
+          return this.kereta[i];
+      }
+    }
   }
 
-  private findTrainRoute(){
+  findTrainRoute(){
     //var tempRoute : number[] = [];
+  }
 
+  /*
+    Method to retrieve value from Storage
+  */
+  getMyTrain(){
+    return this.localStorage.get('kereta').then(value => value ? true : false);
   }
 
   /*
@@ -468,64 +487,133 @@ export class EtaPage {
   It's calculate from starting to each stopover
   Calculate each station
   */
-  calculateRoute(){
-    var aa : any = 0.00;
-    var cc : any = 0.00;
-    var dd : any = 0.00;
+calculateRoute(){
+     var aa : any = 0.00;
+     var cc : any = 0.00;
+     var dd : any = 0.00;
 
-    //Geolocation variable
-    var watch2: any;
-    var latt:any = 0.00;
-    var lonn:any = 0.00;
-    var radiuss:any = 0.00;
-    var latt2:any = 0.00;
-    var lonn2:any = 0.00;
+     //Geolocation variable
+     //var watch2: any;
+     var latt:any = 0.00;
+     var lonn:any = 0.00;
+     var radiuss:any = 0.00;
+     var latt2:any = 0.00;
+     var lonn2:any = 0.00;
 
-    var dLatt:any = 0.00;
-    var dLonn:any = 0.00;
+     var dLatt:any = 0.00;
+     var dLonn:any = 0.00;
 
-    //display all variable in this class
-    console.log("Mau this");
-    console.log(this);
+     var idx:any = 0;
+     var stat1:any;
+     var stat2:any;
 
-    //this.myTrain = this.findTrainIndex();
-    //Ceritanya naik kereta Bandung Raya Eko
-    this.myTrain = this.kereta[0];
-    console.log("Route kereta 1 :"+this.myTrain.trainName);
-    for(let i=0; i < this.myTrain.route.length-1;i++){
+     //display all variable in this class
+     console.log("Mau this");
+     console.log(this);
 
-      //index for target station
-      //from starting station to each stopover
-      var idx = this.myTrain.route[i];
-      var stat1 = this.stasiun[idx];
-      //its target station
-      idx = this.myTrain.route[i+1];
-      var stat2 = this.stasiun[idx];
+     //this.myTrain = this.findTrainIndex();
+     //Ceritanya naik kereta Bandung Raya Eko
+     this.myTrain = this.kereta[0];
+     console.log("Route kereta 1 :"+this.myTrain.trainName);
 
-      //calculate distance between station
-      //1st location
-      latt = parseFloat(stat1.lat);
-      lonn = parseFloat(stat1.lng);
+     var stasiunawalidx=0;
+     var stasiuntujuanidx=0;
+     // console.log(this.stasiun[this.myTrain.route[1]].name);
+     // console.log(this.Location);
+     for(let i=0;i<this.myTrain.route.length;i++){
+         if(this.stasiun[this.myTrain.route[i]].name=="Stasiun Jombang"){
+           //console.log(this.stasiun[this.myTrain.route[i]].name);"Stasiun Bandung"
+           stasiunawalidx =i;
+         }
+     }
+     for(let i=0;i<this.myTrain.route.length;i++){
+       if(this.stasiun[this.myTrain.route[i]].name=="Stasiun Bandung"){
+         stasiuntujuanidx =i;
+       }
+   }
+   console.log("arr stasiun awal :"+ stasiunawalidx);
+   console.log("arr stasiun tujuan :"+ stasiuntujuanidx);
 
-      //2nd location
-      latt2  = parseFloat(stat2.lat);
-      lonn2 = parseFloat(stat2.lng);
+   if(stasiunawalidx < stasiuntujuanidx){
+   var x = 0;
+   for(let i=stasiunawalidx; i <stasiuntujuanidx;i++){
 
-      radiuss = 6371; // Earth's radius (km)
-      dLatt = (Math.PI/180)*(latt2 - latt);
-      dLonn = (Math.PI/180)*(lonn2 - lonn);
-      aa = Math.sin(dLatt/2) * Math.sin(dLatt/2) +
-      Math.cos((Math.PI/180)*latt) *
-      Math.cos((Math.PI/180)*latt2) *
-      Math.sin(dLonn / 2) *
-      Math.sin(dLonn / 2);
-      cc = 2 * Math.atan2(Math.sqrt(aa), Math.sqrt(1-aa));
-      dd = radiuss * cc; // Distance in km
-      dd = dd.toFixed(2); // Using to fixed its becoming string.
+     //index for target station
+     //from starting station to each stopover
+     idx = this.myTrain.route[i];
+     stat1 = this.stasiun[idx];
+     //its target station
+     idx = this.myTrain.route[i+1];
+     stat2 = this.stasiun[idx];
+     this.ruteKereta[x] = idx;
+     x++;
+     //calculate distance between station
+     //1st location
+     latt = parseFloat(stat1.lat);
+     lonn = parseFloat(stat1.lng);
 
-      //write to array :
-      //it keep data of distance between station
-      this.stationDistances[i] = dd;
+     //2nd location
+     latt2  = parseFloat(stat2.lat);
+     lonn2 = parseFloat(stat2.lng);
+
+     radiuss = 6371; // Earth's radius (km)
+     dLatt = (Math.PI/180)*(latt2 - latt);
+     dLonn = (Math.PI/180)*(lonn2 - lonn);
+     aa = Math.sin(dLatt/2) * Math.sin(dLatt/2) +
+     Math.cos((Math.PI/180)*latt) *
+     Math.cos((Math.PI/180)*latt2) *
+     Math.sin(dLonn / 2) *
+     Math.sin(dLonn / 2);
+     cc = 2 * Math.atan2(Math.sqrt(aa), Math.sqrt(1-aa));
+     dd = radiuss * cc; // Distance in km
+     dd = dd.toFixed(2); // Using to fixed its becoming string.
+
+     //write to array :
+     //it keep data of distance between station
+     this.stationDistances[i] = dd;
+   }
+ }
+   else{
+     x=0;
+   for(let i=stasiunawalidx; i > stasiuntujuanidx; i--){
+   //index for target station
+     //from starting station to each stopover
+     idx = this.myTrain.route[i];
+     stat1 = this.stasiun[idx];
+     //its target station
+     console.log(idx);
+     idx = this.myTrain.route[i-1];
+     stat2 = this.stasiun[idx];
+     this.ruteKereta[x] = idx;
+     //calculate distance between station
+     //1st location
+     latt = parseFloat(stat1.lat);
+     lonn = parseFloat(stat1.lng);
+     //console.log(latt + "as" + lonn)
+     //2nd location
+     latt2  = parseFloat(stat2.lat);
+     lonn2 = parseFloat(stat2.lng);
+    // console.log(latt2 + "as" + lonn2)
+
+
+     radiuss = 6371; // Earth's radius (km)
+     dLatt = (Math.PI/180)*(latt2 - latt);
+     dLonn = (Math.PI/180)*(lonn2 - lonn);
+     aa = Math.sin(dLatt/2) * Math.sin(dLatt/2) +
+     Math.cos((Math.PI/180)*latt) *
+     Math.cos((Math.PI/180)*latt2) *
+     Math.sin(dLonn / 2) *
+     Math.sin(dLonn / 2);
+     cc = 2 * Math.atan2(Math.sqrt(aa), Math.sqrt(1-aa));
+     dd = radiuss * cc; // Distance in km
+     dd = dd.toFixed(2); // Using to fixed its becoming string.
+     console.log("aaaaaaa"+dd);
+     //write to array :
+     //it keep data of distance between station
+
+     this.stationDistances[x] = dd;
+     x++;
+     }
     }
   }
 
@@ -540,7 +628,7 @@ export class EtaPage {
     setTimeout(() =>
     {
       var curDistance : number = 0;
-      var tempDistance : number = 0;
+      //var tempDistance : number = 0;
       for (let i = 0; i < this.stationDistances.length; i++) {
         curDistance = curDistance + Number(this.stationDistances[i]);
         this.stopoverDistance[i] = Number(curDistance) - Number(this.ourDistance);
@@ -562,7 +650,7 @@ export class EtaPage {
     var dd : any = 0.00;
 
     //Geolocation variable
-    var watch2: any;
+    //var watch2: any;
     var latt:any = 0.00;
     var lonn:any = 0.00;
     var radiuss:any = 0.00;
@@ -626,8 +714,8 @@ initializeStopoverStations(){
 
   setTimeout(() =>  {
     this.items = [];
-    for (let i = 0; i < this.stationDistances.length; i++) {
-      var idx = this.myTrain.route[i+1];
+    for (let i = 0; i < this.ruteKereta.length; i++) {
+      var idx = this.ruteKereta[i];
       //console.log("index : "+idx);
       //console.log("stasiun distance : "+this.stationDistances[i]);
       this.items.push({
@@ -639,7 +727,6 @@ initializeStopoverStations(){
   },6000);
 
 }
-
 
 calculateAndDisplayRoute() {
   //show and hide MAP

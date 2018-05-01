@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 
 import { Storage } from '@ionic/storage';
 
@@ -15,7 +15,7 @@ declare var google;
 export class MapsPage {
 
   //local Storage
-  localStorage : Storage;
+  //localStorage : Storage;
 
   //Target station;
   Destination: any;
@@ -29,8 +29,8 @@ export class MapsPage {
   directionsService = new google.maps.DirectionsService;
   directionsDisplay = new google.maps.DirectionsRenderer;
 
-  constructor(private storage: Storage, public navCtrl: NavController,public navParams: NavParams) {
-    this.localStorage = storage;
+  constructor(public localStorage : Storage, public navCtrl: NavController,public navParams: NavParams) {
+    //this.localStorage = storage;
     this.Destination = navParams.get('destination');
     this.Location = navParams.get('location');
 
