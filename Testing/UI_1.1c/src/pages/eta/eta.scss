@@ -70,15 +70,31 @@ ion-header{
 
 
 .menujuKe{
-	font-size: 13px;
+	//border:1px solid black;
+	font-size: 15px;
 	padding-left:125px;
+	margin-top:8px;
+	//margin-bottom: 1px;
+	padding-bottom:0px;
+	padding-top:0px;
+
 	//padding-right: 0px;
 }
 
-.namaStasiun{
+.namaStasiunAwal{
 	//border:1px solid black;
-	font-size: 13px;
-	padding-left: 20%;
+	font-size: 15px;
+	padding-left: 12%;
+	margin-top:1px;
+	margin-bottom:1px;
+	
+}
+
+.namaStasiunTujuan{
+	//border:1px solid black;
+	font-size: 15px;
+	padding-left: 12%;
+	margin-bottom:12px;
 }
 
 page-eta {
