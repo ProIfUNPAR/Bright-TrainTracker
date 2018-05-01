@@ -36,9 +36,7 @@ export class HomePage {
 
     constructor(private storage: Storage, public alertCtrl: AlertController, public navCtrl: NavController) {
       this.initializeTrainsAndLocations();
-      //this.navParams = navParams;
-      //this.stations = afDatabase.list('/').valueChanges();
-      //this.initializeStations();
+      
     }
 
     ionViewDidLoad(){
@@ -385,6 +383,7 @@ export class HomePage {
 
     onChangeTrainLocation(event){
       this.kereta = event;
+      console.log(this.kereta);
       this.kereta = this.kereta.replace(/\s+/g,'')
       this.storage.set('kereta', this.kereta);
       console.log(this.kereta);
@@ -440,11 +439,11 @@ export class HomePage {
     initializeRouteLocation(){
 
       var myTrain = this.kereta;
-      console.log(this.trains[1].trainName);
+      //console.log(this.trains[1].trainName);
       for(let j = 0; j < this.trains.length;j++){
         if(myTrain == this.trains[j].trainName.replace(/\s+/g,'')){
           this.route = this.trains[j].route;
-          console.log(this.route);
+          //console.log(this.route);
         }
       }
       var length = this.trains[0].route.length;
@@ -453,7 +452,7 @@ export class HomePage {
       for (let i = 0; i < length; i++) {
         var idx = this.route[i];
         var stationName = this.locations[idx].name;
-        console.log(stationName);
+        //console.log(stationName);
         this.trainLocations.push({stationName: stationName});
       }
      }

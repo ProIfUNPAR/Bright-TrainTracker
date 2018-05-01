@@ -4,6 +4,9 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 // Import for geolocation (lan, lon) fitur
 import { Geolocation } from '@ionic-native/geolocation';
+// Program will running even minimized
+import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
+
 
 // Import all navigated page
 import { MyApp } from './app.component';
@@ -66,6 +69,7 @@ import { IonicStorageModule } from '@ionic/storage';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    BackgroundGeolocation,
     Geolocation
   ]
 })
