@@ -32,7 +32,7 @@
   <ion-list>
   <ion-item>
     <ion-label color="primary">ETA : </ion-label>
-    <ion-input placeholder="0" readonly="true"></ion-input>
+    <ion-label readonly="true" class="numberPositioning">{{estimatedTimeOfArrival}}</ion-label>
   </ion-item>
   <ion-item color="">
     <ion-label color="primary" >Distance : </ion-label>
@@ -41,7 +41,7 @@
   </ion-item>
   <ion-item>
     <ion-label color="primary" >Train Speed : </ion-label>
-    <ion-input placeholder="0" readonly="true"></ion-input>
+    <ion-label readonly="true" class="numberPositioning">{{speed}}</ion-label>
   </ion-item>
 
 </ion-list>
