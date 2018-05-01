@@ -649,6 +649,7 @@ calculateAndDisplayRoute() {
 
   let directionsService = new google.maps.DirectionsService;
   let directionsDisplay = new google.maps.DirectionsRenderer;
+  let directionsTransitLine = new google.maps.TransitLine;
   const map = new google.maps.Map(document.getElementById('map'), {
     zoom: 7,
     center: {lat: -6.9197513, lng: -107.6068601}
@@ -665,7 +666,7 @@ calculateAndDisplayRoute() {
       map.setCenter(pos);
       //that.MyLocation = new google.maps.LatLng(pos); //TO GET YOUR TRULLY POSITION
       that.MyLocation = that.Location;
-
+      directionsTransitLine.setName("null");
       directionsService.route({
         origin: that.MyLocation,
         destination: that.Destination+"",
