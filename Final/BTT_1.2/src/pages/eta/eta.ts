@@ -15,7 +15,7 @@ declare var google;
 })
 export class EtaPage {
   //local Storage
-  storage : Storage;
+  localStorage : Storage;
 
   icons: string[];
   items: Array<{jam: string, jarak: string, stasiun: string}>;
@@ -73,7 +73,8 @@ export class EtaPage {
   d : any = 0.00;
 
 
-  constructor(private localStorage: Storage, public navCtrl: NavController, public zone: NgZone, private geolocation: Geolocation, public backgroundGeolocation: BackgroundGeolocation) {
+  constructor(private storage: Storage, public navCtrl: NavController, public zone: NgZone, private geolocation: Geolocation, public backgroundGeolocation: BackgroundGeolocation) {
+    this.localStorage = storage;
     this.geolocation = geolocation;
     //this.navParams = navParams;
 
@@ -85,11 +86,11 @@ export class EtaPage {
     // this.Location = navParams.get('location');
 
     //Get dest and loc from storage
-    this.storage.get('location').then((val) => {
+    this.localStorage.get('location').then((val) => {
       this.Location = val;
       //console.log('Your location from storage is loca =', val);
     });
-    this.storage.get('destination').then((val) => {
+    this.localStorage.get('destination').then((val) => {
       this.Destination = val;
     });
   }
@@ -97,7 +98,7 @@ export class EtaPage {
   ionViewDidLoad(){
       this.initializeStasiun();
 
-      this.findTrainIndex();
+      //this.findTrainIndex();
 
       this.calculateRoute();
       this.initializeStopoverStations();
@@ -432,21 +433,21 @@ export class EtaPage {
     Method to get the index of train.
   */
   private findTrainIndex(){
-    var tempTrain : string;
-    this.storage.get('kereta').then((val) => {
-      this.tempTrain = val;
-    });
-    console.log("KERETAKOEEE "+tempTrain);
-
-    //bruteforce searching
-    for(let i = 0; i < this.kereta.length;i++){
-      var namaKerata = this.kereta[i].trainName;
-      namaKerata = namaKerata.replace(/\s+/g,'');
-      console.log("TEMP :"+tempTrain+" == COMPARE "+namaKerata);
-      if(tempTrain==namaKerata){
-          return this.kereta[i];
-      }
-    }
+    // var tempTrain : string;
+    // this.storage.get('kereta').then((val) => {
+    //   this.tempTrain = val;
+    // });
+    // console.log("KERETAKOEEE "+tempTrain);
+    //
+    // //bruteforce searching
+    // for(let i = 0; i < this.kereta.length;i++){
+    //   var namaKerata = this.kereta[i].trainName;
+    //   namaKerata = namaKerata.replace(/\s+/g,'');
+    //  console.log(" :"+tempTrain+" == COMPARE "+namaKerata);
+    //   if(tempTrain==namaKerata){
+    //       return this.kereta[i];
+    //   }
+    // }
   }
 
   private findTrainRoute(){
@@ -465,6 +466,7 @@ export class EtaPage {
   //
   /*
   It's calculate from starting to each stopover
+  Calculate each station
   */
   calculateRoute(){
     var aa : any = 0.00;

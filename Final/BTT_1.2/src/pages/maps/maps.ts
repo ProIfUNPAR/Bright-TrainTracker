@@ -15,7 +15,7 @@ declare var google;
 export class MapsPage {
 
   //local Storage
-  storage : Storage;
+  localStorage : Storage;
 
   //Target station;
   Destination: any;
@@ -30,6 +30,7 @@ export class MapsPage {
   directionsDisplay = new google.maps.DirectionsRenderer;
 
   constructor(private storage: Storage, public navCtrl: NavController,public navParams: NavParams) {
+    this.localStorage = storage;
     this.Destination = navParams.get('destination');
     this.Location = navParams.get('location');
 
@@ -43,13 +44,13 @@ export class MapsPage {
   ionViewDidLoad(){
     //cek output
 
-    this.storage.get('location').then((val:string) => {
+    this.localStorage.get('location').then((val:string) => {
       this.MyTrip = val;
       console.log('Your location from storage is loca =', val);
     });
     //this.MyTrip = loca;
     //console.log('MaTrip is '+this.MyTrip);
-    this.storage.get('destination').then((val) => {
+    this.localStorage.get('destination').then((val) => {
     this.MyTrip = this.MyTrip + " to " + val;
     console.log('Your destination from storage is ', val);
   });
