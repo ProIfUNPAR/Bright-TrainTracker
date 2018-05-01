@@ -47,7 +47,11 @@
 </ion-list>
 
   <!-- PENAMBAHAN CODE DARI MAPS -->
-  <button ion-button full (click)="calculateAndDisplayRoute()">Show Direction</button>
+  <ion-item class="destinationMaps">
+      <ion-label floating>Destination</ion-label>
+      <ion-input type="text" [(ngModel)]="Destination" disabled></ion-input>
+  </ion-item>
+  <button class = "buttonDirection" ion-button full (click)="calculateAndDisplayRoute()">Show Direction</button>
 
   <div id="map"></div>
 
