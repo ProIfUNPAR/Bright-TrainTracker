@@ -18,6 +18,11 @@ ion-header{
 	padding-left: 30px;
 	padding-right: 30px;
 }
+.itemTo{
+	//border : 1px solid red;
+	padding-left: 10px;
+	padding-right: 10px;
+}
 .itemJam{
 	//border : 1px solid red;
 	padding-left:5px;
@@ -36,6 +41,20 @@ ion-header{
 	padding-left: 20px;
 	//border:1px solid black;
 	font-Size : 13px;
+}
+.textPositioning{
+	padding-left: 3px;
+	//border:1px solid black;
+	font-Size : 13px;
+}
+.labelPositioning{
+	//padding-right: 3px !important;
+	//width: 5px !important;
+	//border:1px solid black;
+	font-Size : 13px;
+}
+ion-label{
+
 }
 .headerStasiun{
 	//border : 4px solid black;

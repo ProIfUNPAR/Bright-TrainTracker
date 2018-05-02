@@ -388,7 +388,7 @@ export class HomePage {
       this.trainLocations = [];
 
       //create trigger loading
-      //this.storage.set('loading', true)
+      //this.storage.set('loading', true);
 
       this.initializeRouteLocation();
     }

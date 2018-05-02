@@ -80,9 +80,12 @@ export class EtaPage {
   c : any = 0.00;
   d : any = 0.00;
 
+  counter : any = 0.00;
+  myLocation : any ;
+  myDestination : any;
+
   viewDistance : any = 0.00;
   viewETA : any = 0.00;
-
 
   constructor(public loadingCtrl : LoadingController, public localStorage : Storage,public navCtrl: NavController, public zone: NgZone, private geolocation: Geolocation, public backgroundGeolocation: BackgroundGeolocation,private localNotifications: LocalNotifications, public platform: Platform) {
     //this.localStorage = storage;
@@ -93,24 +96,20 @@ export class EtaPage {
     this.speed = 1;
     this.estimatedTimeOfArrival = 1;
 
+    //catch dest and location from home.html
+    // this.Destination = navParams.get('destination');
+    // this.Location = navParams.get('location');
+  }
+
+  ionViewDidLoad(){
+
     let loading = this.loadingCtrl.create({
         content: 'Please wait...'
       });
       loading.present();
       setTimeout(function() {
         loading.dismiss();
-      }, 9000);
-
-
-    //catch dest and location from home.html
-    // this.Destination = navParams.get('destination');
-    // this.Location = navParams.get('location');
-
-    //Get dest and loc from storage
-
-  }
-
-  ionViewDidLoad(){
+      }, 11500);
 
     setInterval(() =>  {
       //code here
@@ -126,10 +125,9 @@ export class EtaPage {
         console.log('Your location from storage is loca =', this.Location);
         console.log('Your destination from storage is dest =', this.Destination);
 
+        //this.callLoading();
+
         this.initializeStasiun();
-
-        //this.findTrainIndex();
-
         this.calculateRoute();
         this.initializeStopoverStations();
 
@@ -169,10 +167,19 @@ export class EtaPage {
             console.log('Error getting location', error);
         });
 
+        //This process do last because it takes a lot of getTime
+        //so I put counter as it mean the previous process is already done
+        if(this.counter==2){
+          this.myLocation = this.Location.replace(/([A-Z])/g, ' $1').trim();
+          this.myDestination = this.Destination.replace(/([A-Z])/g, ' $1').trim();
+        }
+        this.counter=this.counter+1;
+
+
       });
     });
    });
-    },11000);
+ },5000);
 
   }
 
@@ -546,7 +553,6 @@ export class EtaPage {
     for(let i=0;i<this.kereta.length;i++){
       //console.log(this.kereta[i].trainName.replace(/\s+/g,'')+"CEKCEKCEKCEK"+this.Keretaku);
       if(this.kereta[i].trainName.replace(/\s+/g,'')==this.Keretaku){
-        //console.log(this.kereta[i].trainName.replace(/\s+/g,'')+" ####################### "+this.Keretaku);
         return this.kereta[i];
       }
     }
@@ -559,7 +565,7 @@ export class EtaPage {
     //cari dulu stasiun
     for(let i=0;i<this.stasiun.length;i++){
       if(this.stasiun[i].name.replace(/\s+/g,'')==this.Location){
-        console.log("SAMAAAAA!!!!!!!!");
+        //console.log("SAMAAAAA!!!!!!!!");
         return this.stasiun[i].id;
       }
     }
@@ -739,7 +745,7 @@ export class EtaPage {
       //actual distance
       this.d = this.stopoverDistance[this.stopoverDistance.length-1];
     },
-    3000);
+    2000);
   }
 
   /*
@@ -846,7 +852,7 @@ initializeStopoverStations(){
         stasiun: this.stasiun[idx].name
       });
     }
-  },6000);
+  },3500);
 
 
 }
