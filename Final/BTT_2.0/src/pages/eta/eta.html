@@ -13,10 +13,22 @@
 
 <ion-content>
 
+  <ion-list>
+    <ion-item class="fontSize" ion-item >
+      <div class="item-note itemJam" item-end>
+        {{myLocation}}
+      </div>
+      <div class="item-note itemTo" item-end>
+        to
+      </div>
+      <div class="item-note itemStasiun" item-end>
+        {{myDestination}}
+      </div>
+    </ion-item>
+  </ion-list>
 
 
-  <!--<ion-card class="headerStasiun"> -->
-
+  <!--
   <ion-card class="headerStasiun">
     <ion-item>
       <ion-label text-center readonly="true" class = "namaStasiunAwal" placeholder="">{{Location}}</ion-label>
@@ -30,6 +42,7 @@
       <ion-label text-center readonly="true" class = "namaStasiunTujuan" placeholder="">{{Destination}}</ion-label>
     </ion-item>
   </ion-card>
+  -->
 
   <!--</ion-card> -->
 
@@ -37,25 +50,22 @@
   <ion-list>
     <ion-item>
       <ion-label color="primary">ETA : </ion-label>
-      <ion-label readonly="true" class="numberPositioning">{{estimatedTimeOfArrival}}</ion-label>
+      <ion-label readonly="true" class="numberPositioning">{{viewETA}} jam</ion-label>
     </ion-item>
     <ion-item color="">
       <ion-label color="primary" >Distance : </ion-label>
-      <ion-label readonly="true" class="numberPositioning">{{d}} </ion-label>
-      <!--  Distance : {{d}} -->
+      <ion-label readonly="true" class="numberPositioning">{{viewDistance}} km</ion-label>
     </ion-item>
     <ion-item>
       <ion-label color="primary" >Train Speed : </ion-label>
       <ion-label readonly="true" class="numberPositioning">{{speed}} km/jam</ion-label>
     </ion-item>
-
   </ion-list>
 
-  <!-- PENAMBAHAN CODE DARI MAPS -->
-  <button ion-button full (click)="calculateAndDisplayRoute()">Show Direction</button>
-
-  <div id="map"></div>
-
+  <!-- PENAMBAHAN CODE DARI MAPS
+    <button ion-button full (click)="calculateAndDisplayRoute()">Show Direction</button>
+    <div id="map"></div>
+ -->
 
   <ion-list>
     <ion-item class="fontSize" ion-item *ngFor="let item of items">

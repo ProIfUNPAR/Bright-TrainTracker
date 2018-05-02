@@ -109,7 +109,7 @@ export class EtaPage {
       loading.present();
       setTimeout(function() {
         loading.dismiss();
-      }, 11500);
+      }, 13500);
 
     setInterval(() =>  {
       //code here
