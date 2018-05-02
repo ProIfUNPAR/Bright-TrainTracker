@@ -497,9 +497,9 @@ export class EtaPage {
     Method to retrieve value from Storage
   */
   getMyTrain(){
-    //console.log("ASDKHGASJDFSJADGJASGDJHASDJHASJHDGSAD");
+    console.log("ASDKHGASJDFSJADGJASGDJHASDJHASJHDGSAD");
     for(let i=0;i<this.kereta.length;i++){
-      //console.log(this.kereta[i].trainName.replace(/\s+/g,'')+" ####################### "+this.Keretaku);
+      console.log(this.kereta[i].trainName.replace(/\s+/g,'')+" ####################### "+this.Keretaku);
       if(this.kereta[i].trainName.replace(/\s+/g,'')==this.Keretaku){
         return this.kereta[i];
       }
