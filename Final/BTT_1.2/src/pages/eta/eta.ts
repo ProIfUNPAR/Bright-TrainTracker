@@ -155,7 +155,9 @@ export class EtaPage {
 
           //actual distance
           this.d = this.stopoverDistance[this.stopoverDistance.length-1];
+          this.d = this.d.toFixed(2);
           this.estimatedTimeOfArrival = this.d / this.speed;
+          this.estimatedTimeOfArrival = this.estimatedTimeOfArrival.toFixed(2);
           //console.log("ETA "+this.estimatedTimeOfArrival);
 
         }).catch((error) => {
@@ -792,14 +794,14 @@ calculateAndDisplayRoute() {
         }
       }, function(response, status) {
         if (status === 'OK') {
-          // for(let i = 0;i < response.routes.length;i++){
-          //   for(let j = 0;j < response.routes[i].legs.length;j++){
-          //     for(let k = 0;k < response.routes[i].legs[j].steps.length;k++){
-          //       console.log("Looping "+i);
-          //       response.routes[i].legs[j].steps[k].transit.line.name = "";
-          //     }
-          //   }
-          // }
+          for(let i = 0;i < response.routes.length;i++){
+            for(let j = 0;j < response.routes[i].legs.length;j++){
+              for(let k = 0;k < response.routes[i].legs[j].steps.length;k++){
+                console.log("Looping "+i);
+                response.routes[i].legs[j].steps[k].transit.line.name = "";
+              }
+            }
+          }
           directionsDisplay.setDirections(response);
           console.log('finish')
         } else {
