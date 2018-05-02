@@ -178,8 +178,8 @@ export class HomePage {
       {id:"109",lat:"-7.610921",lng:"109.507770",name:"Stasiun Gombong"},
       {id:"110",lat:"-7.218755",lng:"110.899937",name:"Stasiun Gundih"},
       {id:"111",lat:"-7.633169",lng:"109.573493",name:"Stasiun Karanganyar"},
-      {id:"113",lat:"0",lng:"0",name:"Stasiun Unknown"},
       {id:"112",lat:"-7.681909",lng:"109.662123",name:"Stasiun Kebumen"},
+      {id:"113",lat:"0",lng:"0",name:"Stasiun Unknown"},
       {id:"114",lat:"-7.163653",lng:"110.635626",name:"Stasiun Kedungjati"},
       {id:"115",lat:"-7.630120",lng:"109.253538",name:"Stasiun Kroya"},
       {id:"116",lat:"-7.619092",lng:"109.139473",name:"Stasiun Maos"},
@@ -443,7 +443,7 @@ export class HomePage {
       for(let j = 0; j < this.trains.length;j++){
         if(myTrain == this.trains[j].trainName.replace(/\s+/g,'')){
           this.route = this.trains[j].route;
-          //console.log(this.route);
+          console.log(this.route);
         }
       }
       var length = this.route.length;
@@ -452,7 +452,7 @@ export class HomePage {
       for (let i = 0; i < length; i++) {
         var idx = this.route[i];
         var stationName = this.locations[idx].name;
-        //console.log(stationName);
+        console.log(stationName);
         this.trainLocations.push({stationName: stationName});
       }
      }

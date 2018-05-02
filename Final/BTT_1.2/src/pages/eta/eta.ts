@@ -461,37 +461,6 @@ export class EtaPage {
     return Math.round(number * factor) / factor;
   }
 
-  /*
-    Method to get the index of train.
-  */
-  findTrainIndex(){
-    // this.localStorage.get('kereta').then((val) => {
-    //   this.tempTrain = val;
-    //   console.log("KERETA AING : "+val)
-    // });
-
-    //var keretaAsal = localStorage.getItem('kfindTrainIndexereta')
-    //this.tempTrain = this.getMyTrain();
-    //this.tempTrain.then(function(val){
-      //console.log("ASAL TRAIN "+String(val));
-
-    //});
-
-
-
-
-    //bruteforce searching
-    // for(let i = 0; i < this.kereta.length;i++){
-    //   var namaKerata = this.kereta[i].trainName;
-    //   namaKerata = namaKerata.replace(/\s+/g,'');
-    //  //console.log("TEMPORARY :"+this.tempTrain+" == COMPARE "+namaKerata);
-    //   if(this.tempTrain==namaKerata){
-    //     console.log("HOORAY!");
-    //       return this.kereta[i];
-    //   }
-    // }
-  }
-
 
   /*
     Method to retrieve value from Storage
