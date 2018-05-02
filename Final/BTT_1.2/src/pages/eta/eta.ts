@@ -798,7 +798,6 @@ calculateAndDisplayRoute() {
           routingPreference: 'FEWER_TRANSFERS'
         }
       }, function(response, status) {
-        var counter = 0
         if (status === 'OK') {
           // for(let i = 0;i < response.routes.length;i++){
           //   for(let j = 0;j < response.routes[i].legs.length;j++){
