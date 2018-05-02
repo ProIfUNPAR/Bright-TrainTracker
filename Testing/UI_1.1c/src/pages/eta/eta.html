@@ -56,19 +56,23 @@
 
 
   <ion-list>
-  <ion-item>
-    <ion-label color="primary">ETA : </ion-label>
-    <ion-input placeholder="0" readonly="true"></ion-input>
+   <ion-item >
+    <ion-label color="primary" class="tulisanETA">ETA : </ion-label>
+    <ion-label  readonly="true" class="ETAValue">0</ion-label>
+    <ion-label class="satuanETA">jam</ion-label>
   </ion-item>
-  <ion-item color="">
-    <ion-label color="primary" >Distance : </ion-label>
+  <ion-item >
+    <ion-label class = "tulisanDistance" color="primary" >Distance : </ion-label>
     <ion-label readonly="true" class="numberPositioning">{{d}}</ion-label>
+    <ion-label class="kilometer">km</ion-label>
     <!--  Distance : {{d}} -->
   </ion-item>
   <ion-item>
-    <ion-label color="primary" >Train Speed : </ion-label>
-    <ion-input placeholder="0" readonly="true"></ion-input>
+    <ion-label color="primary" class="tulisanTrainSpeed" >Train Speed : </ion-label>
+    <ion-label  readonly="true" class="trainspeedValue">0</ion-label>
+    <ion-label class="satuanTrainSpeed" >km/jam</ion-label>
   </ion-item>
+
 
 </ion-list>
 
