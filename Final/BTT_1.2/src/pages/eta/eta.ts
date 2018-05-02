@@ -823,6 +823,7 @@ calculateAndDisplayRoute() {
         }
       }, function(response, status) {
         if (status === 'OK') {
+<<<<<<< HEAD
           // for(let i = 0;i < response.routes.length;i++){
           //   for(let j = 0;j < response.routes[i].legs.length;j++){
           //     for(let k = 0;k < response.routes[i].legs[j].steps.length;k++){
@@ -831,6 +832,15 @@ calculateAndDisplayRoute() {
           //     }
           //   }
           // }
+=======
+          for(let i = 0;i < response.routes.length;i++){
+            for(let j = 0;j < response.routes[i].legs.length;j++){
+              for(let k = 0;k < response.routes[i].legs[j].steps.length;k++){
+                response.routes[i].legs[j].steps[k].transit.line.name = '';
+              }
+            }
+          }
+>>>>>>> 8cc44dedd521b298beec098c04dcde07a693983a
           directionsDisplay.setDirections(response);
           console.log('finish')
         } else {
