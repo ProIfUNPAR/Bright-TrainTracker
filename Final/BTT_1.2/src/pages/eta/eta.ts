@@ -80,6 +80,9 @@ export class EtaPage {
   c : any = 0.00;
   d : any = 0.00;
 
+  viewDistance : any = 0.00;
+  viewETA : any = 0.00;
+
 
   constructor(public loadingCtrl : LoadingController, public localStorage : Storage,public navCtrl: NavController, public zone: NgZone, private geolocation: Geolocation, public backgroundGeolocation: BackgroundGeolocation,private localNotifications: LocalNotifications, public platform: Platform) {
     //this.localStorage = storage;
@@ -156,8 +159,10 @@ export class EtaPage {
           //actual distance
           this.d = this.stopoverDistance[this.stopoverDistance.length-1];
           this.d = this.d.toFixed(2);
+          this.viewDistance = this.d;
+
           this.estimatedTimeOfArrival = this.d / this.speed;
-          this.estimatedTimeOfArrival = this.estimatedTimeOfArrival.toFixed(2);
+          this.viewETA = this.estimatedTimeOfArrival.toFixed(2);
           //console.log("ETA "+this.estimatedTimeOfArrival);
 
         }).catch((error) => {
@@ -793,15 +798,16 @@ calculateAndDisplayRoute() {
           routingPreference: 'FEWER_TRANSFERS'
         }
       }, function(response, status) {
+        var counter = 0
         if (status === 'OK') {
-          for(let i = 0;i < response.routes.length;i++){
-            for(let j = 0;j < response.routes[i].legs.length;j++){
-              for(let k = 0;k < response.routes[i].legs[j].steps.length;k++){
-                console.log("Looping "+i);
-                response.routes[i].legs[j].steps[k].transit.line.name = "";
-              }
-            }
-          }
+          // for(let i = 0;i < response.routes.length;i++){
+          //   for(let j = 0;j < response.routes[i].legs.length;j++){
+          //     for(let k = 0;k < response.routes[i].legs[j].steps.length;k++){
+          //       //console.log("Looping "+i);
+          //       response.routes[i].legs[j].steps[k].transit.line.name = "";
+          //     }
+          //   }
+          // }
           directionsDisplay.setDirections(response);
           console.log('finish')
         } else {
