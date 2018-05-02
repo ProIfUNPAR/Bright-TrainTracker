@@ -370,7 +370,6 @@ export class HomePage {
          {trainName:"Argo Sindro (KA11)(ekse)",route :[121,117,125,149,42,43]},
          {trainName:"Argo Muria (KA18)(ekse)",route :[121,117,125,149,33,42,43]},
          {trainName:"Menoreh (KA149)(ekse)",route :[121,126,117,125,159,87,89,42,162]},
-
        ];
 
     }
@@ -387,6 +386,10 @@ export class HomePage {
       this.storage.set('kereta', this.kereta);
       console.log(this.kereta);
       this.trainLocations = [];
+
+      //create trigger loading
+      //this.storage.set('loading', true)
+
       this.initializeRouteLocation();
     }
 
