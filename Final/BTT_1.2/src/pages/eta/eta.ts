@@ -131,8 +131,6 @@ export class EtaPage {
         this.calculateRoute();
         this.initializeStopoverStations();
 
-        this.startTracking();
-
         this.geolocation.getCurrentPosition().then((resp) => {
           //console.log(" LAT                -  LONG")
           console.log(resp.coords.latitude, resp.coords.longitude);
@@ -180,6 +178,8 @@ export class EtaPage {
     });
    });
  },5000);
+
+  this.startTracking();
 
   }
 
