@@ -99,6 +99,8 @@ export class EtaPage {
     //catch dest and location from home.html
     // this.Destination = navParams.get('destination');
     // this.Location = navParams.get('location');
+
+    this.startTracking();
   }
 
   ionViewDidLoad(){
@@ -114,24 +116,23 @@ export class EtaPage {
     setInterval(() =>  {
       //code here
 
-    //WAIT FOR THE PROMISES FINISH THEN EXECUTE ALL THE NEEDED
-  this.localStorage.get('kereta').then((val:string) => {
-    this.Keretaku = val;
-    this.localStorage.get('location').then((val:string) => {
-      this.Location = val;
-      this.localStorage.get('destination').then((val:string) => {
-        this.Destination = val;
-        console.log('Your train from storage is loca =', this.Keretaku);
-        console.log('Your location from storage is loca =', this.Location);
-        console.log('Your destination from storage is dest =', this.Destination);
+      //WAIT FOR THE PROMISES FINISH THEN EXECUTE ALL THE NEEDED
+    this.localStorage.get('kereta').then((val:string) => {
+      this.Keretaku = val;
+      this.localStorage.get('location').then((val:string) => {
+        this.Location = val;
+        this.localStorage.get('destination').then((val:string) => {
+          this.Destination = val;
+          console.log('Your train from storage is loca =', this.Keretaku);
+          console.log('Your location from storage is loca =', this.Location);
+          console.log('Your destination from storage is dest =', this.Destination);
 
-        //this.callLoading();
 
-        this.initializeStasiun();
-        this.calculateRoute();
-        this.initializeStopoverStations();
+          this.initializeStasiun();
+          this.calculateRoute();
+          this.initializeStopoverStations();
 
-        this.geolocation.getCurrentPosition().then((resp) => {
+          this.geolocation.getCurrentPosition().then((resp) => {
           //console.log(" LAT                -  LONG")
           console.log(resp.coords.latitude, resp.coords.longitude);
 
@@ -163,24 +164,20 @@ export class EtaPage {
 
         }).catch((error) => {
             console.log('Error getting location', error);
+          });
+
+          //This process do last because it takes a lot of getTime
+          //so I put counter as it mean the previous process is already done
+          if(this.counter==2){
+            this.myLocation = this.Location.replace(/([A-Z])/g, ' $1').trim();
+            this.myDestination = this.Destination.replace(/([A-Z])/g, ' $1').trim();
+          }
+          this.counter=this.counter+1;
+
         });
-
-        //This process do last because it takes a lot of getTime
-        //so I put counter as it mean the previous process is already done
-        if(this.counter==2){
-          this.myLocation = this.Location.replace(/([A-Z])/g, ' $1').trim();
-          this.myDestination = this.Destination.replace(/([A-Z])/g, ' $1').trim();
-        }
-        this.counter=this.counter+1;
-
-
       });
     });
-   });
- },5000);
-
-  this.startTracking();
-
+    },5000);
   }
 
   /*
