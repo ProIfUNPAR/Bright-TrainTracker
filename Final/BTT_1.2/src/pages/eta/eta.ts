@@ -100,7 +100,7 @@ export class EtaPage {
     // this.Destination = navParams.get('destination');
     // this.Location = navParams.get('location');
 
-    this.startTracking();
+    //this.startTracking();
   }
 
   ionViewDidLoad(){
@@ -131,6 +131,8 @@ export class EtaPage {
           this.initializeStasiun();
           this.calculateRoute();
           this.initializeStopoverStations();
+
+          this.startTracking();
 
           this.geolocation.getCurrentPosition().then((resp) => {
           //console.log(" LAT                -  LONG")
@@ -528,7 +530,6 @@ export class EtaPage {
 
     }, (err) => {
       console.log(err);
-
     });
 
     this.backgroundGeolocation.start();
