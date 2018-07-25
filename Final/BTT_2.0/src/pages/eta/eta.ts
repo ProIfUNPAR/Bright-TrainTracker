@@ -93,7 +93,7 @@ export class EtaPage {
      //this.loadingCtrl = loadingCtrl;
     //this.navParams = navParams;
 
-    this.speed = 1;
+    this.speed = 62;
     this.estimatedTimeOfArrival = 1;
 
     //catch dest and location from home.html

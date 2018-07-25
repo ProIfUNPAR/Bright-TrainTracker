@@ -7,7 +7,7 @@ import { HomePage } from '../pages/home/home';
   //import { ListPage } from '../pages/list/list';
 import { EtaPage } from '../pages/eta/eta';
   //import { MapsPage } from '../pages/maps/maps';
-//import { SettingsPage } from '../pages/settings/settings';
+import { SettingsPage } from '../pages/settings/settings';
 
 @Component({
   templateUrl: 'app.html'
@@ -28,7 +28,7 @@ export class MyApp {
       //{ title: 'List', component: ListPage },
       { title: 'ETA', component: EtaPage },
       //{ title: 'Maps', component: MapsPage},
-      //{ title: 'Settings', component: SettingsPage}
+      { title: 'Settings', component: SettingsPage}
     ];
 
   }

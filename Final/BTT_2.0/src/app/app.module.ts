@@ -15,7 +15,7 @@ import { HomePage } from '../pages/home/home';
 //import { ListPage } from '../pages/list/list';
 import { EtaPage } from '../pages/eta/eta';
 //import { MapsPage } from '../pages/maps/maps';
-//import { SettingsPage } from '../pages/settings/settings';
+import { SettingsPage } from '../pages/settings/settings';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -45,7 +45,7 @@ import { IonicStorageModule } from '@ionic/storage';
     //ListPage,
     EtaPage,
     //MapsPage,
-    //SettingsPage
+    SettingsPage,
   ],
   imports: [
     BrowserModule,
@@ -64,7 +64,7 @@ import { IonicStorageModule } from '@ionic/storage';
     //ListPage,
     EtaPage,
     //MapsPage,
-    //SettingsPage
+    SettingsPage,
   ],
   providers: [
     StatusBar,
